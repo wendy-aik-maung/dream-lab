@@ -2,13 +2,15 @@ import React from "react";
 
 const InputForm = ({ label, id, type = "text", placeholder = "" }) => {
   return (
-    <fieldset className="w-full">
-      <label
-        htmlFor={id}
-        className="mb-2 block font-semibold font-poppins text-textColor4 capitalize"
-      >
-        {label}
-      </label>
+    <fieldset className="w-full my-2">
+      {label ? (
+        <label
+          htmlFor={id}
+          className="mb-2 block font-semibold font-poppins text-textColor4 capitalize"
+        >
+          {label}
+        </label>
+      ) : null}
       <input
         type={type}
         id={id}

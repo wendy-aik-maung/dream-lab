@@ -5,8 +5,14 @@ import { MdLocalLibrary } from "react-icons/md";
 import { RxPerson } from "react-icons/rx";
 import SearchInput from "./SearchInput";
 import Logo from "../../assets/Icon.svg";
-
+import { useLoginModalContext } from "../../contexts/LoginModalContext";
 const Navbar = () => {
+  const { setIsUserLoginModalOpen } = useLoginModalContext();
+
+  const handleLoginModalOpen = () => {
+    return setIsUserLoginModalOpen(true);
+  };
+
   return (
     <nav className="py-4 flex justify-between items-baseline text-textColor1">
       <Link to="/">
@@ -42,7 +48,10 @@ const Navbar = () => {
         </li>
       </ul>
       <SearchInput />
-      <button className="btn_primary flex items-center justify-center font-semibold rounded-xl">
+      <button
+        className="btn_primary flex items-center justify-center font-semibold rounded-xl"
+        onClick={handleLoginModalOpen}
+      >
         <RxPerson className="mr-2" size={18} />
         <span>Login</span>
       </button>

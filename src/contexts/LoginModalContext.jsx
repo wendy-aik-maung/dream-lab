@@ -1,4 +1,4 @@
-import { useContext, createContext } from "react";
+import { useContext, createContext, useState } from "react";
 
 const LoginModalContext = createContext();
 
@@ -7,7 +7,9 @@ export const useLoginModalContext = () => {
 };
 
 export function LoginModalContextProvider({ children }) {
-  const contextValue = {};
+  const [isUserLoginModalOpen, setIsUserLoginModalOpen] = useState(false);
+
+  const contextValue = { isUserLoginModalOpen, setIsUserLoginModalOpen };
 
   return (
     <LoginModalContext.Provider value={contextValue}>
