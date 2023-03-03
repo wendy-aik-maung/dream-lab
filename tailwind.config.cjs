@@ -9,7 +9,7 @@ module.exports = {
         dreamLabColor2: "##00D7FF",
         dreamLabColor3: "#00BEFF",
         dreamLabColor4: "#1D3160",
-        textColor1: "#1D3160",
+        textColor1: "#262626",
         textColor2: "#0092FF",
         textColor3: "#EFEFEF",
         textColor4: "#54595F",
