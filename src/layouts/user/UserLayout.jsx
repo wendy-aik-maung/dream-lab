@@ -4,11 +4,13 @@ import Navbar from "../../components/user/Navbar";
 import Footer from "../../components/user/Footer";
 const UserLayout = () => {
   return (
-    <main>
-      <Navbar />
-      <Outlet />
+    <>
+      <main className="max-w-[1440px] mx-auto font-poppins">
+        <Navbar />
+        <Outlet />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 };
 
