@@ -16,6 +16,7 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        asap: ["Asap", "sans-serif"],
         myanmar: ["Noto Sans Myanmar", "sans-serif"],
       },
     },

@@ -1,4 +1,4 @@
-import { useContext, createContext } from "react";
+import { useContext, createContext, useState } from "react";
 
 const RegisterModalContext = createContext();
 
@@ -7,7 +7,9 @@ export const useRegisterModalContext = () => {
 };
 
 export function RegisterModalContextProvider({ children }) {
-  const contextValue = {};
+  const [isUserRegisterModalOpen, setIsUserRegisterModalOpen] = useState(false);
+
+  const contextValue = { isUserRegisterModalOpen, setIsUserRegisterModalOpen };
 
   return (
     <RegisterModalContext.Provider value={contextValue}>
