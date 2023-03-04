@@ -4,13 +4,12 @@ import Logo2 from "../../../assets/Logo2.svg";
 
 const AdminLogin = () => {
   return (
-    <main className="flex flex-row w-full h-screen ">
+    <main className="flex flex-row w-full h-screen font-poppins">
       {/* Login image section */}
-      
-        <div className="bg-[#E6FBFF] md:flex flex-col items-center justify-center w-6/12 hidden">
-          <img src={loginImg} />
-        </div>
-    
+
+      <div className="bg-[#E6FBFF] md:flex flex-col items-center justify-center w-6/12 hidden">
+        <img src={loginImg} />
+      </div>
 
       {/* form section */}
       <div className="  w-full md:w-1/2 flex flex-col items-center justify-center bg-white ">
@@ -49,7 +48,7 @@ const AdminLogin = () => {
           </div>
           <div className="flex items-center justify-between mt-8">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-dreamLabColor1 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
             >
               Sign In
