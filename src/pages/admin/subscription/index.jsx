@@ -11,12 +11,14 @@ const SubscriptionIndex = () => {
 
 	return (
 		<div className="container mx-auto">
-			<header className="flex justify-between">
-				<h2 className="font-bold text-xl ">Subscription Plan Lists</h2>
+			<header className="flex justify-between font-poppins">
+				<h2 className="font-bold text-2xl  text-textColor1">
+					Subscription Plan Lists
+				</h2>
 				<Link
 					to={"/admin/subscription/create"}
-					className="btn_primary flex items-center py-2 px-10 gap-x-2 font-normal text-lg">
-					<AiFillPlusCircle /> Create Subscription
+					className="btn_primary flex justify-center items-center py-2 px-10 gap-2 font-medium text-lg w-[264px]">
+					<AiFillPlusCircle size={18} /> Create Subscription
 				</Link>
 			</header>
 			{subscription.length === 0 ? (
