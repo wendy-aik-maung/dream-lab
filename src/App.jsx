@@ -5,7 +5,7 @@ import { RegisterModalContextProvider } from "./contexts/RegisterModalContext";
 import { routes as userRoutes } from "./routes/UserRoutes";
 import { routes as adminRoutes } from "./routes/AdminRoutes";
 const App = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   const UserRouting = useRoutes(userRoutes);
   const AdminRouting = useRoutes(adminRoutes);
   return (

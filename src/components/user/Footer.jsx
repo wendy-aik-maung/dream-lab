@@ -134,11 +134,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        {/* <div className="mt-12">
-          <p className="text-textColor1">
+        <div className="mt-12">
+          <p className="text-textColor1 text-sm lg:text-base text-center lg:text-left">
             Copyright 2022 Dreamlabnews.All Rights reserved.
           </p>
-        </div> */}
+        </div>
       </div>
     </footer>
   );

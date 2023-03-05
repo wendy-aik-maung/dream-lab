@@ -9,7 +9,7 @@ import Logo from "../../assets/Icon.svg";
 import { useLoginModalContext } from "../../contexts/LoginModalContext";
 import MobileNavbar from "./MobileNavbar";
 const Navbar = () => {
-  const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useState(true);
+  const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useState(false);
 
   const { setIsUserLoginModalOpen } = useLoginModalContext();
 
