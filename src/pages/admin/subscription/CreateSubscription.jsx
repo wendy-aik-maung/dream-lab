@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import Switch from "react-switch";
+import CreatePageTitle from "../../../components/admin/CreatePageTitle";
 import InputForm from "../../../components/form/InputForm";
 import TextAreaForm from "../../../components/form/TextAreaForm";
 import ChoosePlan from "./ChoosePlan";
-
+import { BiArrowBack } from "react-icons/bi";
+import { Link } from "react-router-dom";
 const CreateSubscription = () => {
 	const [active, setActive] = useState(false);
 	const [selectPlan, setSelectPlan] = useState(false);
@@ -12,6 +14,17 @@ const CreateSubscription = () => {
 	return (
 		<div className="container mx-auto">
 			<form action="" className="w-1/2 my-10">
+				<header className=" flex justify-between font-poppins font-bold text-xl mb-10">
+					<Link
+						to={"/admin/subscription"}
+						className="flex items-center text-dreamLabColor3">
+						<BiArrowBack />
+						<span className="pl-2"> Back</span>
+					</Link>
+					<div>
+						<h2>Create Subscription</h2>
+					</div>
+				</header>
 				<InputForm
 					type="text"
 					label="Subscription Name:"
@@ -33,7 +46,7 @@ const CreateSubscription = () => {
 					<section className="w-full">
 						<label
 							htmlFor="subscribeType"
-							className="text-lg font-poppins text-textColor4 capitalize font-bold my-2 block">
+							className="text-lg font-poppins text-textColor4 capitalize font-semibold my-2 block">
 							Subscription Length Type
 						</label>
 						<select
