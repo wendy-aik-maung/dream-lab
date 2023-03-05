@@ -3,16 +3,21 @@ import { useState } from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
 import EmptyView from "../../../assets/EmptyView";
 import SubscriptionItem from "./SubscriptionItem";
+import DeleteModal from "./DeleteModal";
+import { Link } from "react-router-dom";
 const SubscriptionIndex = () => {
+	const [isDelete, setIsDelete] = useState(false);
 	const [subscription, setSubscription] = useState([1, 2]);
 
 	return (
 		<div className="container mx-auto">
 			<header className="flex justify-between">
-				<h3 className="font-semibold text-xl ">Subscription Plan Lists</h3>
-				<div className="btn-dreamLabColor2 flex items-center py-2 px-10 gap-x-2 font-normal text-lg ">
+				<h2 className="font-bold text-xl ">Subscription Plan Lists</h2>
+				<Link
+					to={"/admin/subscription/create"}
+					className="btn_primary flex items-center py-2 px-10 gap-x-2 font-normal text-lg">
 					<AiFillPlusCircle /> Create Subscription
-				</div>
+				</Link>
 			</header>
 			{subscription.length === 0 ? (
 				<section className="mt-48 text-center">
@@ -23,8 +28,11 @@ const SubscriptionIndex = () => {
 				</section>
 			) : (
 				<div>
-					<SubscriptionItem />
+					<SubscriptionItem isDelete={isDelete} setIsDelete={setIsDelete} />
 				</div>
+			)}
+			{isDelete && (
+				<DeleteModal isDelete={isDelete} setIsDelete={setIsDelete} />
 			)}
 		</div>
 	);
