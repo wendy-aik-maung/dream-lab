@@ -7,7 +7,7 @@ import ProfileImg from "../../assets/profile.png";
 
 const Header = ({ children }) => {
   return (
-    <nav className="fixed top-0 left-0 z-10  flex flex-row justify-between items-baseline w-full  py-4 bg-white shadow-lg md:pl-14 ">
+    <nav className="fixed top-0 left-0 z-10  flex flex-row justify-between items-center w-full  h-20 bg-white shadow-lg md:pl-14 ">
       <Link to="/admin">
         <img src={Logo} alt="logo" />
       </Link>

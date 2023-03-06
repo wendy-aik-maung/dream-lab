@@ -22,7 +22,7 @@ const UserRegister = () => {
       onClick={handleRegisterModalClose}
     >
       <div
-        className="p-8 bg-[#f3f5f7] rounded-2xl relative max-w-[425px] w-full flex flex-col items-center"
+        className="p-8 bg-white rounded-2xl relative max-w-[425px] w-full flex flex-col items-center"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="self-start">

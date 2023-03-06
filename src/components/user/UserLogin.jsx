@@ -22,7 +22,7 @@ const UserLogin = () => {
       onClick={handleLoginModalClose}
     >
       <div
-        className="p-8 bg-[#f3f5f7] rounded-2xl relative max-w-[425px] w-full flex flex-col items-center"
+        className="p-8 bg-white rounded-2xl relative max-w-[425px] w-full flex flex-col items-center"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-center font-bold font-asap text-2xl text-textColor1 my-4">
