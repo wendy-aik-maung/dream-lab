@@ -4,10 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #f5f5f5;
-}
-
 .btn_primary {
   padding: 0.5em 1em;
   border-radius: 8px;

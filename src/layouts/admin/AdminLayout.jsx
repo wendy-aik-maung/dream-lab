@@ -7,11 +7,13 @@ import Sidebar from "../../components/admin/Sidebar";
 const AdminLayout = () => {
   return (
     <>
-      <main className=" font-poppins">
+      <main className="relative font-poppins">
         <Header />
         <div className="flex flex-row ">
-          <Sidebar/>
-          <Outlet />
+          <Sidebar />
+          <div className="ml-80 mt-20  w-full p-12 font-poppins">
+            <Outlet />
+          </div>
         </div>
       </main>
     </>

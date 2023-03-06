@@ -34,7 +34,7 @@ const PlanIndex = () => {
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
   return (
-    <section className="p-12 font-poppins">
+    <section>
       <CreatePageTitle
         title="Created Plan"
         buttonTitle="Create New"

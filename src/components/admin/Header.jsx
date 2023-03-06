@@ -7,14 +7,14 @@ import ProfileImg from "../../assets/profile.png";
 
 const Header = ({ children }) => {
   return (
-    <nav className="  flex flex-row justify-between w-full h-20 bg-white shadow-lg md:pl-14 ">
+    <nav className="fixed top-0 left-0 z-10  flex flex-row justify-between items-baseline w-full  py-4 bg-white shadow-lg md:pl-14 ">
       <Link to="/admin">
         <img src={Logo} alt="logo" />
       </Link>
       <div className="flex items-center font-bold">{children}</div>
-      <div className="flex flex-row gap-4  pr-2 md:pr-20 ">
-        <div className="flex justify-center items-center">
-          <BiBell className=" text-white  rounded-full  bg-dreamLabColor1 relative w-7 h-7 md:w-8 md:h-8" />
+      <div className="flex flex-row items-center gap-4  pr-2 md:pr-20 ">
+        <div className="flex justify-center items-center w-7 h-7 md:w-8 md:h-8 rounded-full bg-dreamLabColor1">
+          <BiBell className=" text-white relative" size={24} />
         </div>
 
         <div className="flex flex-row justify-center items-center gap-2">
