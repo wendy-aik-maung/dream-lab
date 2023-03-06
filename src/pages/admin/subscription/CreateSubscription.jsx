@@ -16,7 +16,7 @@ const CreateSubscription = () => {
       <form action="" className="w-3/4 ">
         <header className=" flex justify-between font-poppins font-bold text-xl mb-10">
           <Link
-            to={"/admin/subscription"}
+            to={"/admin/subscriptions"}
             className="flex items-center text-dreamLabColor3"
           >
             <BiArrowBack />

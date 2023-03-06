@@ -10,7 +10,7 @@ const EditPlan = ({ planCode, planName, setEditPlan, setEditStatus }) => {
       onClick={() => setEditStatus(false)}
     >
       <div
-        className="max-w-[30rem] w-full bg-[#f5f5f5] h-full p-8"
+        className="max-w-[30rem] w-full bg-white h-full p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-10">

@@ -16,7 +16,7 @@ const SubscriptionIndex = () => {
           Subscription Plan Lists
         </h2>
         <Link
-          to={"/admin/subscription/create"}
+          to={"/admin/subscriptions/create"}
           className="btn_primary flex justify-center items-center py-2 px-10 gap-2 font-medium text-lg w-[264px]"
         >
           <AiFillPlusCircle size={18} /> Create Subscription
