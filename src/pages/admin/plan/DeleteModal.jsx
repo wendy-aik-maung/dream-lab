@@ -7,11 +7,11 @@ const DeleteModal = ({ setDeleteStatus }) => {
       onClick={() => setDeleteStatus()}
     >
       <div
-        className="bg-white rounded-lg p-8 flex flex-col items-center"
+        className="bg-white rounded-lg p-8 flex flex-col items-center w-[400px]"
         onClick={(e) => e.stopPropagation()}
       >
         <RiDeleteBin5Line size={96} fill={"#bfbfbf"} className="mb-8" />
-        <p className="font-medium text-[#333333] mb-12">
+        <p className="font-medium text-xl text-center mb-12 text-[#333]">
           Are you sure want to delete this plan?
         </p>
         <div className="flex gap-4">

@@ -12,7 +12,7 @@ const TextAreaForm = ({ placeholder, id, label, rows = 4 }) => {
         {label}
       </label>
       <textarea
-        className="w-full bg-[#f5f5f5] py-2 px-2 border-2 font-bold rounded-md font-poppins focus:outline-none focus:border-black placeholder:text-[#bfbfbf] placeholder:font-semibold resize-none"
+        className="w-full  py-2 px-2 border-2 font-bold rounded-md font-poppins focus:outline-none focus:border-black placeholder:text-[#bfbfbf] placeholder:font-semibold resize-none"
         placeholder={placeholder}
         id={id}
         rows={rows}

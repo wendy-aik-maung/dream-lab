@@ -6,39 +6,39 @@ import SubscriptionIndex from "../pages/admin/subscription";
 import CreateSubscription from "../pages/admin/subscription/CreateSubscription";
 import EditSubscription from "../pages/admin/subscription/EditSubscription";
 export const routes = [
-	{
-		path: "login",
-		children: [{ index: true, element: <AdminLogin /> }],
-	},
-	{
-		path: "admin",
-		element: <AdminLayout />,
-		children: [
-			{
-				index: true,
-				element: <Dashboard />,
-			},
-			{
-				path: "subscription",
-				children: [
-					{
-						index: true,
-						element: <SubscriptionIndex />,
-					},
-					{
-						path: "create",
-						element: <CreateSubscription />,
-					},
-					{
-						path: "edit",
-						element: <EditSubscription />,
-					},
-				],
-			},
-			{
-				path: "plan",
-				children: [{ index: true, element: <PlanIndex /> }],
-			},
-		],
-	},
+  {
+    path: "login",
+    children: [{ index: true, element: <AdminLogin /> }],
+  },
+  {
+    path: "admin",
+    element: <AdminLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "subscriptions",
+        children: [
+          {
+            index: true,
+            element: <SubscriptionIndex />,
+          },
+          {
+            path: "create",
+            element: <CreateSubscription />,
+          },
+          {
+            path: "edit",
+            element: <EditSubscription />,
+          },
+        ],
+      },
+      {
+        path: "plans",
+        children: [{ index: true, element: <PlanIndex /> }],
+      },
+    ],
+  },
 ];

@@ -6,7 +6,7 @@ const EditPlan = ({ planCode, planName, setEditPlan, setEditStatus }) => {
 
   return (
     <aside
-      className="fixed top-0 left-0 w-full h-full z-10 bg-black bg-opacity-80 flex justify-end "
+      className="fixed z-50 top-0 left-0 w-full h-full  bg-black bg-opacity-80 flex justify-end "
       onClick={() => setEditStatus(false)}
     >
       <div
