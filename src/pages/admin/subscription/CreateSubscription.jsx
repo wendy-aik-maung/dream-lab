@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const CreateSubscription = () => {
   const [active, setActive] = useState(false);
   const [selectPlan, setSelectPlan] = useState(false);
-
+  const [plans, setPlans] = useState([]);
   return (
     <div className="container mx-auto">
       <form action="" className="w-3/4 ">
@@ -87,7 +87,12 @@ const CreateSubscription = () => {
         </button>
       </form>
       {selectPlan && (
-        <ChoosePlan selectPlan={selectPlan} setSelectPlan={setSelectPlan} />
+        <ChoosePlan
+          selectPlan={selectPlan}
+          setSelectPlan={setSelectPlan}
+          plans={plans}
+          setPlans={plans}
+        />
       )}
     </div>
   );

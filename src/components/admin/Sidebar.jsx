@@ -14,10 +14,19 @@ import { BiCategory, BiLogOut } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
 import { BiImage } from "react-icons/bi";
 import { AiFillCreditCard } from "react-icons/ai";
+import { useUserDataContext } from "../../contexts/UserDataContext";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const [manage, setManage] = useState(false);
   const [subscription, setSubscription] = useState(false);
+  const { logout } = useUserDataContext();
+
+  const handleLogout = () => {
+    logout();
+    navigate(0);
+  };
 
   return (
     <div className="h-full overflow-y-auto overflow-x-hidden flex flex-col w-80 items-center py-8 bg-dreamLabColor4 text-white text-opacity-50 fixed top-0 left-0 z-0 ">
@@ -32,7 +41,7 @@ const Sidebar = () => {
           <AdminSidebarLink to="/books" icon={<ImBooks />} title="Books" />
           <AdminSidebarLink to="/plans" icon={<MdEventNote />} title="Plans" />
           <AdminSidebarLink
-            to="/product"
+            to="/subscriptions"
             icon={<RiVipCrownFill />}
             title="Subscription plan"
           />
@@ -110,7 +119,10 @@ const Sidebar = () => {
           )}
           <hr />
           <li>
-            <button className="text-textColor3 py-4 text-lg cursor-pointer gap-2  flex items-center ">
+            <button
+              className="text-textColor3 py-4 text-lg cursor-pointer gap-2  flex items-center"
+              onClick={handleLogout}
+            >
               <BiLogOut />
               <span>Logout</span>
             </button>
