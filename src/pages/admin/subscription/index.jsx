@@ -5,9 +5,16 @@ import EmptyView from "../../../assets/EmptyView";
 import SubscriptionItem from "./SubscriptionItem";
 import DeleteModal from "./DeleteModal";
 import { Link } from "react-router-dom";
+import { useGetSubscriptions } from "../../../hooks/useSubscriptions";
 const SubscriptionIndex = () => {
   const [isDelete, setIsDelete] = useState(false);
   const [subscription, setSubscription] = useState([1, 2]);
+
+  const { isLoading, isError, error, data, refetch } = useGetSubscriptions();
+
+  const refreshData = () => {
+    refetch();
+  };
 
   return (
     <div className="container mx-auto">
@@ -35,7 +42,11 @@ const SubscriptionIndex = () => {
         </div>
       )}
       {isDelete && (
-        <DeleteModal isDelete={isDelete} setIsDelete={setIsDelete} />
+        <DeleteModal
+          isDelete={isDelete}
+          setIsDelete={setIsDelete}
+          refreshData={refreshData}
+        />
       )}
     </div>
   );

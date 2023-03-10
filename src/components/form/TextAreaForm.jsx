@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextAreaForm = ({ placeholder, id, label, rows = 4 }) => {
+const TextAreaForm = ({ placeholder, id, label, rows = 4, name, register }) => {
   return (
     <fieldset className="w-full">
       <label
@@ -16,7 +16,11 @@ const TextAreaForm = ({ placeholder, id, label, rows = 4 }) => {
         placeholder={placeholder}
         id={id}
         rows={rows}
+        {...register(name)}
       ></textarea>
+      {errors[name] ? (
+        <p className="text-red-600 mt-2">{errors[name]?.message}</p>
+      ) : null}
     </fieldset>
   );
 };

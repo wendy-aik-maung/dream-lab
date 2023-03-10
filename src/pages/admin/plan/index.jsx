@@ -4,7 +4,9 @@ import CreatePlan from "./CreatePlan";
 import EditPlan from "./EditPlan";
 import PlanItem from "../plan/PlanItem";
 import DeleteModal from "./DeleteModal";
+import { useGetPlans } from "../../../hooks/usePlans";
 
+// FOR UI ONLY (need to delete)
 const tempPlans = [
   {
     id: 1,
@@ -33,6 +35,13 @@ const PlanIndex = () => {
   const [planCode, setPlanCode] = useState("");
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
+
+  const { refetch } = useGetPlans();
+
+  const refreshData = () => {
+    refetch();
+  };
+
   return (
     <section>
       <CreatePageTitle
@@ -53,15 +62,26 @@ const PlanIndex = () => {
           />
         ))}
       </section>
-      {createStatus ? <CreatePlan setCreateStatus={setCreateStatus} /> : null}
+      {createStatus ? (
+        <CreatePlan
+          setCreateStatus={setCreateStatus}
+          refreshData={refreshData}
+        />
+      ) : null}
       {editStatus ? (
         <EditPlan
           {...editPlan}
           setEditPlan={setEditPlan}
           setEditStatus={setEditStatus}
+          refreshData={refreshData}
         />
       ) : null}
-      {deleteStatus ? <DeleteModal setDeleteStatus={setDeleteStatus} /> : null}
+      {deleteStatus ? (
+        <DeleteModal
+          setDeleteStatus={setDeleteStatus}
+          refreshData={refreshData}
+        />
+      ) : null}
     </section>
   );
 };

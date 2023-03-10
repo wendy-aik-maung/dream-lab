@@ -1,7 +1,7 @@
 import React from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const DeleteModal = ({ isDelete, setIsDelete }) => {
+const DeleteModal = ({ isDelete, setIsDelete, refreshData }) => {
   return (
     <section
       className={`fixed top-0 left-0 w-full h-full z-10 bg-black bg-opacity-80 flex justify-center items-center ${

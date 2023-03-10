@@ -1,6 +1,14 @@
 import React from "react";
 
-const InputForm = ({ label, id, type = "text", placeholder = "" }) => {
+const InputForm = ({
+  label,
+  id,
+  name,
+  type = "text",
+  placeholder = "",
+  register,
+  errors,
+}) => {
   return (
     <fieldset className="w-full my-2">
       {label ? (
@@ -14,9 +22,14 @@ const InputForm = ({ label, id, type = "text", placeholder = "" }) => {
       <input
         type={type}
         id={id}
-        className="w-full  py-2 px-2 border-2 font-bold rounded-md font-poppins focus:outline-none focus:border-black placeholder:text-[#bfbfbf]  placeholder:font-semibold"
+        name={name}
+        className="w-full  py-2 px-2 border-2 font-bold rounded-md font-poppins focus:outline-none focus:border-black placeholder:text-[#bfbfbf]  placeholder:font-semibold "
         placeholder={placeholder}
+        {...register(name)}
       />
+      {errors[name] ? (
+        <p className="text-red-600 mt-2">{errors[name]?.message}</p>
+      ) : null}
     </fieldset>
   );
 };
