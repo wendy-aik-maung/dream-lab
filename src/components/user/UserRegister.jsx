@@ -88,9 +88,9 @@ const UserRegister = () => {
     let timer;
     if (userRegisterMutation.isSuccess) {
       dispatch({ type: REGISTER_SUCCESS });
+      refreshUserData();
       timer = setTimeout(() => {
         handleRegisterModalClose();
-        refreshUserData();
       }, 1500);
     }
 
