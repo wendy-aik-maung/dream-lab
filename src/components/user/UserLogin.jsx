@@ -82,9 +82,9 @@ const UserLogin = () => {
 
     if (userLoginMutation.isSuccess) {
       dispatch({ type: LOGIN_SUCCESS });
+      refreshUserData();
       timer = setTimeout(() => {
         handleLoginModalClose();
-        refreshUserData();
       }, 1500);
     }
 

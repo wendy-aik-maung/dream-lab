@@ -16,7 +16,7 @@ import { BiImage } from "react-icons/bi";
 import { AiFillCreditCard } from "react-icons/ai";
 import { useUserDataContext } from "../../contexts/UserDataContext";
 import { useNavigate } from "react-router-dom";
-
+import { ISADMIN_LOCAL_STORAGE } from "../../contexts/AdminAuthContext";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [manage, setManage] = useState(false);
@@ -25,6 +25,7 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     logout();
+    localStorage.removeItem(ISADMIN_LOCAL_STORAGE);
     navigate(0);
   };
 
