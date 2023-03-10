@@ -25,8 +25,6 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     logout();
-    localStorage.removeItem("isAdmin");
-
     navigate(0);
   };
 
