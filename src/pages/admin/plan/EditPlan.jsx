@@ -1,8 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
+import { ClipLoader } from "react-spinners";
+import { useUpdatePlan } from "../../../hooks/usePlans";
 import InputForm from "../../../components/form/InputForm";
-const EditPlan = ({ planCode, planName, setEditPlan, setEditStatus }) => {
-  console.log(planCode, planName);
+
+
+const EditPlan = ({ editPlan, setEditPlan, setEditStatus, refreshData }) => {
+  const editPlanMutation = useUpdatePlan();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    return editPlanMutation.mutate(data);
+  };
+
+  useEffect(() => {
+    setValue("code", editPlan.code);
+    setValue("name", editPlan.name);
+  }, [editPlan]);
+
+  useEffect(() => {
+    if (editPlanMutation.isSuccess) {
+      refreshData();
+      setEditStatus(false);
+    }
+  }, [editPlanMutation.isSuccess]);
 
   return (
     <aside
@@ -21,21 +48,33 @@ const EditPlan = ({ planCode, planName, setEditPlan, setEditStatus }) => {
             className="stroke-1 cursor-pointer"
           />
         </div>
-        <form action="">
+        <form action="" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-8">
             <InputForm
+              name="code"
               label="Plan Code"
-              id="plan-code"
+              id="code"
               placeholder="Type Plan Code"
+              register={register}
+              errors={errors}
             />
             <InputForm
+              name="name"
               label="Plan Name"
-              id="plan-name"
+              id="name"
               placeholder="Type Plan Name"
+              register={register}
+              errors={errors}
             />
           </div>
+          {editPlanMutation.isError && (
+            <p className="text-red-400">{editPlanMutation.error.message}</p>
+          )}
           <button className="btn_primary mt-24 w-full font-semibold">
-            Create
+            {editPlanMutation.isLoading && (
+              <ClipLoader color="white" size={20} />
+            )}
+            Edit
           </button>
         </form>
       </div>
