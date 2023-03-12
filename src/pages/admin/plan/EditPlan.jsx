@@ -5,7 +5,6 @@ import { ClipLoader } from "react-spinners";
 import { useUpdatePlan } from "../../../hooks/usePlans";
 import InputForm from "../../../components/form/InputForm";
 
-
 const EditPlan = ({ editPlan, setEditPlan, setEditStatus, refreshData }) => {
   const editPlanMutation = useUpdatePlan();
   const {
@@ -70,11 +69,18 @@ const EditPlan = ({ editPlan, setEditPlan, setEditStatus, refreshData }) => {
           {editPlanMutation.isError && (
             <p className="text-red-400">{editPlanMutation.error.message}</p>
           )}
-          <button className="btn_primary mt-24 w-full font-semibold">
-            {editPlanMutation.isLoading && (
-              <ClipLoader color="white" size={20} />
+          <button
+            className="btn_primary mt-24 w-full font-semibold disabled:cursor-not-allowed disabled:bg-opacity-75"
+            disabled={editPlanMutation.isLoading}
+          >
+            {editPlanMutation.isLoading ? (
+              <div className="flex items-center justify-center gap-3">
+                <ClipLoader color="white" size={24} />
+                <span>Editing...</span>
+              </div>
+            ) : (
+              <span>Edit</span>
             )}
-            Edit
           </button>
         </form>
       </div>
