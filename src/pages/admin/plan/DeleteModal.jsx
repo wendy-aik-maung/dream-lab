@@ -10,13 +10,11 @@ const DeleteModal = ({ planCode, setDeleteStatus, refreshData }) => {
   };
 
   useEffect(() => {
-   if(deletePlanMutation.isSuccess){
-    refreshData();
-    setDeleteStatus(false)
-
-   }
-  }, [deletePlanMutation])
-  
+    if (deletePlanMutation.isSuccess) {
+      refreshData();
+      setDeleteStatus(false);
+    }
+  }, [deletePlanMutation.isSuccess]);
 
   return (
     <div
@@ -42,13 +40,18 @@ const DeleteModal = ({ planCode, setDeleteStatus, refreshData }) => {
             Cancel
           </button>
           <button
-            className="font-medium bg-[#BC3131] px-4 py-2 rounded text-white"
+            className="font-medium bg-[#BC3131] px-4 py-2 rounded text-white disabled:cursor-not-allowed disabled:bg-opacity-75"
+            disabled={deletePlanMutation.isLoading}
             onClick={onRemoveHandle}
           >
-            {deletePlanMutation.isLoading && (
-              <ClipLoader color="white" size={24} />
+            {deletePlanMutation.isLoading ? (
+              <div className="flex items-center justify-center gap-3">
+                <ClipLoader color="white" size={24} />
+                <span>Deleting...</span>
+              </div>
+            ) : (
+              <span>Delete</span>
             )}
-            Delete
           </button>
         </div>
       </div>
