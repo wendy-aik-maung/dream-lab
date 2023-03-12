@@ -30,7 +30,7 @@ export const routes = [
             element: <CreateSubscription />,
           },
           {
-            path: "edit",
+            path: "edit/:id",
             element: <EditSubscription />,
           },
         ],

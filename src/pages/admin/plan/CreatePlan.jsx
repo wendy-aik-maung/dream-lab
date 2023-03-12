@@ -12,21 +12,18 @@ const PlanSchema = yup.object({
   name: yup.string().required(),
 });
 
-const CreatePlan = ({ setCreateStatus,refreshData}) => {
+const CreatePlan = ({ setCreateStatus, refreshData }) => {
   const createPlanMutation = useCreatePlan();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
-    
+    reset,
   } = useForm({
     resolver: yupResolver(PlanSchema),
   });
-  
 
   const onSubmit = (data) => {
-    
     createPlanMutation.mutate(data);
   };
   useEffect(() => {
@@ -36,7 +33,6 @@ const CreatePlan = ({ setCreateStatus,refreshData}) => {
       setCreateStatus(false);
     }
   }, [createPlanMutation.isSuccess]);
-
 
   return (
     <aside
@@ -81,11 +77,19 @@ const CreatePlan = ({ setCreateStatus,refreshData}) => {
           {createPlanMutation.isError && (
             <p className="text-red-400">{createPlanMutation.error.message}</p>
           )}
-          <button className="btn_primary mt-24 w-full font-semibold">
-            {createPlanMutation.isLoading && (
-              <ClipLoader color="white" size={20} />
+
+          <button
+            className="btn_primary mt-24 w-full font-semibold disabled:cursor-not-allowed disabled:bg-opacity-75"
+            disabled={createPlanMutation.isLoading}
+          >
+            {createPlanMutation.isLoading ? (
+              <div className="flex items-center justify-center gap-3">
+                <ClipLoader color="white" size={24} />
+                <span>Creating...</span>
+              </div>
+            ) : (
+              <span>Create</span>
             )}
-            Create
           </button>
         </form>
       </div>

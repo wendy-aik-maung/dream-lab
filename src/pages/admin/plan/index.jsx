@@ -6,6 +6,7 @@ import PlanItem from "../plan/PlanItem";
 import DeleteModal from "./DeleteModal";
 import { useGetPlans } from "../../../hooks/usePlans";
 import { ClipLoader } from "react-spinners";
+import EmptyView from "../../../assets/EmptyView";
 // FOR UI ONLY (need to delete)
 
 const PlanIndex = () => {
@@ -34,7 +35,6 @@ const PlanIndex = () => {
   if (isError) {
     return <p className="text-red-500 font-poppins">{error.message}</p>;
   }
-  console.log(data);
 
   return (
     <section>
@@ -43,17 +43,27 @@ const PlanIndex = () => {
         buttonTitle="Create New"
         setCreateStatus={setCreateStatus}
       />
+
       <section className="flex flex-col gap-4 mt-12">
-        {data.map((plan) => (
-          <PlanItem
-            key={plan.code}
-            plan={plan}
-            setEditStatus={setEditStatus}
-            setEditPlan={setEditPlan}
-            setPlanCode={setPlanCode}
-            setDeleteStatus={setDeleteStatus}
-          />
-        ))}
+        {data.length === 0 ? (
+          <section className="mt-48 text-center">
+            <div className="flex justify-center">
+              <EmptyView />
+            </div>
+            <p className="mt-5">You have no plans created yet</p>
+          </section>
+        ) : (
+          data.map((plan) => (
+            <PlanItem
+              key={plan.code}
+              plan={plan}
+              setEditStatus={setEditStatus}
+              setEditPlan={setEditPlan}
+              setPlanCode={setPlanCode}
+              setDeleteStatus={setDeleteStatus}
+            />
+          ))
+        )}
       </section>
       {createStatus ? (
         <CreatePlan

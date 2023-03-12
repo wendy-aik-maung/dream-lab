@@ -7,6 +7,7 @@ import { UserDataContextProvider } from "./contexts/UserDataContext";
 import { routes as userRoutes } from "./routes/UserRoutes";
 import { routes as adminRoutes } from "./routes/AdminRoutes";
 import { useAdminAuthContext } from "./contexts/AdminAuthContext";
+import { getToken } from "./utils/getToken";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,8 @@ const App = () => {
   const AdminRouting = useRoutes(adminRoutes);
 
   const { isAdmin } = useAdminAuthContext();
+  const token = getToken();
+  console.log(token);
 
   return (
     <RegisterModalContextProvider>
