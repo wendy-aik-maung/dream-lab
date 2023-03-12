@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SubscriptionItem = ({ subscriptionInfo, isDelete, setIsDelete }) => {
+const SubscriptionItem = ({ subscriptionInfo, setId, setIsDelete }) => {
 	return (
 		<div className="container mx-auto border-2 shadow-lg  p-10 my-6">
 			<h2 className="font-semibold text-xl pb-3">{subscriptionInfo.name}</h2>
@@ -17,7 +17,7 @@ const SubscriptionItem = ({ subscriptionInfo, isDelete, setIsDelete }) => {
 					<button
 						className="ml-4  text-red-600 font-semibold text-lg"
 						onClick={() => {
-							// isDelete(`${subscriptionInfo.id}`);
+							setId(`${subscriptionInfo.id}`);
 							setIsDelete(true);
 						}}>
 						Delete

@@ -9,7 +9,7 @@ import { useGetSubscriptions } from "../../../hooks/useSubscriptions";
 import { ClipLoader } from "react-spinners";
 const SubscriptionIndex = () => {
 	const [isDelete, setIsDelete] = useState(false);
-	// const [subscriptions, setSubscriptions] = useState("");
+	const [id, setId] = useState("");
 
 	const { isLoading, isError, error, data, refetch } = useGetSubscriptions();
 
@@ -53,7 +53,7 @@ const SubscriptionIndex = () => {
 					{data?.map((subscription) => (
 						<SubscriptionItem
 							subscriptionInfo={subscription}
-							isDelete={isDelete}
+							setId={setId}
 							setIsDelete={setIsDelete}
 						/>
 					))}
@@ -61,6 +61,7 @@ const SubscriptionIndex = () => {
 			)}
 			{isDelete && (
 				<DeleteModal
+					id={id}
 					isDelete={isDelete}
 					setIsDelete={setIsDelete}
 					refreshData={refreshData}

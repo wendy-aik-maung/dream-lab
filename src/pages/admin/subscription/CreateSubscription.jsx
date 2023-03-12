@@ -66,6 +66,7 @@ const CreateSubscription = () => {
 				<InputForm
 					type="text"
 					label="Subscription Name:"
+					name="name"
 					placeholder="Type name"
 					errors={errors}
 					register={register}
@@ -73,6 +74,7 @@ const CreateSubscription = () => {
 				<InputForm
 					type="text"
 					label="Stack Title:"
+					name="stackTitle"
 					placeholder="Type stack title"
 					errors={errors}
 					register={register}
@@ -80,6 +82,7 @@ const CreateSubscription = () => {
 				<InputForm
 					type="number"
 					label="Original Price:"
+					name="originalPrice"
 					placeholder="0 Ks"
 					errors={errors}
 					register={register}
@@ -87,6 +90,7 @@ const CreateSubscription = () => {
 				<InputForm
 					type="number"
 					label="Sale Price:"
+					name="salePrice"
 					placeholder="0 Ks"
 					errors={errors}
 					register={register}
@@ -124,6 +128,7 @@ const CreateSubscription = () => {
 				<TextAreaForm
 					type="text"
 					label="Description:"
+					name="description"
 					id="text"
 					placeholder="Type Description"
 					errors={errors}
