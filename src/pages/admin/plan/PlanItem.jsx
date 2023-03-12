@@ -1,28 +1,26 @@
 import React from "react";
 
 const PlanItem = ({
-  planCode,
-  planName,
+  plan,
   setEditStatus,
   setEditPlan,
   setPlanCode,
+
   setDeleteStatus,
 }) => {
   const onClickEdit = () => {
     setEditStatus(true);
-    setEditPlan((prev) => {
-      return { ...prev, planCode, planName };
-    });
+    setEditPlan(plan);
   };
 
   const onClickDelete = () => {
     setDeleteStatus(true);
-    setPlanCode(planCode);
+    setPlanCode(plan.code);
   };
 
   return (
     <article className="bg-white rounded p-9 flex items-center justify-between shadow-lg">
-      <h4 className="text-xl font-medium capitalize">{planCode}</h4>
+      <h4 className="text-xl font-medium capitalize">{plan.name}</h4>
       <div className="flex gap-12">
         <button
           className="btn_primary font-medium text-textColor1 w-[6rem]"

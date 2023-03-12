@@ -5,42 +5,36 @@ import EditPlan from "./EditPlan";
 import PlanItem from "../plan/PlanItem";
 import DeleteModal from "./DeleteModal";
 import { useGetPlans } from "../../../hooks/usePlans";
-
+import { ClipLoader } from "react-spinners";
 // FOR UI ONLY (need to delete)
-const tempPlans = [
-  {
-    id: 1,
-    planCode: "videoCode",
-    planName: "Videos",
-  },
-  {
-    id: 2,
-    planCode: "articleCode",
-    planName: "Articles",
-  },
-  {
-    id: 3,
-    planCode: "bookCode",
-    planName: "Bookd",
-  },
-  ,
-];
 
 const PlanIndex = () => {
   const [createStatus, setCreateStatus] = useState(false);
   const [editPlan, setEditPlan] = useState({
-    planCode: "",
-    planName: "",
+    code: "",
+    name: "",
   });
   const [planCode, setPlanCode] = useState("");
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
 
-  const { refetch } = useGetPlans();
+  const { isLoading, isError, error, data, refetch } = useGetPlans();
 
   const refreshData = () => {
     refetch();
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ClipLoader color="white" size={24} />
+      </div>
+    );
+  }
+  if (isError) {
+    return <p className="text-red-500 font-poppins">{error.message}</p>;
+  }
+  console.log(data);
 
   return (
     <section>
@@ -50,11 +44,10 @@ const PlanIndex = () => {
         setCreateStatus={setCreateStatus}
       />
       <section className="flex flex-col gap-4 mt-12">
-        {tempPlans.map((plan) => (
+        {data.map((plan) => (
           <PlanItem
-            key={plan.id}
-            planName={plan.planName}
-            planCode={plan.planCode}
+            key={plan.code}
+            plan={plan}
             setEditStatus={setEditStatus}
             setEditPlan={setEditPlan}
             setPlanCode={setPlanCode}
@@ -70,7 +63,7 @@ const PlanIndex = () => {
       ) : null}
       {editStatus ? (
         <EditPlan
-          {...editPlan}
+          editPlan={editPlan}
           setEditPlan={setEditPlan}
           setEditStatus={setEditStatus}
           refreshData={refreshData}
@@ -78,6 +71,7 @@ const PlanIndex = () => {
       ) : null}
       {deleteStatus ? (
         <DeleteModal
+          planCode={planCode}
           setDeleteStatus={setDeleteStatus}
           refreshData={refreshData}
         />
