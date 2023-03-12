@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Switch from "react-switch";
 import InputForm from "../../../components/form/InputForm";
 import TextAreaForm from "../../../components/form/TextAreaForm";
@@ -9,9 +9,13 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useCreateSubscription } from "../../../hooks/useSubscriptions";
+import {
+	useCreateSubscription,
+	useRemovePlan,
+} from "../../../hooks/useSubscriptions";
 import { ClipLoader } from "react-spinners";
 import ErrorMessage from "../../../components/form/ErrorMessage";
+import { v4 as uuid } from "uuid";
 
 export const SubscriptionSchema = yup.object({
 	name: yup.string().required(),
@@ -27,6 +31,10 @@ const CreateSubscription = () => {
 	const [active, setActive] = useState(false);
 	const [selectPlan, setSelectPlan] = useState(false);
 	const [plans, setPlans] = useState([]);
+	const [getPlans, setGetPlans] = useState([]);
+	const [fetch, setFetch] = useState(null);
+
+	const handleRefresh = () => setFetch(uuid());
 
 	const createSubscriptionMutation = useCreateSubscription();
 
@@ -48,6 +56,18 @@ const CreateSubscription = () => {
 		data["plans"] = plans;
 		createSubscriptionMutation.mutate(data);
 	};
+
+	const removePlanMutation = useRemovePlan();
+
+	const handlePlanRemove = async (planId) => {
+		removePlanMutation.mutate(planId);
+	};
+
+	useEffect(() => {
+		if (removePlanMutation.isSuccess) {
+			handleRefresh();
+		}
+	}, [removePlanMutation.isSuccess]);
 
 	return (
 		<div className="container mx-auto">
@@ -144,26 +164,31 @@ const CreateSubscription = () => {
 						onClick={() => setSelectPlan(true)}>
 						Choose Plan
 					</section>
-					<p>0 Plan selected</p>
+					<p>{plans.length} plans selected</p>
 				</div>
 				{createSubscriptionMutation.isError && (
 					<ErrorMessage message={createSubscriptionMutation.error.message} />
 				)}
 				<button
 					type="submit"
-					className="btn_primary text-lg font-bold py-2 my-8 flex items-center justify-center gap-x-3 w-full">
-					{createSubscriptionMutation.isLoading && (
-						<ClipLoader color="white" size={20} />
+					className="btn_primary text-lg font-bold py-2 my-8 flex items-center justify-center gap-x-3 w-full disabled:cursor-not-allowed disabled:bg-opacity-75"
+					disabled={createSubscriptionMutation.isLoading}>
+					{createSubscriptionMutation.isLoading ? (
+						<div className="flex items-center justify-center gap-3">
+							<ClipLoader color="white" size={24} />
+							<span>Creating...</span>
+						</div>
+					) : (
+						<span>Create</span>
 					)}
-					Create
 				</button>
 			</form>
 			{selectPlan && (
 				<ChoosePlan
-					selectPlan={selectPlan}
+					getPlans={getPlans}
 					setSelectPlan={setSelectPlan}
 					plans={plans}
-					setPlans={plans}
+					setPlans={setPlans}
 				/>
 			)}
 		</div>

@@ -38,10 +38,6 @@ const DeleteModal = ({ id, isDelete, setIsDelete, refreshData }) => {
 						onClick={() => setIsDelete(false)}>
 						Cancel
 					</button>
-
-					{deleteSubscriptionMutation.isLoading && (
-						<ClipLoader color="white" size={20} />
-					)}
 					{deleteSubscriptionMutation.isError && (
 						<ErrorMessage message={deletePlanMutation.error.message} />
 					)}
@@ -49,6 +45,11 @@ const DeleteModal = ({ id, isDelete, setIsDelete, refreshData }) => {
 					<button
 						className="bg-red-600 rounded-md text-white py-2 px-4 flex items-center gap-x-3"
 						onClick={onDeleteHandler}>
+						{deleteSubscriptionMutation.isLoading && (
+							<div className="flex items-center justify-center gap-3">
+								<ClipLoader color="white" size={24} />
+							</div>
+						)}
 						Delete
 					</button>
 				</div>
