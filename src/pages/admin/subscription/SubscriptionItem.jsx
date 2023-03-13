@@ -25,9 +25,9 @@ const SubscriptionItem = ({ subscriptionInfo, setId, setIsDelete }) => {
 				</div>
 			</section>
 			<div className="mt-5 flex items-end gap-x-5 ">
-				<p className="line-through">{subscriptionInfo.salePrice} Ks</p>
+				<p className="line-through">{subscriptionInfo.originalPrice} Ks</p>
 				<p className="text-dreamLabColor1 text-2xl font-semibold">
-					{subscriptionInfo.originalPrice} Ks
+					{subscriptionInfo.salePrice} Ks
 				</p>
 			</div>
 		</div>
