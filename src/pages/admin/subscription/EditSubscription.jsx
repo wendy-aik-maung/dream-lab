@@ -16,6 +16,7 @@ import {
 import { HiXMark } from "react-icons/hi2";
 import ErrorMessage from "../../../components/form/ErrorMessage";
 import { ClipLoader } from "react-spinners";
+
 const EditSubscription = () => {
   const { id } = useParams();
 
@@ -55,6 +56,12 @@ const EditSubscription = () => {
 
   const handlePlanRemove = async (planId) => {
     removePlanMutation.mutate(planId);
+  };
+
+  const handlePlanRemoveFromui = (planCode) => {
+    setPlans((prev) => {
+      return prev.filter((plan) => plan.plan.code !== planCode);
+    });
   };
 
   useEffect(() => {
@@ -191,6 +198,18 @@ const EditSubscription = () => {
                 <HiXMark
                   className="cursor-pointer"
                   onClick={() => handlePlanRemove(plan.id)}
+                />
+              </div>
+            ))}
+            {plans.map((plan) => (
+              <div
+                key={plan.plan.code}
+                className="rounded-full py-1.5 px-4 shadow w-max  border flex gap-4 items-center"
+              >
+                <span>{plan.plan.name}</span>
+                <HiXMark
+                  className="cursor-pointer"
+                  onClick={() => handlePlanRemoveFromui(plan.plan.code)}
                 />
               </div>
             ))}
