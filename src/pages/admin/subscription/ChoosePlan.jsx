@@ -10,8 +10,13 @@ const ChoosePlan = ({ setSelectPlan, getPlans, plans, setPlans }) => {
 
   const checkHandle = (e) => {
     const planCode = e.target.value;
+    const selectedPlan = data?.find((plan) => plan.code === planCode);
+
     if (e.currentTarget.checked) {
-      setSelectPlans([...selectPlans, { planCode, applyAll: false }]);
+      setSelectPlans([
+        ...selectPlans,
+        { planCode, applyAll: false, plan: selectedPlan },
+      ]);
     } else {
       setSelectPlans(selectPlans.filter((plan) => plan.planCode !== planCode));
     }
