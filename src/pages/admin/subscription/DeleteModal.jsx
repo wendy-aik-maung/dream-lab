@@ -47,7 +47,7 @@ const DeleteModal = ({ id, isDelete, setIsDelete, refreshData }) => {
 						onClick={onDeleteHandler}>
 						{deleteSubscriptionMutation.isLoading && (
 							<div className="flex items-center justify-center gap-3">
-								<ClipLoader color="white" size={24} />
+								<ClipLoader color="white" size={23} />
 							</div>
 						)}
 						Delete
