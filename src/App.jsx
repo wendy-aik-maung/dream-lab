@@ -25,7 +25,7 @@ const App = () => {
         <UserDataContextProvider>
           <QueryClientProvider client={queryClient}>
             <Routes>
-              <Route path="/" element={UserRouting} />
+              <Route path="/*" element={UserRouting} />
               <Route
                 path="/admin/*"
                 element={isAdmin ? AdminRouting : <Navigate to="/login" />}

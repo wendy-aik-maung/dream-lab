@@ -7,6 +7,7 @@ import {
   fetchSubscription,
   removePlan,
   updateSubscription,
+  fetchSubscriptionsForUser,
 } from "../services/api/subscriptionApi";
 
 // ========= Custom Hooks for Plans ========== //
@@ -15,6 +16,10 @@ import {
 
 export const useGetSubscriptions = () => {
   return useQuery(["subscriptions"], fetchSubscriptions);
+};
+
+export const useGetSubscriptionsForUser = () => {
+  return useQuery(["subscriptionsForUser"], fetchSubscriptionsForUser);
 };
 
 // ========== Get Single subscription ==========//
