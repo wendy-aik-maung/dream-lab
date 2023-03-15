@@ -112,7 +112,7 @@ const Sidebar = () => {
           {subscription && (
             <div>
               <AdminSidebarLink
-                to="/"
+                to="/subscribers"
                 icon={<FaUserAlt />}
                 title="Subscriber"
               />
