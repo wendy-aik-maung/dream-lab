@@ -14,8 +14,8 @@ const UserLayout = () => {
   return (
     <>
       <main
-        className="max-w-[1440px] mx-auto font-poppins
-      px-6 md:px-4 lg:px-2"
+        className=" mx-auto font-poppins
+      "
       >
         <Navbar />
         <Outlet />

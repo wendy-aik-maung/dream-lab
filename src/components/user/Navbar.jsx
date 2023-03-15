@@ -55,7 +55,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="py-4 flex justify-between items-baseline text-textColor1">
+      <nav className="py-4 px-2 md:px-6  lg:px-12 flex justify-between items-baseline text-textColor1">
         <HiOutlineMenuAlt2
           className="text-3xl block lg:hidden"
           onClick={handleMobileNavbarOpen}
@@ -84,7 +84,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/pricing"
               className="flex items-center gap-2 font-semibold hover:text-textColor2"
             >
               <AiFillDollarCircle />

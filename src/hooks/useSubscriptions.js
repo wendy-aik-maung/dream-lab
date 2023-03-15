@@ -7,6 +7,8 @@ import {
   fetchSubscription,
   removePlan,
   updateSubscription,
+  fetchSubscriptionsForUser,
+  userSubscribe,
 } from "../services/api/subscriptionApi";
 
 // ========= Custom Hooks for Plans ========== //
@@ -15,6 +17,10 @@ import {
 
 export const useGetSubscriptions = () => {
   return useQuery(["subscriptions"], fetchSubscriptions);
+};
+
+export const useGetSubscriptionsForUser = () => {
+  return useQuery(["subscriptionsForUser"], fetchSubscriptionsForUser);
 };
 
 // ========== Get Single subscription ==========//
@@ -55,4 +61,10 @@ export const useDeleteSubscription = () => {
 
 export const useRemovePlan = () => {
   return useMutation(removePlan);
+};
+
+// ========== User Subscribe ==========//
+
+export const useUserSubscribe = () => {
+  return useMutation(userSubscribe);
 };

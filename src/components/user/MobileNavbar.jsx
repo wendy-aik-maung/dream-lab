@@ -41,7 +41,7 @@ const MobileNavbar = ({ onClose }) => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/pricing"
               className="flex items-center gap-2 font-semibold active:text-textColor2"
             >
               <AiFillDollarCircle />
