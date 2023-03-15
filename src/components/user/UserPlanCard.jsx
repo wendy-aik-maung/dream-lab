@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const UserPlanCard = ({ subscription }) => {
-  const { name, originalPrice, salePrice, description } = subscription;
+  const { id, name, originalPrice, salePrice, description } = subscription;
 
   return (
     <article className=" shadow-md py-4 px-6 rounded-xl flex flex-col min-h-[20rem]">
@@ -15,9 +16,12 @@ const UserPlanCard = ({ subscription }) => {
           {salePrice} Ks
         </span>
       </div>
-      <button className="btn_primary mt-auto font-semibold">
+      <Link
+        className="btn_primary mt-auto font-semibold text-center"
+        to={`/pricing/purchaseplan/${id}`}
+      >
         Purchase Now
-      </button>
+      </Link>
     </article>
   );
 };

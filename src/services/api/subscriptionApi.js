@@ -1,5 +1,6 @@
 import { BASE_URL } from "./api_endpoint";
 import { getToken } from "../../utils/getToken";
+import { dateFormatter } from "../../utils/dateFormatter";
 
 // ========== Get all subscriptions ========== //
 
@@ -47,11 +48,7 @@ export const fetchSubscriptionsForUser = async () => {
 // ========== Get Single subscription ==========//
 
 export const fetchSubscription = async (id) => {
-  const token = getToken();
   var requestOptions = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
     mode: "cors",
     method: "GET",
     redirect: "follow",
@@ -178,6 +175,46 @@ export const removePlan = async (planId) => {
       requestOptions
     );
     const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// ========== User Subscribe ==========//
+
+export const userSubscribe = async (data) => {
+  const { id, image } = data;
+
+  const token = getToken();
+  const formData = new FormData();
+  const startDate = dateFormatter();
+
+  formData.append("paymentImage", image);
+  formData.append("subscriptionId", Number(id));
+  formData.append("startDate", startDate);
+
+  console.log(formData);
+
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "POST",
+    redirect: "follow",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(
+      `${BASE_URL}users/subscribe/subscription`,
+      requestOptions
+    );
+    const data = await response.json();
+
     if (!response.ok) throw new Error(data.message);
 
     return data;

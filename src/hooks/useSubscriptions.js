@@ -8,6 +8,7 @@ import {
   removePlan,
   updateSubscription,
   fetchSubscriptionsForUser,
+  userSubscribe,
 } from "../services/api/subscriptionApi";
 
 // ========= Custom Hooks for Plans ========== //
@@ -60,4 +61,10 @@ export const useDeleteSubscription = () => {
 
 export const useRemovePlan = () => {
   return useMutation(removePlan);
+};
+
+// ========== User Subscribe ==========//
+
+export const useUserSubscribe = () => {
+  return useMutation(userSubscribe);
 };
