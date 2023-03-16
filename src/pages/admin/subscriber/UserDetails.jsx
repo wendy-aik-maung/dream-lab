@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const UserDetails = ({ subscriber }) => {
-  const { user, status, subscription, startDate } = subscriber;
+const UserDetails = ({ subscriber, setUserId, setIsSidebarOpen }) => {
+  const { id, user, status, subscription, startDate } = subscriber;
   const handleStatus = () => {
     if (status === "p") {
       return { cls: "bg-[#C99206]", text: "request" };
@@ -15,6 +15,11 @@ const UserDetails = ({ subscriber }) => {
     }
   };
   const [currentStatus, setStatus] = useState(handleStatus());
+
+  const handleViewDetails = () => {
+    setUserId(id);
+    setIsSidebarOpen(true);
+  };
 
   return (
     <>
@@ -36,7 +41,7 @@ const UserDetails = ({ subscriber }) => {
           {startDate}
         </span>
         <span className="col-span-2 text-dreamLabColor1 font-semibold">
-          <Link to={"/"}>View Details</Link>
+          <button onClick={handleViewDetails}>View Details</button>
         </span>
       </article>
     </>

@@ -30,3 +30,27 @@ export const getUserSubscriptions = async (status, page, limit) => {
     throw error;
   }
 };
+
+export const getUserSubscriptionHistory = async (id) => {
+  const token = getToken();
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "GET",
+    redirect: "follow",
+  };
+  try {
+    const response = await fetch(
+      `${BASE_URL}users/subscription/history`,
+      requestOptions
+    );
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
