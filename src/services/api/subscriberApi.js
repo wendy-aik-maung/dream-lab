@@ -31,22 +31,27 @@ export const getUserSubscriptions = async (status, page, limit) => {
   }
 };
 
-export const getUserSubscriptionHistory = async (id) => {
+export const userSubscriptionUpdate = async (user) => {
   const token = getToken();
   const requestOptions = {
     headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     mode: "cors",
-    method: "GET",
+    method: "POST",
+    body: JSON.stringify(user),
     redirect: "follow",
   };
+
   try {
     const response = await fetch(
-      `${BASE_URL}users/subscription/history`,
+      `${BASE_URL}users/subscribe/subscription/${user.id}`,
       requestOptions
     );
     const data = await response.json();
+
     if (!response.ok) throw new Error(data.message);
 
     return data;

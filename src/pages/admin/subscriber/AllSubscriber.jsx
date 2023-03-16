@@ -10,7 +10,7 @@ const AllSubscriber = () => {
     useGetUserSubscription("", currentPage);
   const [pageCount, setPageCount] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const [userDetails, setUserDetails] = useState({});
 
   useEffect(() => {
     if (isSuccess) {
@@ -38,14 +38,17 @@ const AllSubscriber = () => {
             <UserDetails
               subscriber={subscriber}
               key={subscriber.id}
-              setUserId={setUserId}
+              setUserDetails={setUserDetails}
               setIsSidebarOpen={setIsSidebarOpen}
             />
           ))
         : null}
       <Pagination pageCount={pageCount} handlePageChange={handlePageChange} />
       {isSidebarOpen ? (
-        <DetailsSidebar setIsSidebarOpen={setIsSidebarOpen} userId={userId} />
+        <DetailsSidebar
+          setIsSidebarOpen={setIsSidebarOpen}
+          userDetails={userDetails}
+        />
       ) : null}
     </section>
   );
