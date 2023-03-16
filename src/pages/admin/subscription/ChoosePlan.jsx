@@ -29,7 +29,7 @@ const ChoosePlan = ({ setSelectPlan, getPlans, plans, setPlans }) => {
 
   return (
     <aside
-      className="fixed top-0 left-0 w-full h-full z-10 bg-black bg-opacity-70 flex justify-end "
+      className="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-70 flex justify-end "
       onClick={() => setSelectPlan(false)}
     >
       <div

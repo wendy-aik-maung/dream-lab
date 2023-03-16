@@ -1,14 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetUserSubscription } from "../../../hooks/useSubscribers";
-import { BASE_URL } from "../../../services/api/api_endpoint";
 import { ClipLoader } from "react-spinners";
+import Pagination from "../../../components/admin/Pagination";
 import UserDetails from "./UserDetails";
 
 const AllSubscriber = () => {
-  const { isLoading, data, isError } = useGetUserSubscription();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { isLoading, data, isError, isSuccess, refetch } =
+    useGetUserSubscription("", currentPage);
+  const [pageCount, setPageCount] = useState(0);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setPageCount(data.meta.totalPages);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    refetch(["", currentPage]);
+  }, [currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   return (
-    <section className="flex flex-col ">
+    <section className="flex flex-col pb-12">
       {isLoading ? (
         <div className="col-span-12 mt-8 flex justify-center items-center">
           <ClipLoader size={32} />
@@ -19,6 +36,7 @@ const AllSubscriber = () => {
             <UserDetails subscriber={subscriber} key={subscriber.id} />
           ))
         : null}
+      <Pagination pageCount={pageCount} handlePageChange={handlePageChange} />
     </section>
   );
 };

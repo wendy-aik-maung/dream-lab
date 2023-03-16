@@ -36,7 +36,7 @@ const CreatePlan = ({ setCreateStatus, refreshData }) => {
 
   return (
     <aside
-      className="fixed top-0 left-0 w-full h-full z-10 bg-black bg-opacity-80 flex justify-end "
+      className="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-80 flex justify-end "
       onClick={() => setCreateStatus(false)}
     >
       <div

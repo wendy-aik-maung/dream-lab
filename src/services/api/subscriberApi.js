@@ -4,7 +4,6 @@ import { BASE_URL } from "./api_endpoint";
 
 export const getUserSubscriptions = async (status, page, limit) => {
   const token = getToken();
-
   const isStatus = status ? `status=${status}` : "";
   const isPage = page ? `page=${page}` : "";
   const isLimited = limit ? `limited=${limit}` : "";
