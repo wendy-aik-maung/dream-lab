@@ -30,7 +30,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-full overflow-y-auto overflow-x-hidden flex flex-col w-80 items-center py-8 bg-dreamLabColor4 text-white text-opacity-50 fixed top-0 left-0 z-0 ">
+    <div className="h-full overflow-y-auto overflow-x-hidden flex flex-col w-80 items-center py-8 bg-dreamLabColor4 text-white text-opacity-50 fixed top-0 left-0 z-10 ">
       <div className="grow  py-20">
         <div className="flex items-center mb-8">
           <span className="text-xl font-bold text-textColor3">
@@ -112,7 +112,7 @@ const Sidebar = () => {
           {subscription && (
             <div>
               <AdminSidebarLink
-                to="/"
+                to="/subscribers"
                 icon={<FaUserAlt />}
                 title="Subscriber"
               />
