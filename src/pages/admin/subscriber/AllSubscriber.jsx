@@ -5,11 +5,7 @@ import { ClipLoader } from "react-spinners";
 import UserDetails from "./UserDetails";
 
 const AllSubscriber = () => {
-  const [currentPage, setCurrentPage] = useState(
-    `${BASE_URL}users/subscription/request`
-  );
-
-  const { isLoading, data, isError } = useGetUserSubscription(currentPage);
+  const { isLoading, data, isError } = useGetUserSubscription();
 
   return (
     <section className="flex flex-col ">

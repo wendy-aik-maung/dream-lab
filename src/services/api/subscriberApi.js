@@ -1,9 +1,14 @@
 // ========== User Subscribe ==========//
-
 import { getToken } from "../../utils/getToken";
+import { BASE_URL } from "./api_endpoint";
 
-export const getUserSubscriptions = async (currentPage) => {
+export const getUserSubscriptions = async (status, page, limit) => {
   const token = getToken();
+
+  const isStatus = status ? `status=${status}` : "";
+  const isPage = page ? `page=${page}` : "";
+  const isLimited = limit ? `limited=${limit}` : "";
+
   const requestOptions = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -13,10 +18,11 @@ export const getUserSubscriptions = async (currentPage) => {
     redirect: "follow",
   };
 
-  console.log(currentPage);
-
   try {
-    const response = await fetch(currentPage, requestOptions);
+    const response = await fetch(
+      `${BASE_URL}users/subscription/request?${isStatus}&${isPage}&${isLimited}`,
+      requestOptions
+    );
     const data = await response.json();
     if (!response.ok) throw new Error(data.message);
 

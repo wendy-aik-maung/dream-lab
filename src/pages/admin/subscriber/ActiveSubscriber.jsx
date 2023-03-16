@@ -8,7 +8,7 @@ const ActiveSubscriber = () => {
     `${BASE_URL}users/subscription/request?status=a`
   );
 
-  const { isLoading, data, isError } = useGetUserSubscription(currentPage);
+  const { isLoading, data, isError } = useGetUserSubscription("a");
 
   return (
     <section className="flex flex-col ">

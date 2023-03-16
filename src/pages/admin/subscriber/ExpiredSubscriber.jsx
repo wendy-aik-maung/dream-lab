@@ -8,9 +8,8 @@ const ExpiredSubscriber = () => {
     `${BASE_URL}users/subscription/request?status=e`
   );
 
-  const { isLoading, data, isError } = useGetUserSubscription(currentPage);
+  const { isLoading, data, isError } = useGetUserSubscription("e");
 
-  console.log(data);
   return (
     <section className="flex flex-col ">
       {isLoading ? (
