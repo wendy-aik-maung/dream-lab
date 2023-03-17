@@ -1,14 +1,33 @@
 import React, { useState } from "react";
 import CreatePageTitle from "../../../components/admin/CreatePageTitle";
+import { useGetCategories } from "../../../hooks/useCategory";
 import CategoryItem from "./CategoryItem";
 import CreateCategory from "./CreateCategory";
 import DeleteModal from "./DeleteModal";
 import EditCategory from "./EditCategory";
-
+import { ClipLoader } from "react-spinners";
 const CategoryIndex = () => {
-  const [createStatus, setCreateStatus] = useState(false);
+  const [createStatus, setCreateStatus] = useState();
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
+
+  const { isLoading, data: categories, refetch, isError } = useGetCategories();
+
+  const handleRefreshData = () => {
+    refetch();
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <ClipLoader color="black" size={32} />
+      </div>
+    );
+  }
+  if (isError) {
+    return <p className="text-red-500 font-poppins">{error.message}</p>;
+  }
+
   return (
     <section>
       <CreatePageTitle
@@ -17,21 +36,20 @@ const CategoryIndex = () => {
         setCreateStatus={setCreateStatus}
       />
       <section className="flex flex-col gap-4 mt-12">
-        <CategoryItem
-          setEditStatus={setEditStatus}
-          setDeleteStatus={setDeleteStatus}
-        />
-        <CategoryItem
-          setEditStatus={setEditStatus}
-          setDeleteStatus={setDeleteStatus}
-        />
-        <CategoryItem
-          setEditStatus={setEditStatus}
-          setDeleteStatus={setDeleteStatus}
-        />
+        {categories.map((category) => (
+          <CategoryItem
+            key={category.id}
+            category={category}
+            setEditStatus={setEditStatus}
+            setDeleteStatus={setDeleteStatus}
+          />
+        ))}
       </section>
       {createStatus ? (
-        <CreateCategory setCreateStatus={setCreateStatus} />
+        <CreateCategory
+          setCreateStatus={setCreateStatus}
+          handleRefreshData={handleRefreshData}
+        />
       ) : null}
       {editStatus ? <EditCategory setEditStatus={setEditStatus} /> : null}
       {deleteStatus ? <DeleteModal setDeleteStatus={setDeleteStatus} /> : null}
