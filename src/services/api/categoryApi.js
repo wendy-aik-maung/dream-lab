@@ -4,58 +4,59 @@ import { getToken } from "../../utils/getToken";
 // ========== Get all category ========== //
 
 export const fetchCategories = async () => {
-	const token = getToken();
-	const requestOption = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-		mode: "cors",
-		method: "GET",
-	};
-	try {
-		const response = await fetch(`${BASE_URL}categories`, requestOption);
-		const data = await response.json();
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "GET",
+  };
+  try {
+    const response = await fetch(`${BASE_URL}categories`, requestOption);
+    const data = await response.json();
 
-		if (!response.ok) {
-			throw new Error(data.message);
-		}
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
 
-		return data;
-	} catch (error) {
-		throw error;
-	}
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // ========== Create category ========== //
 
 export const createCategory = async (data) => {
-	const token = getToken();
-	const formData = new FormData();
+  const { name, icon } = data;
 
-	formData.append("icon", image);
-	formData.append("name", string);
-	console.log(formData);
+  const token = getToken();
+  const formData = new FormData();
 
-	const requestOptions = {
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-		mode: "cors",
-		method: "POST",
-		redirect: "follow",
-		body: formData,
-	};
+  formData.append("icon", icon[0]);
+  formData.append("name", name);
 
-	try {
-		const response = await fetch(`${BASE_URL}categories`, requestOptions);
-		const data = await response.json();
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "POST",
+    redirect: "follow",
+    body: formData,
+  };
 
-		if (!response.ok) throw new Error(data.message);
+  try {
+    const response = await fetch(`${BASE_URL}categories`, requestOptions);
+    const data = await response.json();
 
-		return data;
-	} catch (error) {
-		throw error;
-	}
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 // ========== Update  category ========== //
