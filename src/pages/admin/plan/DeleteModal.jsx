@@ -19,7 +19,7 @@ const DeleteModal = ({ planCode, setDeleteStatus, refreshData }) => {
   return (
     <div
       className="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-80 flex justify-center items-center "
-      onClick={() => setDeleteStatus()}
+      onClick={() => setDeleteStatus(false)}
     >
       <div
         className="bg-white rounded-lg p-8 flex flex-col items-center w-[400px]"

@@ -10,8 +10,10 @@ import AllSubscriber from "../pages/admin/subscriber/AllSubscriber";
 import RequestSubscriber from "../pages/admin/subscriber/RequestSubscriber";
 import ActiveSubscriber from "../pages/admin/subscriber/ActiveSubscriber";
 import ExpiredSubscriber from "../pages/admin/subscriber/ExpiredSubscriber";
-// import ActiveSubscriber
-// import ExpiredSubscriber
+import CategoryIndex from "../pages/admin/category";
+import BookAuthor from "../pages/admin/author/BookAuthor";
+import AuthorIndex from "../pages/admin/author";
+import ArticleAuthor from "../pages/admin/author/ArticleAuthor";
 export const routes = [
   {
     path: "login",
@@ -54,6 +56,26 @@ export const routes = [
           { path: "request", element: <RequestSubscriber /> },
           { path: "active", element: <ActiveSubscriber /> },
           { path: "expired", element: <ExpiredSubscriber /> },
+        ],
+      },
+      {
+        path: "category",
+        children: [{ index: true, element: <CategoryIndex /> }],
+      },
+      {
+        path: "author",
+        element: <AuthorIndex />,
+        children: [
+          {
+            path: "",
+            element: (
+              <div className="font-poppins text-2xl text-textColor1">
+                Please Select Author.
+              </div>
+            ),
+          },
+          { path: "books", element: <BookAuthor /> },
+          { path: "articles", element: <ArticleAuthor /> },
         ],
       },
     ],

@@ -1,25 +1,20 @@
 import React from "react";
 
-const PlanItem = ({
-  plan,
-  setEditStatus,
-  setEditPlan,
-  setPlanCode,
-  setDeleteStatus,
-}) => {
+const AuthorItem = ({ setEditStatus, setDeleteStatus }) => {
   const onClickEdit = () => {
     setEditStatus(true);
-    setEditPlan(plan);
   };
 
   const onClickDelete = () => {
     setDeleteStatus(true);
-    setPlanCode(plan.code);
   };
 
   return (
-    <article className="bg-white rounded p-9 flex items-center justify-between shadow-lg">
-      <h4 className="text-xl font-medium capitalize">{plan.name}</h4>
+    <article className="bg-white rounded p-9 flex items-center  justify-between shadow-lg">
+      <h4 className="text-xl font-medium capitalize ">Author Name</h4>
+      <div className="text-sm grow  ">
+        <span className="py-2 px-4 rounded-full bg-red-400 ml-12">status</span>
+      </div>
       <div className="flex gap-12">
         <button
           className="btn_primary font-medium text-textColor1 w-[6rem]"
@@ -35,4 +30,4 @@ const PlanItem = ({
   );
 };
 
-export default PlanItem;
+export default AuthorItem;

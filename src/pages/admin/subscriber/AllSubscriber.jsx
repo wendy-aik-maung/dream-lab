@@ -43,6 +43,7 @@ const AllSubscriber = () => {
             />
           ))
         : null}
+
       <Pagination pageCount={pageCount} handlePageChange={handlePageChange} />
       {isSidebarOpen ? (
         <DetailsSidebar
