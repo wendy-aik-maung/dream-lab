@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
-const UserDetails = ({ subscriber, setUserId, setIsSidebarOpen }) => {
-  const { id, user, status, subscription, startDate } = subscriber;
+const UserDetails = ({ subscriber, setUserDetails, setIsSidebarOpen }) => {
+  const {
+    id,
+    user,
+    status,
+    subscription,
+    startDate,
+    expiredDate,
+    paymentImage,
+  } = subscriber;
   const handleStatus = () => {
     if (status === "p") {
       return { cls: "bg-[#C99206]", text: "request" };
@@ -17,7 +24,17 @@ const UserDetails = ({ subscriber, setUserId, setIsSidebarOpen }) => {
   const [currentStatus, setStatus] = useState(handleStatus());
 
   const handleViewDetails = () => {
-    setUserId(id);
+    setUserDetails({
+      id: id,
+      customerName: user.displayName || user.email,
+      planStatus: status,
+      purchaseId: subscriber.paymentId || "123456789",
+      startDate: startDate,
+      expiredDate: expiredDate,
+      planName: subscription.name,
+      amount: subscription.salePrice,
+      bankSlipImage: paymentImage,
+    });
     setIsSidebarOpen(true);
   };
 

@@ -3,12 +3,14 @@ import { useGetUserSubscription } from "../../../hooks/useSubscribers";
 import UserDetails from "./UserDetails";
 import { ClipLoader } from "react-spinners";
 import Pagination from "../../../components/admin/Pagination";
+import DetailsSidebar from "./DetailsSidebar";
 const ActiveSubscriber = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { isLoading, data, isError, isSuccess, refetch } =
     useGetUserSubscription("a", currentPage);
   const [pageCount, setPageCount] = useState(0);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
   useEffect(() => {
     if (isSuccess) {
       setPageCount(data.meta.totalPages);
@@ -32,10 +34,21 @@ const ActiveSubscriber = () => {
       ) : null}
       {!isLoading && !isError
         ? data.items.map((subscriber) => (
-            <UserDetails subscriber={subscriber} key={subscriber.id} />
+            <UserDetails
+              subscriber={subscriber}
+              key={subscriber.id}
+              setUserDetails={setUserDetails}
+              setIsSidebarOpen={setIsSidebarOpen}
+            />
           ))
         : null}
       <Pagination handlePageChange={handlePageChange} pageCount={pageCount} />
+      {isSidebarOpen ? (
+        <DetailsSidebar
+          setIsSidebarOpen={setIsSidebarOpen}
+          userDetails={userDetails}
+        />
+      ) : null}
     </section>
   );
 };

@@ -1,25 +1,18 @@
 import React from "react";
 
-const PlanItem = ({
-  plan,
-  setEditStatus,
-  setEditPlan,
-  setPlanCode,
-  setDeleteStatus,
-}) => {
+const CategoryItem = ({ setEditStatus, setDeleteStatus }) => {
   const onClickEdit = () => {
     setEditStatus(true);
-    setEditPlan(plan);
   };
 
   const onClickDelete = () => {
     setDeleteStatus(true);
-    setPlanCode(plan.code);
   };
 
   return (
-    <article className="bg-white rounded p-9 flex items-center justify-between shadow-lg">
-      <h4 className="text-xl font-medium capitalize">{plan.name}</h4>
+    <article className="bg-white rounded p-9 flex items-center gap-4 justify-between shadow-lg">
+      <img src="" alt="category image" />
+      <h4 className="text-xl font-medium capitalize grow">Category Name</h4>
       <div className="flex gap-12">
         <button
           className="btn_primary font-medium text-textColor1 w-[6rem]"
@@ -35,4 +28,4 @@ const PlanItem = ({
   );
 };
 
-export default PlanItem;
+export default CategoryItem;

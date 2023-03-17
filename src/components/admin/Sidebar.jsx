@@ -17,6 +17,7 @@ import { AiFillCreditCard } from "react-icons/ai";
 import { useUserDataContext } from "../../contexts/UserDataContext";
 import { useNavigate } from "react-router-dom";
 import { ISADMIN_LOCAL_STORAGE } from "../../contexts/AdminAuthContext";
+import { HiOutlinePencilSquare } from "react-icons/hi2";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [manage, setManage] = useState(false);
@@ -86,6 +87,11 @@ const Sidebar = () => {
                 to="/category"
                 icon={<BiCategory />}
                 title="Category"
+              />
+              <AdminSidebarLink
+                to="/author/books"
+                icon={<HiOutlinePencilSquare />}
+                title="Authors"
               />
               <AdminSidebarLink to="/users" icon={<FaUsers />} title="Users" />
               <AdminSidebarLink
