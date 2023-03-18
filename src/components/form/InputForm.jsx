@@ -11,7 +11,7 @@ const InputForm = ({
 	return (
 		<fieldset className="w-full my-2">
 			{label ? (
-				<label className="mb-2 block font-semibold font-poppins text-textColor4 capitalize text-lg">
+				<label className="mb-2 block font-bold font-poppins text-textColor4 capitalize text-lg">
 					{label}
 				</label>
 			) : null}

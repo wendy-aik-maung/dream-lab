@@ -26,6 +26,25 @@ export const fetchCategories = async () => {
   }
 };
 
+// ========== Get Single category ==========//
+
+export const fetchCategory = async (id) => {
+  var requestOptions = {
+    mode: "cors",
+    method: "GET",
+    redirect: "follow",
+  };
+  try {
+    const response = await fetch(`${BASE_URL}categories/${id}`, requestOptions);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // ========== Create category ========== //
 
 export const createCategory = async (data) => {
@@ -61,8 +80,63 @@ export const createCategory = async (data) => {
 
 // ========== Update  category ========== //
 
-export const updateCategory = async (data) => {};
+export const updateCategory = async (params) => {
+  const { data, id } = params;
+
+  const token = getToken();
+  const formData = new FormData();
+
+  const icon = typeof data?.icon === "string" ? data.icon : data.icon?.[0];
+
+  formData.append("icon", icon);
+  formData.append("name", data?.name);
+
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "PATCH",
+    redirect: "follow",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(`${BASE_URL}categories/${id}`, requestOptions);
+    const responseData = await response.json();
+
+    if (!response.ok) throw new Error(responseData.message);
+
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // ========== Delete category ========== //
 
-export const deleteCategory = async (id) => {};
+export const deleteCategory = async (id) => {
+  const token = getToken();
+
+  var requestOptions = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "DELETE",
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(`${BASE_URL}categories/${id}`, requestOptions);
+    const data = await response.json();
+
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
