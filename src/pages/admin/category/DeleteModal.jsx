@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { useDeleteCategory } from "../../../hooks/useCategory";
-import { useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import ErrorMessage from "../../../components/form/ErrorMessage";
+import { useDeleteCategory } from "../../../hooks/useCategory";
 
 const DeleteModal = ({ id, setDeleteStatus, handleRefreshData }) => {
 	const deleteCategoryMutation = useDeleteCategory();
@@ -30,6 +29,7 @@ const DeleteModal = ({ id, setDeleteStatus, handleRefreshData }) => {
 				<p className="font-medium text-xl text-center mb-12 text-[#333]">
 					Are you sure want to delete this category?
 				</p>
+
 				<div className="flex gap-7">
 					<button
 						className="font-medium bg-[#E4E4E4] px-4 py-2 rounded"
@@ -41,7 +41,8 @@ const DeleteModal = ({ id, setDeleteStatus, handleRefreshData }) => {
 					)}
 					<button
 						onClick={handleDelete}
-						className="font-medium bg-[#BC3131] px-4 py-2 rounded text-white disabled:cursor-not-allowed disabled:bg-opacity-75">
+						className="font-medium bg-[#BC3131] px-4 py-2 rounded text-white disabled:cursor-not-allowed disabled:bg-opacity-75"
+						disabled={deleteCategoryMutation.isLoading}>
 						{deleteCategoryMutation.isLoading ? (
 							<div className="flex items-center justify-center gap-3">
 								<ClipLoader color="white" size={23} />
