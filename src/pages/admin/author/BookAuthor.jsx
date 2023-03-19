@@ -17,6 +17,7 @@ const BookAuthor = () => {
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
   const { isLoading, isError, error, data, refetch } = useGetBookAuthor();
+  const [id, setId] = useState("");
 
   const refreshData = () => {
     refetch();
@@ -59,6 +60,7 @@ const BookAuthor = () => {
             setDeleteStatus={setDeleteStatus}
             setEditStatus={setEditStatus}
             setEditAuthor={setEditAuthor}
+            setId={setId}
           />
         ))
       )}
@@ -77,7 +79,13 @@ const BookAuthor = () => {
           refreshData={refreshData}
         />
       ) : null}
-      {deleteStatus ? <DeleteModal setDeleteStatus={setDeleteStatus} /> : null}
+      {deleteStatus ? (
+        <DeleteModal
+          setDeleteStatus={setDeleteStatus}
+          id={id}
+          refreshData={refreshData}
+        />
+      ) : null}
     </section>
   );
 };

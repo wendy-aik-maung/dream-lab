@@ -5,6 +5,7 @@ const AuthorItem = ({
   setDeleteStatus,
   author,
   setEditAuthor,
+  setId
 }) => {
   const [status, setStatus] = useState({ color: "", text: "" });
   const onClickEdit = () => {
@@ -13,7 +14,10 @@ const AuthorItem = ({
   };
 
   const onClickDelete = () => {
+    
+    setId(author.id);
     setDeleteStatus(true);
+    
   };
   const handleStatusChange = () => {
     if (author.status === "a") {
