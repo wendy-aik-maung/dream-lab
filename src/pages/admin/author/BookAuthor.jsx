@@ -6,6 +6,11 @@ import CreateAuthor from "./CreateAuthor";
 import DeleteModal from "./DeleteModal";
 import EditAuthor from "./EditAuthor";
 import { ClipLoader } from "react-spinners";
+import {
+  useCreateBookAuthor,
+  useUpdateBookAuthor,
+  useDeleteBookAuthor,
+} from "../../../hooks/useAuthors";
 
 const BookAuthor = () => {
   const [createStatus, setCreateStatus] = useState(false);
@@ -69,6 +74,7 @@ const BookAuthor = () => {
         <CreateAuthor
           setCreateStatus={setCreateStatus}
           refreshData={refreshData}
+          useCreateAuthor={useCreateBookAuthor}
         />
       ) : null}
       {editStatus ? (
@@ -77,6 +83,7 @@ const BookAuthor = () => {
           setEditAuthor={setEditAuthor}
           setEditStatus={setEditStatus}
           refreshData={refreshData}
+          useEditMutation={useUpdateBookAuthor}
         />
       ) : null}
       {deleteStatus ? (
@@ -84,6 +91,7 @@ const BookAuthor = () => {
           setDeleteStatus={setDeleteStatus}
           id={id}
           refreshData={refreshData}
+          useAuthorDeleteMutation={useDeleteBookAuthor}
         />
       ) : null}
     </section>

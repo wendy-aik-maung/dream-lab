@@ -5,16 +5,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import InputForm from "../../../components/form/InputForm";
-import { useCreateBookAuthor } from "../../../hooks/useAuthors";
+
 import { ClipLoader } from "react-spinners";
 
 const BookAuthorSchema = yup.object({
   name: yup.string().required(),
 });
 
-const CreateAuthor = ({ setCreateStatus,refreshData }) => {
+const CreateAuthor = ({ setCreateStatus, refreshData, useCreateAuthor }) => {
   const [active, setActive] = useState(false);
-  const createBookAuthorMutation = useCreateBookAuthor();
+  const createMutation = useCreateAuthor();
   const {
     register,
     handleSubmit,
@@ -30,17 +30,17 @@ const CreateAuthor = ({ setCreateStatus,refreshData }) => {
     } else {
       data["status"] = "p";
     }
-    
-    createBookAuthorMutation.mutate(data);
+
+    createMutation.mutate(data);
   };
 
   useEffect(() => {
-    if (createBookAuthorMutation.isSuccess) {
-      reset({name: "" });
+    if (createMutation.isSuccess) {
+      reset({ name: "" });
       refreshData();
       setCreateStatus(false);
     }
-  }, [createBookAuthorMutation.isSuccess]);
+  }, [createMutation.isSuccess]);
 
   return (
     <aside
@@ -77,14 +77,14 @@ const CreateAuthor = ({ setCreateStatus,refreshData }) => {
               <Switch onChange={() => setActive(!active)} checked={active} />
             </section>
           </div>
-          {createBookAuthorMutation.isError && (
-            <p className="text-red-400">{createBookAuthorMutation.error.message}</p>
+          {createMutation.isError && (
+            <p className="text-red-400">{createMutation.error.message}</p>
           )}
           <button
             className="btn_primary mt-24 w-full font-semibold disabled:cursor-not-allowed disabled:bg-opacity-75"
-            disabled={createBookAuthorMutation.isLoading}
+            disabled={createMutation.isLoading}
           >
-            {createBookAuthorMutation.isLoading ? (
+            {createMutation.isLoading ? (
               <div className="flex items-center justify-center gap-3">
                 <ClipLoader color="white" size={24} />
                 <span>Creating...</span>

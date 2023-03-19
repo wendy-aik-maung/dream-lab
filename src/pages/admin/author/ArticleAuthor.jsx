@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { useGetArticleAuthor } from "../../../hooks/useAuthors";
+import {
+  useCreateArticleAuthor,
+  useDeleteArticleAuthor,
+  useGetArticleAuthor,
+  useUpdateArticleAuthor,
+} from "../../../hooks/useAuthors";
 import { ClipLoader } from "react-spinners";
 import AuthorItem from "./AuthorItem";
 import CreateAuthor from "./CreateAuthor";
@@ -12,6 +17,13 @@ const ArticleAuthor = () => {
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
   const { isLoading, isError, error, data, refetch } = useGetArticleAuthor();
+  const [editAuthor, setEditAuthor] = useState({
+    id: "",
+    name: "",
+    status: "",
+  });
+
+  const [id, setId] = useState("");
 
   const refreshData = () => {
     refetch();
@@ -49,17 +61,40 @@ const ArticleAuthor = () => {
       ) : (
         data.map((author) => (
           <AuthorItem
-            key={author.name}
+            key={author.id}
             author={author}
             setDeleteStatus={setDeleteStatus}
             setEditStatus={setEditStatus}
+            setEditAuthor={setEditAuthor}
+            setId={setId}
           />
         ))
       )}
 
-      {createStatus ? <CreateAuthor setCreateStatus={setCreateStatus} /> : null}
-      {editStatus ? <EditAuthor setEditStatus={setEditStatus} /> : null}
-      {deleteStatus ? <DeleteModal setDeleteStatus={setDeleteStatus} /> : null}
+      {createStatus ? (
+        <CreateAuthor
+          setCreateStatus={setCreateStatus}
+          refreshData={refreshData}
+          useCreateAuthor={useCreateArticleAuthor}
+        />
+      ) : null}
+      {editStatus ? (
+        <EditAuthor
+          editAuthor={editAuthor}
+          setEditAuthor={setEditAuthor}
+          setEditStatus={setEditStatus}
+          refreshData={refreshData}
+          useEditMutation={useUpdateArticleAuthor}
+        />
+      ) : null}
+      {deleteStatus ? (
+        <DeleteModal
+          id={id}
+          refreshData={refreshData}
+          setDeleteStatus={setDeleteStatus}
+          useAuthorDeleteMutation={useDeleteArticleAuthor}
+        />
+      ) : null}
     </section>
   );
 };
