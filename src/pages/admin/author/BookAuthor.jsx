@@ -10,8 +10,9 @@ import { ClipLoader } from "react-spinners";
 const BookAuthor = () => {
   const [createStatus, setCreateStatus] = useState(false);
   const [editAuthor, setEditAuthor] = useState({
+    id: "",
     name: "",
-    status: ""
+    status: "",
   });
   const [editStatus, setEditStatus] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
@@ -53,7 +54,7 @@ const BookAuthor = () => {
       ) : (
         data.map((author) => (
           <AuthorItem
-            key={author.name}
+            key={author.id}
             author={author}
             setDeleteStatus={setDeleteStatus}
             setEditStatus={setEditStatus}
@@ -62,8 +63,20 @@ const BookAuthor = () => {
         ))
       )}
 
-      {createStatus ? <CreateAuthor setCreateStatus={setCreateStatus} refreshData={refreshData}/> : null}
-      {editStatus ? <EditAuthor  editAuthor={editAuthor} setEditAuthor={setEditAuthor} setEditStatus={setEditStatus} /> : null}
+      {createStatus ? (
+        <CreateAuthor
+          setCreateStatus={setCreateStatus}
+          refreshData={refreshData}
+        />
+      ) : null}
+      {editStatus ? (
+        <EditAuthor
+          editAuthor={editAuthor}
+          setEditAuthor={setEditAuthor}
+          setEditStatus={setEditStatus}
+          refreshData={refreshData}
+        />
+      ) : null}
       {deleteStatus ? <DeleteModal setDeleteStatus={setDeleteStatus} /> : null}
     </section>
   );

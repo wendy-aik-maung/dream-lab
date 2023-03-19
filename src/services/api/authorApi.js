@@ -58,7 +58,8 @@ export const createBookAuthor = async (data) => {
 
 // ========== Update book author ========== //
 
-export const updateBookAuthor = async (data) => {
+export const updateBookAuthor = async (params) => {
+  const { data, id } = params;
   const token = getToken();
   const requestOption = {
     headers: {
@@ -71,10 +72,7 @@ export const updateBookAuthor = async (data) => {
     body: JSON.stringify(data),
   };
   try {
-    const response = await fetch(
-      `${BASE_URL}bookauthors/{{bookAuthorId}}`,
-      requestOption
-    );
+    const response = await fetch(`${BASE_URL}bookauthors/${id}`, requestOption);
     const result = await response.json();
 
     if (!response.ok) {

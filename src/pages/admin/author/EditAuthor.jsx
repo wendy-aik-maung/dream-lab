@@ -6,9 +6,12 @@ import { ClipLoader } from "react-spinners";
 import InputForm from "../../../components/form/InputForm";
 import Switch from "react-switch";
 
-
-const EditAuthor = ({ setEditStatus,editAuthor,setEditAuthor}) => {
-  
+const EditAuthor = ({
+  setEditStatus,
+  editAuthor,
+  setEditAuthor,
+  refreshData,
+}) => {
   const [active, setActive] = useState(false);
   const editAuthorMutation = useUpdateBookAuthor();
   const {
@@ -19,20 +22,18 @@ const EditAuthor = ({ setEditStatus,editAuthor,setEditAuthor}) => {
   } = useForm();
 
   const onSubmit = (data) => {
-  
     if (active) {
       data["status"] = "a";
     } else {
       data["status"] = "p";
     }
-    return editAuthorMutation.mutate(data);
+
+    return editAuthorMutation.mutate({ data, id: editAuthor.id });
   };
 
   useEffect(() => {
-    
     setValue("name", editAuthor.name);
-    setValue("status",editAuthor.status);
-    
+    setActive(editAuthor.status === "a" ? true : false);
   }, [editAuthor]);
 
   useEffect(() => {
@@ -78,9 +79,7 @@ const EditAuthor = ({ setEditStatus,editAuthor,setEditAuthor}) => {
             </section>
           </div>
           {editAuthorMutation.isError && (
-            <p className="text-red-400">
-              {editAuthorMutation.error.message}
-            </p>
+            <p className="text-red-400">{editAuthorMutation.error.message}</p>
           )}
           <button
             className="btn_primary mt-24 w-full font-semibold disabled:cursor-not-allowed disabled:bg-opacity-75"
