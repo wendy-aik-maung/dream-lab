@@ -87,7 +87,30 @@ export const updateBookAuthor = async (params) => {
 
 // ========== Delete plan ========== //
 
-export const deleteBookAuthor = async (id) => {};
+export const deleteBookAuthor = async (id) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "DELETE",
+  };
+  try {
+    const response = await fetch(`${BASE_URL}bookauthors/${id}`, requestOption);
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // ========================================== Article Author ======================================= //
 
@@ -118,7 +141,31 @@ export const fetchArticleAuthor = async () => {
 
 // ========== Create Article author ========== //
 
-export const createArticleAuthor = async (data) => {};
+export const createArticleAuthor = async (data) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "POST",
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(`${BASE_URL}articleauthors`, requestOption);
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // ========== Update Article author ========== //
 
