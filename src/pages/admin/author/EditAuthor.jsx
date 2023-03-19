@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiXMark } from "react-icons/hi2";
-import { useUpdateBookAuthor } from "../../../hooks/useAuthors";
 import { ClipLoader } from "react-spinners";
 import InputForm from "../../../components/form/InputForm";
 import Switch from "react-switch";
@@ -11,9 +10,10 @@ const EditAuthor = ({
   editAuthor,
   setEditAuthor,
   refreshData,
+  useEditMutation,
 }) => {
   const [active, setActive] = useState(false);
-  const editAuthorMutation = useUpdateBookAuthor();
+  const editAuthorMutation = useEditMutation();
   const {
     register,
     handleSubmit,

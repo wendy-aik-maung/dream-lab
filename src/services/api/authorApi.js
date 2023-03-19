@@ -169,8 +169,62 @@ export const createArticleAuthor = async (data) => {
 
 // ========== Update Article author ========== //
 
-export const updateArticleAuthor = async (data) => {};
+export const updateArticleAuthor = async (params) => {
+  const { data, id } = params;
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "PATCH",
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(
+      `${BASE_URL}articleauthors/${id}`,
+      requestOption
+    );
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // ========== Delete plan ========== //
 
-export const deleteArticleAuthor = async (id) => {};
+export const deleteArticleAuthor = async (id) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "DELETE",
+  };
+  try {
+    const response = await fetch(
+      `${BASE_URL}articleauthors/${id}`,
+      requestOption
+    );
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};

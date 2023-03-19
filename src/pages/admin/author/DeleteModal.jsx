@@ -1,23 +1,26 @@
 import React, { useEffect } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
-import { useDeleteBookAuthor } from "../../../hooks/useAuthors";
 import { ClipLoader } from "react-spinners";
 
-const DeleteModal = ({ setDeleteStatus, id,refreshData }) => {
-  const deleteAuthorMutation = useDeleteBookAuthor();
+const DeleteModal = ({
+  setDeleteStatus,
+  id,
+  refreshData,
+  useAuthorDeleteMutation,
+}) => {
+  const deleteAuthorMutation = useAuthorDeleteMutation();
 
   const onRemoveHandler = () => {
     deleteAuthorMutation.mutate(id);
   };
   useEffect(() => {
-    if(deleteAuthorMutation.isSuccess){
+    if (deleteAuthorMutation.isSuccess) {
       refreshData();
-      
-      setDeleteStatus(false);
 
+      setDeleteStatus(false);
     }
-  }, [deleteAuthorMutation.isSuccess])
-  
+  }, [deleteAuthorMutation.isSuccess]);
+
   return (
     <div
       className="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-80 flex justify-center items-center "
