@@ -5,15 +5,87 @@ import { getToken } from "../../utils/getToken";
 
 // ========== Get all book author ========== //
 
-export const fetchBookAuthor = async () => {};
+export const fetchBookAuthor = async () => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "GET",
+  };
+  try {
+    const response = await fetch(`${BASE_URL}bookauthors`, requestOption);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // ========== Create book author ========== //
 
-export const createBookAuthor = async (data) => {};
+export const createBookAuthor = async (data) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "POST",
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(`${BASE_URL}bookauthors`, requestOption);
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // ========== Update book author ========== //
 
-export const updateBookAuthor = async (data) => {};
+export const updateBookAuthor = async (data) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "PATCH",
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(
+      `${BASE_URL}bookauthors/{{bookAuthorId}}`,
+      requestOption
+    );
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // ========== Delete plan ========== //
 
@@ -23,7 +95,28 @@ export const deleteBookAuthor = async (id) => {};
 
 // ========== Get all book author ========== //
 
-export const fetchArticleAuthor = async () => {};
+export const fetchArticleAuthor = async () => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "GET",
+  };
+  try {
+    const response = await fetch(`${BASE_URL}articleauthors`, requestOption);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 // ========== Create Article author ========== //
 

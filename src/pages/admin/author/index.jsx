@@ -12,7 +12,9 @@ const allLinks = [
     to: "articles",
   },
 ];
+
 const AuthorIndex = () => {
+  
   return (
     <section className="font-poppins relative">
       <div className="flex justify-between items-center">
