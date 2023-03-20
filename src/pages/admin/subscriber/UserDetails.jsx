@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const UserDetails = ({ subscriber, setUserDetails, setIsSidebarOpen }) => {
   const {
@@ -12,16 +12,20 @@ const UserDetails = ({ subscriber, setUserDetails, setIsSidebarOpen }) => {
   } = subscriber;
   const handleStatus = () => {
     if (status === "p") {
-      return { cls: "bg-[#C99206]", text: "request" };
+      setStatus({ cls: "bg-[#C99206]", text: "request" });
     } else if (status === "e") {
-      return { cls: "bg-[#BC3131]", text: "expired" };
+      setStatus({ cls: "bg-[#BC3131]", text: "expired" });
     } else if (status === "c") {
-      return { cls: "bg-[#BC3131]", text: "cancel" };
+      setStatus({ cls: "bg-[#BC3131]", text: "cancel" });
     } else if (status === "a") {
-      return { cls: "bg-[#058F23]", text: "active" };
+      setStatus({ cls: "bg-[#058F23]", text: "active" });
     }
   };
-  const [currentStatus, setStatus] = useState(handleStatus());
+  const [currentStatus, setStatus] = useState({ cls: "", text: "" });
+
+  useEffect(() => {
+    handleStatus();
+  }, [subscriber]);
 
   const handleViewDetails = () => {
     setUserDetails({
@@ -46,9 +50,9 @@ const UserDetails = ({ subscriber, setUserDetails, setIsSidebarOpen }) => {
         </span>
         <div className={`col-span-2`}>
           <span
-            className={`px-4 py-2 text-white text-sm ${currentStatus?.cls} rounded-full `}
+            className={`px-4 py-2 text-white text-sm ${currentStatus.cls} rounded-full `}
           >
-            {currentStatus?.text}
+            {currentStatus.text}
           </span>
         </div>
         <span className="col-span-3  text-[#8E98B0] font-semibold ">
