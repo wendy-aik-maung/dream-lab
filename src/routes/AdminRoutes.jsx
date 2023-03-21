@@ -14,6 +14,9 @@ import CategoryIndex from "../pages/admin/category";
 import BookAuthor from "../pages/admin/author/BookAuthor";
 import AuthorIndex from "../pages/admin/author";
 import ArticleAuthor from "../pages/admin/author/ArticleAuthor";
+import BookIndex from "../pages/admin/book";
+import EditBook from "../pages/admin/book/EditBook";
+import CreateBook from "../pages/admin/book/CreateBook";
 export const routes = [
   {
     path: "login",
@@ -76,6 +79,23 @@ export const routes = [
           },
           { path: "books", element: <BookAuthor /> },
           { path: "articles", element: <ArticleAuthor /> },
+        ],
+      },
+      {
+        path: "books",
+        children: [
+          {
+            index: true,
+            element: <BookIndex />,
+          },
+          {
+            path: "create",
+            element: <CreateBook />,
+          },
+          {
+            path: "edit/:id",
+            element: <EditBook />,
+          },
         ],
       },
     ],
