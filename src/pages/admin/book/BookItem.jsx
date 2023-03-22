@@ -12,8 +12,15 @@ const BookItem = ({ book }) => {
     } else {
       setStatus({ cls: "bg-[#C99206]", text: "pending" });
     }
+
+    if (!isFree) {
+      setCurrentIsFreeStatus("bg-[#d4a73f]");
+    } else {
+      setCurrentIsFreeStatus("bg-green-600");
+    }
   };
   const [currentStatus, setStatus] = useState({ cls: "", text: "" });
+  const [currentIsFreeStatus, setCurrentIsFreeStatus] = useState("");
 
   useEffect(() => {
     handleStatus();
@@ -41,7 +48,9 @@ const BookItem = ({ book }) => {
       </div>
 
       <div className="col-span-2   flex gap-2">
-        <div className="w-1/2 bg-green-600 py-1 flex justify-center items-center rounded">
+        <div
+          className={`w-1/2 bg-green-600 ${currentIsFreeStatus} py-1 flex justify-center items-center rounded`}
+        >
           {isFree ? (
             <span className="text-white text-sm">Free</span>
           ) : (

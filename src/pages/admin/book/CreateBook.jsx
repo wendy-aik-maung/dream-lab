@@ -151,7 +151,7 @@ const CreateBook = () => {
                   <img
                     src={URL.createObjectURL(bookCover?.[0])}
                     alt="bankslip"
-                    className="w-full max-h-[15rem] h-full object-cover"
+                    className="w-full  h-full object-cover"
                   />
                 </div>
               ) : (

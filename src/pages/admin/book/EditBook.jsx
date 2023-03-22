@@ -155,8 +155,6 @@ const EditBook = () => {
     );
   }
 
-  // console.log(data);
-
   return (
     <div className="container mx-auto">
       <header className=" flex gap-12  font-poppins font-bold text-xl mb-8">
