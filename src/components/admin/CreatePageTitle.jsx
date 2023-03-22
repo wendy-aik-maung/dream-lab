@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillPlusCircle } from "react-icons/ai";
 const CreatePageTitle = ({ title, buttonTitle, setCreateStatus }) => {
   return (
-    <div className="flex justify-between font-poppins">
+    <div className="flex justify-between items-center font-poppins">
       <h2 className="text-2xl font-bold text-textColor1">{title}</h2>
       <div>
         <button
