@@ -93,7 +93,7 @@ export const routes = [
             element: <CreateBook />,
           },
           {
-            path: "edit/:id",
+            path: "edit/:slug",
             element: <EditBook />,
           },
         ],

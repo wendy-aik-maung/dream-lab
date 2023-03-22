@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import BookImage from "../../../assets/book-image.jpg";
 import { GiCutDiamond } from "react-icons/gi";
-const BookItem = ({ book, number }) => {
-  const { title, mainImage, isFree, status, categories, bookAuthors } = book;
+import { Link } from "react-router-dom";
+const BookItem = ({ book }) => {
+  const { title, mainImage, isFree, status, categories, bookAuthors, slug } =
+    book;
 
   const handleStatus = () => {
     if (status === "a") {
@@ -26,13 +28,13 @@ const BookItem = ({ book, number }) => {
         />
       </div>
 
-      <div className="col-span-1">
+      <div className="col-span-2">
         <span className="font-medium  rounded-full text-textColor1">
           {title}
         </span>
       </div>
 
-      <div className="col-span-3  text-textColors1 font-medium whitespace-nowrap overflow-hidden ">
+      <div className="col-span-2  text-textColors1 font-medium flex gap-2 whitespace-nowrap overflow-hidden ">
         {bookAuthors.map((author) => (
           <span key={author.id}>{author.name}</span>
         ))}
@@ -63,9 +65,12 @@ const BookItem = ({ book, number }) => {
         ))}
       </div>
 
-      <button className=" col-span-1 btn_primary font-medium !py-1 ">
+      <Link
+        className=" col-span-1 btn_primary font-medium !py-1 block text-center "
+        to={`/admin/books/edit/${slug}`}
+      >
         Edit
-      </button>
+      </Link>
     </article>
   );
 };

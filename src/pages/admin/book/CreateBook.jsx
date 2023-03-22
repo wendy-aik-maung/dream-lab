@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BiArrowBack } from "react-icons/bi";
 import { BsImage, BsTrash } from "react-icons/bs";
@@ -7,22 +7,118 @@ import InputForm from "../../../components/form/InputForm";
 import Select from "react-select";
 import Switch from "react-switch";
 import TextAreaForm from "../../../components/form/TextAreaForm";
+import { useGetBookAuthor } from "../../../hooks/useAuthors";
+import { useGetCategories } from "../../../hooks/useCategory";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useAddBook } from "../../../hooks/useBooks";
+import { ClipLoader } from "react-spinners";
+const BookSchema = yup.object({
+  bookCover: yup
+    .mixed()
+    .required("A file is required")
+    .test("fileFormat", "Unsupported file format", (value) => {
+      return ["image/jpeg", "image/png", "application/pdf"].includes(
+        value[0]?.type
+      );
+    }),
+  bookname: yup.string().required(),
+  bookpages: yup.number().positive().required(),
+  duration: yup.string().required(),
+  description: yup.string().required(),
+});
+
 const CreateBook = () => {
   const [active, setActive] = useState(false);
   const [isFree, setIsFree] = useState(false);
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [authorOptions, setAuthorOptions] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedAuthors, setSelectedAuthors] = useState([]);
+
+  // Category Fetch
+
+  const {
+    isLoading: categoryLoading,
+    data: categories,
+    isSuccess: categorySuccess,
+  } = useGetCategories();
+
+  // Authors Fetch
+
+  const {
+    isLoading: authorLoading,
+    data: authors,
+    isSuccess: authorSuccess,
+  } = useGetBookAuthor();
 
   const {
     watch,
     formState: { errors },
     register,
     setValue,
-  } = useForm();
+    handleSubmit,
+  } = useForm({ resolver: yupResolver(BookSchema) });
 
   const bookCover = watch("bookCover");
 
   const handleRemoveImage = () => {
     setValue("bookCover", []);
   };
+
+  const handleCategoryChange = (selectedOptions) => {
+    setSelectedCategories(selectedOptions);
+  };
+
+  const handleAuthorChange = (selectedOptions) => {
+    setSelectedAuthors(selectedOptions);
+  };
+
+  useEffect(() => {
+    if (categorySuccess && authorSuccess) {
+      setCategoryOptions(() => {
+        return categories.map((category) => {
+          return { label: category.name, value: category.id };
+        });
+      });
+      setAuthorOptions(() => {
+        return authors.map((author) => {
+          return { label: author.name, value: author.id };
+        });
+      });
+    }
+  }, [categorySuccess, authorSuccess]);
+
+  const bookAddMutation = useAddBook();
+
+  const onSubmit = (data) => {
+    const tempAuthorArr = selectedAuthors.map((author) => author.value);
+    const tempCategoryArr = selectedCategories.map(
+      (category) => category.value
+    );
+
+    const submitData = {
+      title: data.bookname,
+      readingTime: data.duration,
+      shortDesc: data.description,
+      page: data.bookpages,
+      isFree: isFree ? 1 : 0,
+      status: active ? "a" : "p",
+      mainImage: data.bookCover,
+      categories: tempCategoryArr,
+      bookAuthors: tempAuthorArr,
+    };
+
+    bookAddMutation.mutate(submitData);
+  };
+
+  if (categoryLoading || authorLoading) {
+    return (
+      <div className="col-span-12 mt-8 flex justify-center items-center">
+        <ClipLoader size={32} />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto">
@@ -39,10 +135,7 @@ const CreateBook = () => {
         </div>
       </header>
       {/* Form */}
-      <form
-        action="
-      "
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-start justify-between gap-x-8">
           {/* first-col */}
           <div className="basis-1/2">
@@ -105,9 +198,9 @@ const CreateBook = () => {
             />
             <InputForm
               label="Book Pages"
-              name="pages"
+              name="bookpages"
               type="number"
-              placeholder="Type number of chapter"
+              placeholder="Type number of pages"
               register={register}
               errors={errors}
             />
@@ -115,13 +208,26 @@ const CreateBook = () => {
               <label className="mb-2 block font-bold font-poppins text-textColor4 capitalize text-lg">
                 author
               </label>
-              <Select />
+
+              <Select
+                value={selectedAuthors}
+                onChange={handleAuthorChange}
+                options={authorOptions}
+                isMulti={true}
+                className="w-full  font-bold rounded-md font-poppins placeholder:text-[#bfbfbf]  placeholder:font-semibold"
+              />
             </fieldset>
             <fieldset className="w-full my-2">
               <label className="mb-2 block font-bold font-poppins text-textColor4 capitalize text-lg">
                 category
               </label>
-              <Select />
+              <Select
+                value={selectedCategories}
+                onChange={handleCategoryChange}
+                options={categoryOptions}
+                isMulti={true}
+                className="w-full  font-bold rounded-md font-poppins placeholder:text-[#bfbfbf]  placeholder:font-semibold"
+              />
             </fieldset>
             <InputForm
               label="Duration"
@@ -153,11 +259,24 @@ const CreateBook = () => {
           </div>
         </div>
         <div className="mt-[7rem] flex justify-center items-center gap-8">
-          <button className="w-[10rem] rounded-md !bg-transparent border-2 border-slate-900 py-2">
+          <Link
+            className="w-[10rem] rounded-md !bg-transparent border-2 border-slate-900 py-2 block text-center"
+            to="/admin/books"
+          >
             Cancel
-          </button>
-          <button className="bg-[#0092ff] border-2 border-[#0092ff] text-white w-[10rem] rounded-md py-2">
-            Create
+          </Link>
+          <button
+            className="bg-[#0092ff] border-2 border-[#0092ff] text-white w-[10rem] rounded-md py-2"
+            disabled={bookAddMutation.isLoading}
+          >
+            {bookAddMutation.isLoading ? (
+              <div className="flex items-center justify-center gap-2">
+                <ClipLoader size={16} color="white" />
+                <span>Creating...</span>
+              </div>
+            ) : (
+              <span>Create</span>
+            )}
           </button>
         </div>
       </form>
