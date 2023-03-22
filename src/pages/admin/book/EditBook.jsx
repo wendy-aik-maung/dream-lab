@@ -13,7 +13,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEditBook, useGetSingleBookByAdmin } from "../../../hooks/useBooks";
 import { ClipLoader } from "react-spinners";
-import CreatePageTitle from "../../../components/admin/CreatePageTitle";
 import BookChapter from "./BookChapter";
 
 const BookSchema = yup.object({
@@ -35,7 +34,18 @@ const EditBook = () => {
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [defaultTitle, setDefaultTitle] = useState("");
 
-  const { isLoading, data: book, isSuccess } = useGetSingleBookByAdmin(slug);
+  // Book Fetch
+
+  const {
+    isLoading,
+    data: book,
+    isSuccess,
+    refetch,
+  } = useGetSingleBookByAdmin(slug);
+
+  const handleRefreshData = () => {
+    refetch();
+  };
 
   // Category Fetch
 
@@ -310,7 +320,11 @@ const EditBook = () => {
       </form>
       <div className="my-8 h-[1px] bg-slate-800" />
       {/* Chapter  */}
-      <BookChapter />
+      <BookChapter
+        chapters={book.bookChapters}
+        bookId={book.id}
+        handleRefreshData={handleRefreshData}
+      />
     </div>
   );
 };

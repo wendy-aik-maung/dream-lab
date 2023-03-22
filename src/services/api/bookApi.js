@@ -170,3 +170,88 @@ export const updateBook = async (data) => {
     throw error;
   }
 };
+
+// Chapters
+
+export const addChapter = async (data) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "POST",
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(`${BASE_URL}books/chapter`, requestOption);
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const editChapter = async (data) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "PATCH",
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(
+      `${BASE_URL}books/chapter/${data.id}`,
+      requestOption
+    );
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteChapter = async (id) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "DELETE",
+  };
+  try {
+    const response = await fetch(
+      `${BASE_URL}books/chapter/${id}`,
+      requestOption
+    );
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};

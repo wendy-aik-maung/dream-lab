@@ -2,7 +2,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import {
   addBook,
+  addChapter,
+  deleteChapter,
+  editChapter,
   getBooksByAdmin,
+  getChaptersofBook,
   getSingleBook,
   updateBook,
 } from "../services/api/bookApi";
@@ -44,4 +48,16 @@ export const useEditBook = () => {
       navigate(`/admin/books`);
     },
   });
+};
+
+export const useAddChapter = () => {
+  return useMutation(addChapter);
+};
+
+export const useEditChapter = () => {
+  return useMutation(editChapter);
+};
+
+export const useDeleteChapter = () => {
+  return useMutation(deleteChapter);
 };
