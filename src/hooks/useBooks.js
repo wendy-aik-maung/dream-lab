@@ -6,7 +6,6 @@ import {
   deleteChapter,
   editChapter,
   getBooksByAdmin,
-  getChaptersofBook,
   getSingleBook,
   updateBook,
 } from "../services/api/bookApi";
