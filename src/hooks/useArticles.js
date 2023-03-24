@@ -41,7 +41,7 @@ export const useEditArticle = () => {
 	const navigate = useNavigate();
 	return useMutation(updateArticle, {
 	  onSuccess: () => {
-		navigate(`/admin/books`);
+		navigate(`/admin/articles`);
 	  },
 	});
   };

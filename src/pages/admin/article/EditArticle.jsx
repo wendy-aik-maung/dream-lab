@@ -129,7 +129,9 @@ const EditArticle = () => {
 		);
 
 		const submitData = {
+      id:article.id,
 			title: data.articlename,
+      defaultTitle,
 			readingTime: data.duration,
 			shortDesc: data.description,
 			content: data.content,

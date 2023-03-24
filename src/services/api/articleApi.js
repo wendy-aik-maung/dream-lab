@@ -130,7 +130,7 @@ export const updateArticle= async (data) => {
     categories,
     articleAuthors,
   } = data;
-  console.log(id);
+  
 
   const token = getToken();
   const formData = new FormData();
