@@ -8,6 +8,8 @@ import { routes as userRoutes } from "./routes/UserRoutes";
 import { routes as adminRoutes } from "./routes/AdminRoutes";
 import { useAdminAuthContext } from "./contexts/AdminAuthContext";
 import { getToken } from "./utils/getToken";
+import { AuthorSelectContextProvider } from "./contexts/AuthorSelectContext";
+import { CategorySelectContextProvider } from "./contexts/CategorySelectContext";
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -20,21 +22,25 @@ const App = () => {
     <RegisterModalContextProvider>
       <LoginModalContextProvider>
         <UserDataContextProvider>
-          <QueryClientProvider client={queryClient}>
-            <Routes>
-              <Route path="/*" element={UserRouting} />
-              <Route
-                path="/admin/*"
-                element={isAdmin ? AdminRouting : <Navigate to="/login" />}
-              />
-              <Route
-                path="/login"
-                element={
-                  isAdmin ? <Navigate to="/admin" replace /> : AdminRouting
-                }
-              />
-            </Routes>
-          </QueryClientProvider>
+          <AuthorSelectContextProvider>
+            <CategorySelectContextProvider>
+              <QueryClientProvider client={queryClient}>
+                <Routes>
+                  <Route path="/*" element={UserRouting} />
+                  <Route
+                    path="/admin/*"
+                    element={isAdmin ? AdminRouting : <Navigate to="/login" />}
+                  />
+                  <Route
+                    path="/login"
+                    element={
+                      isAdmin ? <Navigate to="/admin" replace /> : AdminRouting
+                    }
+                  />
+                </Routes>
+              </QueryClientProvider>
+            </CategorySelectContextProvider>
+          </AuthorSelectContextProvider>
         </UserDataContextProvider>
       </LoginModalContextProvider>
     </RegisterModalContextProvider>

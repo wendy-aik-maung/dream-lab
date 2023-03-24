@@ -14,6 +14,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEditBook, useGetSingleBookByAdmin } from "../../../hooks/useBooks";
 import { ClipLoader } from "react-spinners";
 import BookChapter from "./BookChapter";
+import { useAuthorSelectContext } from "../../../contexts/AuthorSelectContext";
+import NoOptionsMessageForAuthor from "./NoOptionsMessageForAuthor";
+import AuthorModal from "./AuthorModal";
+import { useCategorySelectContext } from "../../../contexts/CategorySelectContext";
+import NoOptionsMessageForCategory from "./NoOptionsMessageForCategory";
+import CategoryModal from "./CategoryModal";
 
 const BookSchema = yup.object({
   bookCover: yup.mixed().required("A file is required"),
@@ -34,6 +40,9 @@ const EditBook = () => {
   const [selectedAuthors, setSelectedAuthors] = useState([]);
   const [defaultTitle, setDefaultTitle] = useState("");
 
+  const { authorModalOpen } = useAuthorSelectContext();
+  const { categoryModalOpen } = useCategorySelectContext();
+
   // Book Fetch
 
   const {
@@ -53,15 +62,25 @@ const EditBook = () => {
     isLoading: categoryLoading,
     data: categories,
     isSuccess: categorySuccess,
+    refetch: categoryRefetch,
   } = useGetCategories();
+
+  const handleRefreshDataForCategory = () => {
+    categoryRefetch();
+  };
 
   // Authors Fetch
 
   const {
+    refetch: authorRefetch,
     isLoading: authorLoading,
     data: authors,
     isSuccess: authorSuccess,
   } = useGetBookAuthor();
+
+  const handleRefreshDataForAuthor = () => {
+    authorRefetch();
+  };
 
   const {
     watch,
@@ -122,7 +141,7 @@ const EditBook = () => {
         });
       });
     }
-  }, [categorySuccess, authorSuccess]);
+  }, [categorySuccess, authorSuccess, authors, categories]);
 
   const bookEditMutation = useEditBook();
 
@@ -253,6 +272,7 @@ const EditBook = () => {
                 onChange={handleAuthorChange}
                 options={authorOptions}
                 isMulti={true}
+                components={{ NoOptionsMessage: NoOptionsMessageForAuthor }}
                 className="w-full  font-bold rounded-md font-poppins placeholder:text-[#bfbfbf]  placeholder:font-semibold"
               />
             </fieldset>
@@ -264,6 +284,7 @@ const EditBook = () => {
                 value={selectedCategories}
                 onChange={handleCategoryChange}
                 options={categoryOptions}
+                components={{ NoOptionsMessage: NoOptionsMessageForCategory }}
                 isMulti={true}
                 className="w-full  font-bold rounded-md font-poppins placeholder:text-[#bfbfbf]  placeholder:font-semibold"
               />
@@ -297,6 +318,13 @@ const EditBook = () => {
             </section>
           </div>
         </div>
+        {bookEditMutation.isError ? (
+          <div className={`bg-red-500 w-full text-center py-4 my-4 rounded-md`}>
+            <p className="text-white font-medium font-poppins">
+              {bookEditMutation.error.message}
+            </p>
+          </div>
+        ) : null}
         <div className="mt-[7rem] flex justify-center items-center gap-8">
           <Link
             className="w-[10rem] rounded-md !bg-transparent border-2 border-slate-900 py-2 block text-center"
@@ -323,6 +351,18 @@ const EditBook = () => {
         bookId={book.id}
         handleRefreshData={handleRefreshData}
       />
+      {authorModalOpen ? (
+        <AuthorModal
+          handleRefreshData={handleRefreshDataForAuthor}
+          setSelectedAuthors={setSelectedAuthors}
+        />
+      ) : null}
+      {categoryModalOpen ? (
+        <CategoryModal
+          handleRefreshData={handleRefreshDataForCategory}
+          setSelectedCategories={setSelectedCategories}
+        />
+      ) : null}
     </div>
   );
 };
