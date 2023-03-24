@@ -13,6 +13,13 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAddBook } from "../../../hooks/useBooks";
 import { ClipLoader } from "react-spinners";
+import NoOptionsMessageForAuthor from "./NoOptionsMessageForAuthor";
+import AuthorModal from "./AuthorModal";
+import { useAuthorSelectContext } from "../../../contexts/AuthorSelectContext";
+import NoOptionsMessageForCategory from "./NoOptionsMessageForCategory";
+import { useCategorySelectContext } from "../../../contexts/CategorySelectContext";
+import CategoryModal from "./CategoryModal";
+
 const BookSchema = yup.object({
   bookCover: yup
     .mixed()
@@ -36,13 +43,21 @@ const CreateBook = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedAuthors, setSelectedAuthors] = useState([]);
 
+  const { authorModalOpen } = useAuthorSelectContext();
+  const { categoryModalOpen } = useCategorySelectContext();
+
   // Category Fetch
 
   const {
     isLoading: categoryLoading,
     data: categories,
     isSuccess: categorySuccess,
+    refetch: categoryRefetch,
   } = useGetCategories();
+
+  const handleRefreshDataForCategory = () => {
+    categoryRefetch();
+  };
 
   // Authors Fetch
 
@@ -50,7 +65,12 @@ const CreateBook = () => {
     isLoading: authorLoading,
     data: authors,
     isSuccess: authorSuccess,
+    refetch: authorRefetch,
   } = useGetBookAuthor();
+
+  const handleRefreshDataForAuthor = () => {
+    authorRefetch();
+  };
 
   const {
     watch,
@@ -87,7 +107,7 @@ const CreateBook = () => {
         });
       });
     }
-  }, [categorySuccess, authorSuccess]);
+  }, [categorySuccess, authorSuccess, authors, categories]);
 
   const bookAddMutation = useAddBook();
 
@@ -214,7 +234,8 @@ const CreateBook = () => {
                 onChange={handleAuthorChange}
                 options={authorOptions}
                 isMulti={true}
-                className="w-full  font-bold rounded-md font-poppins placeholder:text-[#bfbfbf]  placeholder:font-semibold"
+                components={{ NoOptionsMessage: NoOptionsMessageForAuthor }}
+                className="w-full  font-bold rounded-md font-poppins placeholder:text-[#bfbfbf]  placeholder:font-semibold z-50"
               />
             </fieldset>
             <fieldset className="w-full my-2">
@@ -225,6 +246,7 @@ const CreateBook = () => {
                 value={selectedCategories}
                 onChange={handleCategoryChange}
                 options={categoryOptions}
+                components={{ NoOptionsMessage: NoOptionsMessageForCategory }}
                 isMulti={true}
                 className="w-full  font-bold rounded-md font-poppins placeholder:text-[#bfbfbf]  placeholder:font-semibold"
               />
@@ -258,6 +280,13 @@ const CreateBook = () => {
             </section>
           </div>
         </div>
+        {bookAddMutation.isError ? (
+          <div className={`bg-red-500 w-full text-center py-4 my-4 rounded-md`}>
+            <p className="text-white font-medium font-poppins">
+              {bookAddMutation.error.message}
+            </p>
+          </div>
+        ) : null}
         <div className="mt-[7rem] flex justify-center items-center gap-8">
           <Link
             className="w-[10rem] rounded-md !bg-transparent border-2 border-slate-900 py-2 block text-center"
@@ -280,6 +309,18 @@ const CreateBook = () => {
           </button>
         </div>
       </form>
+      {authorModalOpen ? (
+        <AuthorModal
+          handleRefreshData={handleRefreshDataForAuthor}
+          setSelectedAuthors={setSelectedAuthors}
+        />
+      ) : null}
+      {categoryModalOpen ? (
+        <CategoryModal
+          handleRefreshData={handleRefreshDataForCategory}
+          setSelectedCategories={setSelectedCategories}
+        />
+      ) : null}
     </div>
   );
 };
