@@ -66,7 +66,7 @@ const CreateAuthor = ({ setCreateStatus, refreshData, useCreateAuthor }) => {
             <InputForm
               type="text"
               name="name"
-              label="Plan Name"
+              label="Author Name"
               id="name"
               placeholder="Type Author Name"
               register={register}
