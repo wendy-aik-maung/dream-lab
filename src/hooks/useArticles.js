@@ -4,6 +4,7 @@ import {
 	addArticle,
 	getArticlesByAdmin,
 	getSingleArticle,
+	updateArticle,
 } from "../services/api/articleApi";
 
 export const useGetArticlesByAdmin = (
@@ -35,3 +36,12 @@ export const useAddArticle = () => {
 		},
 	});
 };
+
+export const useEditArticle = () => {
+	const navigate = useNavigate();
+	return useMutation(updateArticle, {
+	  onSuccess: () => {
+		navigate(`/admin/books`);
+	  },
+	});
+  };
