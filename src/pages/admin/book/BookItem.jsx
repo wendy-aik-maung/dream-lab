@@ -14,7 +14,7 @@ const BookItem = ({ book }) => {
     }
 
     if (!isFree) {
-      setCurrentIsFreeStatus("bg-[#d4a73f]");
+      setCurrentIsFreeStatus("bg-[#1D3160]");
     } else {
       setCurrentIsFreeStatus("bg-green-600");
     }

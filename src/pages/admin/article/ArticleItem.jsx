@@ -48,7 +48,7 @@ const ArticleItem = ({ article }) => {
 
       <div className="col-span-2   flex gap-2">
         <div
-          className={`w-1/2 bg-green-600 ${currentIsFreeStatus} py-1 flex justify-center items-center rounded`}
+          className={`w-1/2  ${currentIsFreeStatus} py-1 flex justify-center items-center rounded`}
         >
           {isFree ? (
             <span className="text-white text-sm">Free</span>
