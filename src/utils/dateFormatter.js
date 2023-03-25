@@ -1,23 +1,15 @@
 export const dateFormatter = () => {
   const date = new Date();
-  if (isNaN(date.getTime())) {
-    throw new TypeError("Invalid ISO 8601 date string");
-  }
 
-  const year = date.getFullYear().toString().padStart(4, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
+  const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+  const dateformatter = new Intl.DateTimeFormat("en-US", options);
+  const parts = dateformatter.formatToParts(date);
 
-  const replacements = {
-    yyyy: year,
-    MM: month,
-    dd: day,
-  };
+  const year = parts.find((part) => part.type === "year").value;
+  const month = parts.find((part) => part.type === "month").value;
+  const day = parts.find((part) => part.type === "day").value;
 
-  let output = "yyyy-MM-dd";
-  for (const [pattern, value] of Object.entries(replacements)) {
-    output = output.replace(pattern, value);
-  }
+  const formattedDate = `${year}-${month}-${day}`;
 
-  return output;
+  return formattedDate;
 };
