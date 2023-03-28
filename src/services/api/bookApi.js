@@ -255,3 +255,24 @@ export const deleteChapter = async (id) => {
     throw error;
   }
 };
+
+export const getPopularBooks = async () => {
+  const requestOptions = {
+    mode: "cors",
+    method: "GET",
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(
+      `${BASE_URL}books/get/popular`,
+      requestOptions
+    );
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

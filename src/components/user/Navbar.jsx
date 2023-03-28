@@ -105,11 +105,13 @@ const Navbar = () => {
                 alt="profile picture"
                 className="pointer-events-none"
               />
-              {userData?.displayname || userData?.email}
+              <span className="hidden md:block overflow-x-hidden pointer-events-none">
+                {userData?.displayname || userData?.email}
+              </span>
             </div>
 
             {isUserDropdownOpen ? (
-              <div className="absolute top-16 w-[10rem] bg-white border border-dreamLabColor2 rounded shadow-lg p-4 flex flex-col gap-4">
+              <div className="absolute top-16 -left-[8rem] md:left-0  w-[10rem] bg-white border border-dreamLabColor2 rounded shadow-lg p-4 flex flex-col gap-4">
                 <Link
                   to="/"
                   className="flex items-center  gap-2 text-[#54595F] font-medium hover:text-dreamLabColor2"

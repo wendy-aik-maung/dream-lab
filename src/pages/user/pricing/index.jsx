@@ -1,6 +1,6 @@
 import React from "react";
-import ChooseMemberShip from "../../../components/user/ChooseMemberShip";
-import PricingHero from "../../../components/user/PricingHero";
+import ChooseMemberShip from "./ChooseMemberShip";
+import PricingHero from "./PricingHero";
 const Pricing = () => {
   return (
     <section>

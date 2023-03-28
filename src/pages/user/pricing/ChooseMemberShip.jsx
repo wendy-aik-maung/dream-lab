@@ -1,7 +1,7 @@
 import React from "react";
-import { useGetSubscriptionsForUser } from "../../hooks/useSubscriptions";
+import { useGetSubscriptionsForUser } from "../../../hooks/useSubscriptions";
 import { ClipLoader } from "react-spinners";
-import UserPlanCard from "./UserPlanCard";
+import UserPlanCard from "../../../components/user/UserPlanCard";
 
 const ChooseMemberShip = () => {
   const {

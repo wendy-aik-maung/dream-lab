@@ -1,6 +1,6 @@
 import React from "react";
-import Crown from "../../assets/Crown.png";
-import Check from "../../assets/Check.png";
+import Crown from "../../../assets/Crown.png";
+import Check from "../../../assets/Check.png";
 import { BiCrown } from "react-icons/bi";
 const PricingHero = () => {
   return (

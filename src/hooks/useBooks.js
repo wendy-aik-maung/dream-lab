@@ -6,6 +6,7 @@ import {
   deleteChapter,
   editChapter,
   getBooksByAdmin,
+  getPopularBooks,
   getSingleBook,
   updateBook,
 } from "../services/api/bookApi";
@@ -59,4 +60,8 @@ export const useEditChapter = () => {
 
 export const useDeleteChapter = () => {
   return useMutation(deleteChapter);
+};
+
+export const useGetPopularBooks = () => {
+  return useQuery(["popularbooks"], getPopularBooks);
 };
