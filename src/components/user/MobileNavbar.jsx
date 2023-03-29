@@ -51,7 +51,7 @@ const MobileNavbar = ({ onClose }) => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/library/books"
               className="flex items-center gap-2 font-semibold active:text-textColor2"
             >
               <MdLocalLibrary />
@@ -60,7 +60,7 @@ const MobileNavbar = ({ onClose }) => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/category"
               className="flex items-center gap-2 font-semibold active:text-textColor2"
             >
               <AiTwotoneAppstore />

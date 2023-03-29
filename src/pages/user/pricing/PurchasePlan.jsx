@@ -156,57 +156,61 @@ const PurchasePlan = () => {
   }, [userSubscribeMutation.isError]);
 
   return (
-    <section className="flex min-h-screen font-poppins">
+    <section className="flex flex-col md:flex-row min-h-screen font-poppins">
       {/* first-col */}
-      <div className="basis-1/2 bg-[#1e315f] px-2 md:px-6 lg:px-20 py-10 text-white">
+      <div className="basis-1/2 bg-[#1e315f] px-4 md:px-6 xl:px-20 py-10 text-white">
         <Link
           to="/pricing"
-          className="flex items-center gap-4 font-medium text-lg"
+          className="flex items-center gap-4 font-medium text-base md:text-lg"
         >
           <BsArrowLeft className="mt-1" />
           <span>Back To Dream Lab Pricing Page</span>
         </Link>
-        <h2 className="flex gap-4 items-center my-16">
-          <span className="text-3xl font-semibold">Complete Purchase</span>
+        <h2 className="flex gap-4 items-center my-10 md:my-16">
+          <span className="text-lg lg:text-2xl xl:text-3xl font-semibold">
+            Complete Purchase
+          </span>
           <img src={PremiumIcon} alt="premiumicon" />
         </h2>
 
-        <div className="flex justify-between bg-gradient-to-r from-[#FFFFFF25] to-[#FFFFFF1B] px-8 py-6 rounded max-w-[480px] w-full mb-20">
+        <div className="flex justify-between flex-col xl:flex-row items-center bg-gradient-to-r from-[#FFFFFF25] to-[#FFFFFF1B] px-8 py-6 rounded max-w-[480px] w-full mb-20 gap-4">
           <div>
-            <h3 className="text-lg mb-6">Select Plan</h3>
+            <h3 className="text-lg mb-6 xl:block hidden">Select Plan</h3>
             {isLoading ? (
               <div className="flex justify-center">
                 <ClipLoader color="white" size={20} />
               </div>
             ) : (
-              <span className="font-semibold text-2xl">
+              <span className="font-semibold text-lg md:text-2xl">
                 {subscriptionData?.name}
               </span>
             )}
           </div>
           <div>
-            <h3 className="text-lg mb-6">Total Price</h3>
+            <h3 className="text-lg mb-6 xl:block hidden">Total Price</h3>
             {isLoading ? (
               <div className="flex justify-center">
                 <ClipLoader color="white" size={20} />
               </div>
             ) : (
-              <span className="font-bold text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#FDCF38F5] via-[#FCC426] to-[#C58F09]">
+              <span className="font-bold text-2xl xl:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#FDCF38F5] via-[#FCC426] to-[#C58F09]">
                 {subscriptionData?.salePrice} Ks
               </span>
             )}
           </div>
         </div>
 
-        <h2 className="text-3xl font-semibold mb-12">Bank Information</h2>
+        <h2 className="text-xl lg:text-2xl xl:text-3xl font-semibold mb-12">
+          Bank Information
+        </h2>
 
-        <div className="grid grid-cols-2 gap-8 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 px-10 md:px-0 ">
           {bankInformations.map((information) => (
             <BankInfoCard {...information} key={information.id} />
           ))}
         </div>
 
-        <p className="text-xl leading-[2.75rem]">
+        <p className="lg:text-base xl:text-xl leading-9 lg:leading-9 xl:leading-[2.75rem]">
           * ငွေလွှဲပြီးသွားပြီဆိုရင်တော့ “ငွေလွှဲပြေစာ မှတဆင့် ငွေလွှဲထားတဲ့
           Screen Shoot လေးကို” ထည့်သွင်း၍ ပေးပို့အတည်ပြုနိုင်ပါတယ်။
           အကူညီလိုအပ်ပါက 09794461888 သို့ ဆက်သွယ်နိုင်ပါသည်။ (Office Hour: 9:00
@@ -214,8 +218,10 @@ const PurchasePlan = () => {
         </p>
       </div>
       {/* second-col */}
-      <div className="px-2 md:px-6 lg:px-20 py-10  basis-1/2">
-        <h2 className=" text-2xl font-semibold my-16">Enter Payment Details</h2>
+      <div className="px-4 md:px-6 xl:px-20 py-10  basis-1/2">
+        <h2 className="text-xl lg:text-2xl font-semibold my-16">
+          Enter Payment Details
+        </h2>
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="flex flex-col items-start gap-4 mb-20 relative">
             <label htmlFor="bankSlip" className="font-bold">
@@ -292,10 +298,10 @@ const PurchasePlan = () => {
 const BankInfoCard = ({ logo, title, phone }) => {
   return (
     <article className=" bg-gradient-to-r from-[#FFFFFF25] to-[#FFFFFF1B] p-4 rounded flex items-center justify-between gap-4">
-      <img src={logo} alt={title} className="object-scale-down" />
+      <img src={logo} alt={title} className="object-scale-down max-w-[5rem]" />
       <div className="grow flex flex-col items-center">
-        <h4 className="font-semibold text-xl mb-2">{title}</h4>
-        <span className="font-normal">{phone}</span>
+        <h4 className="font-semibold text-base xl:text-xl mb-2">{title}</h4>
+        <span className="font-normal text-sm">{phone}</span>
       </div>
     </article>
   );

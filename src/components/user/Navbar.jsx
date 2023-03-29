@@ -81,7 +81,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/library/books"
               className="flex items-center gap-2 font-semibold hover:text-textColor2"
             >
               <MdLocalLibrary />
@@ -90,7 +90,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/category"
               className="flex items-center gap-2 font-semibold hover:text-textColor2"
             >
               <AiTwotoneAppstore />
@@ -126,7 +126,7 @@ const Navbar = () => {
             </div>
 
             {isUserDropdownOpen ? (
-              <div className="absolute top-14   -left-[10rem] md:-left-[5rem]  w-[12rem] md:w-[14rem] bg-white border border-dreamLabColor2 rounded shadow-lg p-4 flex flex-col gap-4">
+              <div className="absolute top-14   -left-[10rem] md:-left-[5rem]  w-[12rem] md:w-[14rem] bg-white border border-dreamLabColor2 rounded shadow-lg p-4 flex flex-col gap-4 z-40">
                 <Link
                   to="/myaccount"
                   className="flex items-center  gap-2 text-[#54595F] font-medium hover:text-dreamLabColor2"
