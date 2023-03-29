@@ -116,7 +116,7 @@ export const addArticle = async (data) => {
   }
 };
 
-export const updateArticle= async (data) => {
+export const updateArticle = async (data) => {
   const {
     id,
     title,
@@ -130,7 +130,6 @@ export const updateArticle= async (data) => {
     categories,
     articleAuthors,
   } = data;
-  
 
   const token = getToken();
   const formData = new FormData();
@@ -164,6 +163,43 @@ export const updateArticle= async (data) => {
     const response = await fetch(`${BASE_URL}articles/${id}`, requestOptions);
     const data = await response.json();
 
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getArticlesByUsers = async (
+  page,
+  limit,
+  search,
+  categoryIds,
+  authorId,
+  isFree,
+  sorting
+) => {
+  const isPage = page ? `page=${page}` : "";
+  const isLimited = limit ? `limit=${limit}` : "";
+  const isSearched = search ? `search=${search}` : "";
+  const isCategoryIds = categoryIds ? `categoryIds=${categoryIds}` : "";
+  const isAuthorId = authorId ? `authorId=${authorId}` : "";
+  const isFreeOrPremium = isFree ? `isFree=${isFree}` : "";
+  const isSorting = sorting ? `sorting=${sorting}` : "";
+
+  const requestOptions = {
+    mode: "cors",
+    method: "GET",
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(
+      `${BASE_URL}articles?${isCategoryIds}&${isPage}&${isLimited}&${isSearched}&${isFreeOrPremium}&${isSorting}&${isAuthorId}`,
+      requestOptions
+    );
+    const data = await response.json();
     if (!response.ok) throw new Error(data.message);
 
     return data;

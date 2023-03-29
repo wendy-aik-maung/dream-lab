@@ -255,3 +255,61 @@ export const deleteChapter = async (id) => {
     throw error;
   }
 };
+
+export const getPopularBooks = async () => {
+  const requestOptions = {
+    mode: "cors",
+    method: "GET",
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(
+      `${BASE_URL}books/get/popular`,
+      requestOptions
+    );
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getBooksByUsers = async (
+  page,
+  limit,
+  search,
+  categoryIds,
+  authorId,
+  isFree,
+  sorting
+) => {
+  const isPage = page ? `page=${page}` : "";
+  const isLimited = limit ? `limit=${limit}` : "";
+  const isSearched = search ? `search=${search}` : "";
+  const isCategoryIds = categoryIds ? `categoryIds=${categoryIds}` : "";
+  const isAuthorId = authorId ? `authorId=${authorId}` : "";
+  const isFreeOrPremium = isFree ? `isFree=${isFree}` : "";
+  const isSorting = sorting ? `sorting=${sorting}` : "";
+
+  const requestOptions = {
+    mode: "cors",
+    method: "GET",
+    redirect: "follow",
+  };
+
+  try {
+    const response = await fetch(
+      `${BASE_URL}books?${isCategoryIds}&${isPage}&${isLimited}&${isSearched}&${isFreeOrPremium}&${isSorting}&${isAuthorId}`,
+      requestOptions
+    );
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.message);
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

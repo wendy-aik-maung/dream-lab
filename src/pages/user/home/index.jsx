@@ -1,14 +1,21 @@
 import React from "react";
-import InputForm from "../../../components/form/InputForm";
-import ErrorMessage from "../../../components/form/ErrorMessage";
-import TextAreaForm from "../../../components/form/TextAreaForm";
-import { BsFillPersonFill } from "react-icons/bs";
+import FreeBanner from "./FreeBanner";
+import LatestArticles from "./LatestArticles";
+import LatestBooks from "./LatestBooks";
+import MainHero from "./MainHero";
+import PopularBooks from "./PopularBooks";
+import WhyChoose from "./WhyChoose";
 const Home = () => {
   return (
     // tempo height
-    <div className="py-10 h-[50vh]">
-      <p>Home</p>
-    </div>
+    <main>
+      <MainHero />
+      <FreeBanner />
+      <PopularBooks />
+      <WhyChoose />
+      <LatestBooks />
+      <LatestArticles />
+    </main>
   );
 };
 

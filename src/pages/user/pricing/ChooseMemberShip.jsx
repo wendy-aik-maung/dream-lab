@@ -1,7 +1,7 @@
 import React from "react";
-import { useGetSubscriptionsForUser } from "../../hooks/useSubscriptions";
+import { useGetSubscriptionsForUser } from "../../../hooks/useSubscriptions";
 import { ClipLoader } from "react-spinners";
-import UserPlanCard from "./UserPlanCard";
+import UserPlanCard from "../../../components/user/UserPlanCard";
 
 const ChooseMemberShip = () => {
   const {
@@ -11,8 +11,8 @@ const ChooseMemberShip = () => {
   } = useGetSubscriptionsForUser();
 
   return (
-    <section className="px-2 md:px-6 lg:px-20 py-20 ">
-      <h2 className="text-3xl font-semibold text-textColor1 text-center mb-20">
+    <section className=" px-4 lg:px-12 py-12  ">
+      <h2 className="text-xl lg:text-2xl xl:text-3xl font-semibold text-textColor1 text-center mb-12 lg:mb-16 xl:mb-20">
         Choose Your Membership
       </h2>
       {isLoading ? (
@@ -21,7 +21,7 @@ const ChooseMemberShip = () => {
         </div>
       ) : null}
       {!isLoading && !isError ? (
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {subscriptionPlans.map((subscription) => (
             <UserPlanCard key={subscription.id} subscription={subscription} />
           ))}

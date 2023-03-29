@@ -1,9 +1,14 @@
 import React from "react";
 import { HiXMark } from "react-icons/hi2";
-import { AiFillHome, AiFillDollarCircle } from "react-icons/ai";
+import {
+  AiFillHome,
+  AiFillDollarCircle,
+  AiTwotoneAppstore,
+} from "react-icons/ai";
 import { MdLocalLibrary } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo3.png";
+import { FaSearch } from "react-icons/fa";
 
 const MobileNavbar = ({ onClose }) => {
   return (
@@ -12,7 +17,7 @@ const MobileNavbar = ({ onClose }) => {
       onClick={onClose}
     >
       <div
-        className="w-3/4 bg-white h-full p-8"
+        className="w-full max-w-[320px] bg-white h-full p-8"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-8">
@@ -21,6 +26,20 @@ const MobileNavbar = ({ onClose }) => {
         </div>
 
         <ul className="flex  flex-col gap-8">
+          <li>
+            <div className="flex  items-center px-3 py-4 bg-[#d9f9ff] gap-4 rounded-full ">
+              <FaSearch
+                size={18}
+                className="stroke-2 fill-dreamLabColor1 shrink-0"
+              />
+
+              <input
+                type="text"
+                placeholder="Search Here"
+                className="bg-transparent focus:outline-none shrink"
+              />
+            </div>
+          </li>
           <li>
             <Link
               to="/"
@@ -32,11 +51,20 @@ const MobileNavbar = ({ onClose }) => {
           </li>
           <li>
             <Link
-              to="/"
+              to="/library/books"
               className="flex items-center gap-2 font-semibold active:text-textColor2"
             >
               <MdLocalLibrary />
               <span>Library</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/category"
+              className="flex items-center gap-2 font-semibold active:text-textColor2"
+            >
+              <AiTwotoneAppstore />
+              <span>Category</span>
             </Link>
           </li>
           <li>

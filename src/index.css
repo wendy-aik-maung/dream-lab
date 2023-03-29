@@ -9,3 +9,8 @@
   border-radius: 8px;
   background-color: #00d7ff;
 }
+
+.swiper-pagination {
+  position: absolute;
+  bottom: 0;
+}

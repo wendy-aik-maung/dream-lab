@@ -1,11 +1,13 @@
 import React from "react";
 import { BiBell } from "react-icons/bi";
-
 import Logo from "../../assets/Icon.svg";
 import { Link } from "react-router-dom";
 import ProfileImg from "../../assets/profile.png";
+import { useUserDataContext } from "../../contexts/UserDataContext";
 
 const Header = ({ children }) => {
+  const { userData } = useUserDataContext();
+
   return (
     <nav className="fixed top-0 left-0 z-20  flex flex-row justify-between items-center w-full  h-20 bg-white shadow-lg md:pl-14 ">
       <Link to="/admin">
@@ -19,7 +21,11 @@ const Header = ({ children }) => {
 
         <div className="flex flex-row justify-center items-center gap-2">
           <figure>
-            <img src={ProfileImg} alt="" className="w-8 h-8 md:w-10 md:h-10" />
+            <img
+              src={userData?.profileImage || ProfileImg}
+              alt=""
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full"
+            />
           </figure>
           <h4 className="font-bold">Admin</h4>
         </div>

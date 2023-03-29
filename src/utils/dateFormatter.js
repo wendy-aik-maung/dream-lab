@@ -1,6 +1,4 @@
-export const dateFormatter = () => {
-  const date = new Date();
-
+export const dateFormatter = (date = new Date()) => {
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
   const dateformatter = new Intl.DateTimeFormat("en-US", options);
   const parts = dateformatter.formatToParts(date);
