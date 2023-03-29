@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
+  addAdditionalInformation,
   getUserInfo,
   getUserSubscriptionHistory,
 } from "../services/api/userAuth";
@@ -10,4 +11,8 @@ export const useGetUserSubscriptionHistory = () => {
 
 export const useGetUserInfo = () => {
   return useQuery(["userInfo"], getUserInfo);
+};
+
+export const useAddAdditionalInformation = () => {
+  return useMutation(addAdditionalInformation);
 };

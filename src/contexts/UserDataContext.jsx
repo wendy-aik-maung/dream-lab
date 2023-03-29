@@ -33,7 +33,7 @@ export const UserDataContextProvider = ({ children }) => {
     navigate("/");
   };
 
-  const contextValue = { userData, logout, refreshUserData };
+  const contextValue = { userData, logout, setUserData, refreshUserData };
 
   return (
     <UserDataContext.Provider value={contextValue}>

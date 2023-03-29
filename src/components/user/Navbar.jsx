@@ -116,17 +116,17 @@ const Navbar = () => {
               ref={dropDownRef}
             >
               <img
-                src={Profile}
+                src={userData?.profileImage || Profile}
                 alt="profile picture"
-                className="pointer-events-none"
+                className="pointer-events-none w-[2.5rem] h-[2.5rem] rounded-full"
               />
               <span className="hidden md:block overflow-x-hidden pointer-events-none">
-                {userData?.displayname || userData?.email}
+                {userData?.displayName || userData?.email}
               </span>
             </div>
 
             {isUserDropdownOpen ? (
-              <div className="absolute top-14 lg:top-16  -left-[10rem] md:left-0  w-[12rem] md:w-[14rem] bg-white border border-dreamLabColor2 rounded shadow-lg p-4 flex flex-col gap-4">
+              <div className="absolute top-14   -left-[10rem] md:-left-[5rem]  w-[12rem] md:w-[14rem] bg-white border border-dreamLabColor2 rounded shadow-lg p-4 flex flex-col gap-4">
                 <Link
                   to="/myaccount"
                   className="flex items-center  gap-2 text-[#54595F] font-medium hover:text-dreamLabColor2"

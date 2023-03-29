@@ -89,3 +89,41 @@ export const getUserInfo = async () => {
     throw error;
   }
 };
+
+export const addAdditionalInformation = async (params) => {
+  const { data, userId } = params;
+
+  const token = getToken();
+  const formData = new FormData();
+
+  const profileImage =
+    typeof data?.profileImage === "string"
+      ? data.profileImage
+      : data.profileImage?.[0];
+
+  formData.append("displayName", data.displayName);
+  formData.append("phoneNumber", data.phoneNumber);
+  formData.append("dob", data.dob);
+  formData.append("profileImage", profileImage);
+
+  const requestOptions = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "PATCH",
+    redirect: "follow",
+    body: formData,
+  };
+
+  try {
+    const response = await fetch(`${BASE_URL}users/${userId}`, requestOptions);
+    const responseData = await response.json();
+
+    if (!response.ok) throw new Error(responseData.message);
+
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -7,7 +7,7 @@ const SubscriptionPlans = () => {
   const { isLoading, data: planHistory } = useGetUserSubscriptionHistory();
 
   return (
-    <section className="px-10 lg:px-16 py-12 font-poppins">
+    <section className="px-2 lg:px-16 py-12 font-poppins">
       <div className="flex flex-col items-center gap-6 mb-6">
         <BiCrown className="text-6xl    text-[#C58F09]" />
         <h2 className="text-2xl font-semibold text-textColor1">
