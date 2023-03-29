@@ -1,17 +1,25 @@
 import React from "react";
-import { useGetBooksByUsers } from "../../../hooks/useBooks";
-import BookSwiper from "./BookSwiper";
-import { ClipLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import { useGetArticlesByUsers } from "../../../hooks/useArticles";
+import { ClipLoader } from "react-spinners";
+import ArticleSwiper from "./ArticleSwiper";
 
-const LatestBooks = () => {
-  const { isLoading, data } = useGetBooksByUsers("", "", "", "", "", "", "l");
+const LatestArticles = () => {
+  const { isLoading, data } = useGetArticlesByUsers(
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "l"
+  );
 
   return (
     <section className="font-poppins px-2 md:px-6 lg:px-20  py-20 text-textColor1">
       <div className="flex justify-between items-center mb-12">
         <h2 className="text-2xl lg:text-3xl text-center font-semibold ">
-          Latest Books
+          Latest Articles
         </h2>
         <Link className="uppercase btn_primary font-semibold text-white !bg-dreamLabColor1">
           view more
@@ -22,10 +30,10 @@ const LatestBooks = () => {
           <ClipLoader color="black" size={48} />
         </div>
       ) : (
-        <BookSwiper data={data.items} />
+        <ArticleSwiper data={data.items} />
       )}
     </section>
   );
 };
 
-export default LatestBooks;
+export default LatestArticles;

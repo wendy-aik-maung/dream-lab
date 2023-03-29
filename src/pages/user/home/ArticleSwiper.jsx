@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const dummyAuthors = ["Leon ", "Scott", "Kennedy", "Ashley"];
 
-const BookSwiper = ({ data }) => {
+const ArticleSwiper = ({ data }) => {
   return (
     <Swiper
       spaceBetween={50}
@@ -48,13 +48,13 @@ const BookSwiper = ({ data }) => {
             {item.title || "Testing Book title"}
           </h3>
           <span className="text-[#595959]">
-            {item.bookAuthors.length > 0
-              ? item.bookAuthors.reduce((prev, current, index) => {
+            {item.articleAuthors.length > 0
+              ? item.articleAuthors.reduce((prev, current, index) => {
                   if (index === 0) {
                     return current.name;
                   }
 
-                  if (index === item.bookAuthors.length - 1) {
+                  if (index === item.articleAuthors.length - 1) {
                     return prev + " and " + current.name;
                   } else {
                     return prev + " ," + current.name;
@@ -87,4 +87,4 @@ const BookSwiper = ({ data }) => {
   );
 };
 
-export default BookSwiper;
+export default ArticleSwiper;

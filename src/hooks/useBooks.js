@@ -6,6 +6,7 @@ import {
   deleteChapter,
   editChapter,
   getBooksByAdmin,
+  getBooksByUsers,
   getPopularBooks,
   getSingleBook,
   updateBook,
@@ -64,4 +65,28 @@ export const useDeleteChapter = () => {
 
 export const useGetPopularBooks = () => {
   return useQuery(["popularbooks"], getPopularBooks);
+};
+
+export const useGetBooksByUsers = (
+  page,
+  limit,
+  search,
+  categoryIds,
+  authorId,
+  isFree,
+  sorting
+) => {
+  return useQuery(
+    ["userbooks", page, limit, search, categoryIds, authorId, isFree, sorting],
+    () =>
+      getBooksByUsers(
+        page,
+        limit,
+        search,
+        categoryIds,
+        authorId,
+        isFree,
+        sorting
+      )
+  );
 };

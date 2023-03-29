@@ -5,10 +5,12 @@ import {
   AiFillHome,
   AiFillDollarCircle,
   AiOutlineLogout,
+  AiTwotoneAppstore,
 } from "react-icons/ai";
 import { MdLocalLibrary } from "react-icons/md";
 import { RxPerson } from "react-icons/rx";
 import { BsPerson } from "react-icons/bs";
+import { BiCrown } from "react-icons/bi";
 import SearchInput from "./SearchInput";
 import Logo from "../../assets/Icon.svg";
 import { useLoginModalContext } from "../../contexts/LoginModalContext";
@@ -55,15 +57,19 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="py-4 px-2 md:px-6  lg:px-12 flex justify-between items-baseline text-textColor1">
+      <nav className="py-4 lg:py-6 px-2 md:px-6  lg:px-12 flex justify-between items-center text-textColor1">
         <HiOutlineMenuAlt2
-          className="text-3xl block lg:hidden"
+          className="text-3xl block xl:hidden mr-4 lg:ml-0"
           onClick={handleMobileNavbarOpen}
         />
         <Link to="/">
-          <img src={Logo} alt="logo" />
+          <img
+            src={Logo}
+            alt="logo"
+            className="w-[8rem] lg:[10rem] object-cover"
+          />
         </Link>
-        <ul className="hidden lg:flex items-center gap-8 ml-8">
+        <ul className="hidden xl:flex items-center gap-8 ml-8">
           <li>
             <Link
               to="/"
@@ -84,6 +90,15 @@ const Navbar = () => {
           </li>
           <li>
             <Link
+              to="/"
+              className="flex items-center gap-2 font-semibold hover:text-textColor2"
+            >
+              <AiTwotoneAppstore />
+              <span>Category</span>
+            </Link>
+          </li>
+          <li>
+            <Link
               to="/pricing"
               className="flex items-center gap-2 font-semibold hover:text-textColor2"
             >
@@ -94,7 +109,7 @@ const Navbar = () => {
         </ul>
         <SearchInput />
         {userData ? (
-          <article className="my-auto pt-3 relative">
+          <article className="my-auto  relative">
             <div
               className="flex items-center gap-4 cursor-pointer "
               onClick={handleUserDropDownOpen}
@@ -111,13 +126,22 @@ const Navbar = () => {
             </div>
 
             {isUserDropdownOpen ? (
-              <div className="absolute top-16 -left-[8rem] md:left-0  w-[10rem] bg-white border border-dreamLabColor2 rounded shadow-lg p-4 flex flex-col gap-4">
+              <div className="absolute top-14 lg:top-16  -left-[10rem] md:left-0  w-[12rem] md:w-[14rem] bg-white border border-dreamLabColor2 rounded shadow-lg p-4 flex flex-col gap-4">
                 <Link
-                  to="/"
+                  to="/myaccount"
                   className="flex items-center  gap-2 text-[#54595F] font-medium hover:text-dreamLabColor2"
                 >
                   <BsPerson size={18} />
-                  <span>Profile</span>
+                  <span className="text-sm md:text-base">My Account</span>
+                </Link>
+                <Link
+                  to="/subscriptionplans"
+                  className="flex items-center  gap-2 text-[#54595F] font-medium hover:text-dreamLabColor2"
+                >
+                  <BiCrown size={18} />
+                  <span className="text-sm md:text-base">
+                    Subscription Plans
+                  </span>
                 </Link>
                 <button
                   to="/"
@@ -125,7 +149,7 @@ const Navbar = () => {
                   onClick={logout}
                 >
                   <AiOutlineLogout size={18} />
-                  <span>Logout</span>
+                  <span className="text-sm md:text-base">Logout</span>
                 </button>
               </div>
             ) : null}
