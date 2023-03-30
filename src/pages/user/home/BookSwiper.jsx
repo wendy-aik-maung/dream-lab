@@ -4,8 +4,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { stringConcat } from "../../../utils/stringConcat";
 
-const dummyAuthors = ["Leon ", "Scott", "Kennedy", "Ashley"];
+const dummyAuthors = [
+  { name: "Leon " },
+  { name: "Scott" },
+  { name: "Kennedy" },
+  { name: "Ashley" },
+];
 
 const BookSwiper = ({ data }) => {
   return (
@@ -49,28 +55,8 @@ const BookSwiper = ({ data }) => {
           </h3>
           <span className="text-[#595959]">
             {item.bookAuthors.length > 0
-              ? item.bookAuthors.reduce((prev, current, index) => {
-                  if (index === 0) {
-                    return current.name;
-                  }
-
-                  if (index === item.bookAuthors.length - 1) {
-                    return prev + " and " + current.name;
-                  } else {
-                    return prev + " ," + current.name;
-                  }
-                }, "")
-              : dummyAuthors.reduce((prev, current, index) => {
-                  if (index === 0) {
-                    return current;
-                  }
-
-                  if (index === dummyAuthors.length - 1) {
-                    return prev + " and " + current;
-                  } else {
-                    return prev + " ," + current;
-                  }
-                }, "")}
+              ? stringConcat(item.bookAuthors)
+              : stringConcat(dummyAuthors)}
           </span>
           <div className="mt-auto flex justify-between">
             <div className="flex items-center gap-2 text-[#595959]">

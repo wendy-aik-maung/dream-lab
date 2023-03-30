@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useUserDataContext } from "../contexts/UserDataContext";
 import {
   addBook,
   addChapter,
@@ -8,7 +9,9 @@ import {
   getBooksByAdmin,
   getBooksByUsers,
   getPopularBooks,
+  getRecommendedBooks,
   getSingleBook,
+  getSingleBookByUser,
   updateBook,
 } from "../services/api/bookApi";
 
@@ -89,4 +92,18 @@ export const useGetBooksByUsers = (
         sorting
       )
   );
+};
+
+export const useGetSingleBookByUser = (slug) => {
+  return useQuery(["userbook", slug], {
+    queryFn: () => getSingleBookByUser(slug),
+    retry: false,
+  });
+};
+
+export const useGetRecommendedBooks = () => {
+  return useQuery(["recommendedbooks"], {
+    queryFn: getRecommendedBooks,
+    retry: false,
+  });
 };
