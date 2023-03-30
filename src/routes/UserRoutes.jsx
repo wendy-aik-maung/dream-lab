@@ -63,7 +63,7 @@ export const routes = [
         element: <Books />,
         children: [
           { path: ":slug", element: <BookOverView /> },
-          { path: ":slug/bookdetails", element: <BookDetails /> },
+          { path: ":slug/:id/bookdetails", element: <BookDetails /> },
         ],
       },
       {
@@ -71,7 +71,7 @@ export const routes = [
         element: <Articles />,
         children: [
           { path: ":slug", element: <ArticleOverView /> },
-          { path: ":slug/articledetails", element: <ArticleDetails /> },
+          { path: ":slug/:id/articledetails", element: <ArticleDetails /> },
         ],
       },
       {

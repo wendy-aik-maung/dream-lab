@@ -173,6 +173,34 @@ export const updateBook = async (data) => {
 
 // Chapters
 
+export const getChapters = async (id) => {
+  const token = getToken();
+  const requestOption = {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    mode: "cors",
+    method: "GET",
+  };
+  try {
+    const response = await fetch(
+      `${BASE_URL}books/chapters/${id}`,
+      requestOption
+    );
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.message);
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const addChapter = async (data) => {
   const token = getToken();
   const requestOption = {
