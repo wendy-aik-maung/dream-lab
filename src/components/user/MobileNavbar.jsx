@@ -44,6 +44,7 @@ const MobileNavbar = ({ onClose }) => {
             <Link
               to="/"
               className="flex items-center gap-2 font-semibold active:text-textColor2"
+              onClick={onClose}
             >
               <AiFillHome />
               <span>Home</span>
@@ -53,6 +54,7 @@ const MobileNavbar = ({ onClose }) => {
             <Link
               to="/library/books"
               className="flex items-center gap-2 font-semibold active:text-textColor2"
+              onClick={onClose}
             >
               <MdLocalLibrary />
               <span>Library</span>
@@ -62,6 +64,7 @@ const MobileNavbar = ({ onClose }) => {
             <Link
               to="/category"
               className="flex items-center gap-2 font-semibold active:text-textColor2"
+              onClick={onClose}
             >
               <AiTwotoneAppstore />
               <span>Category</span>
@@ -71,6 +74,7 @@ const MobileNavbar = ({ onClose }) => {
             <Link
               to="/pricing"
               className="flex items-center gap-2 font-semibold active:text-textColor2"
+              onClick={onClose}
             >
               <AiFillDollarCircle />
               <span>Pricing</span>
