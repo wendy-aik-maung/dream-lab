@@ -61,18 +61,12 @@ export const routes = [
       {
         path: "books",
         element: <Books />,
-        children: [
-          { path: ":slug", element: <BookOverView /> },
-          { path: ":slug/:id/bookdetails", element: <BookDetails /> },
-        ],
+        children: [{ path: ":slug", element: <BookOverView /> }],
       },
       {
         path: "articles",
         element: <Articles />,
-        children: [
-          { path: ":slug", element: <ArticleOverView /> },
-          { path: ":slug/:id/articledetails", element: <ArticleDetails /> },
-        ],
+        children: [{ path: ":slug", element: <ArticleOverView /> }],
       },
       {
         path: "subscriptionplans",
@@ -88,6 +82,11 @@ export const routes = [
       },
     ],
   },
+  {
+    path: "/books/:slug/:id/bookdetails",
+    element: <BookDetails />,
+  },
+  { path: "/articles/:slug/:id/articledetails", element: <ArticleDetails /> },
   {
     path: "/pricing/purchaseplan/:subscriptionId",
     element: <PurchasePlan />,

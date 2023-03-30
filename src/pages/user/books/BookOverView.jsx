@@ -1,15 +1,12 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import {
-  useGetPopularBooks,
-  useGetRecommendedBooks,
-  useGetSingleBookByUser,
-} from "../../../hooks/useBooks";
+import React, { useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useGetSingleBookByUser } from "../../../hooks/useBooks";
 import { ClipLoader } from "react-spinners";
 import { getToken } from "../../../utils/getToken";
 import { BiArrowBack, BiCrown } from "react-icons/bi";
 import { stringConcat } from "../../../utils/stringConcat";
 import { BsBook, BsClock } from "react-icons/bs";
+import { useUserDataContext } from "../../../contexts/UserDataContext";
 
 const dummyAuthors = [
   { name: "Leon" },
@@ -19,14 +16,10 @@ const dummyAuthors = [
 ];
 
 const BookOverView = () => {
+  const navigate = useNavigate();
   const { slug } = useParams();
-
-  // const { isLoading: recommendedLoading, data: recommendedBooks } =
-  //   useGetRecommendedBooks();
-
-  const { isLoading: popularLoading, data: popularBooks } =
-    useGetPopularBooks();
-
+  const { userData } = useUserDataContext();
+  const token = userData?.access_token;
   const {
     isLoading: singleBookLoading,
     data: singleBook,
@@ -35,18 +28,18 @@ const BookOverView = () => {
     refetch: singleBookRefetch,
   } = useGetSingleBookByUser(slug);
 
-  if (singleBookLoading || popularLoading) {
+  useEffect(() => {
+    if (token) {
+      singleBookRefetch();
+    }
+  }, [token]);
+
+  if (singleBookLoading) {
     return (
-      <div className="flex justify-center items-center py-12">
+      <div className="flex justify-center items-center py-[160px]">
         <ClipLoader color="black" size={48} />
       </div>
     );
-  }
-
-  const token = getToken();
-
-  if (token) {
-    singleBookRefetch();
   }
 
   return (
@@ -60,30 +53,30 @@ const BookOverView = () => {
       ) : (
         <div className="px-4 lg:px-12 py-12">
           <header className=" flex gap-12  font-poppins font-bold text-xl mb-8">
-            <Link
-              to={"/library/books"}
+            <button
               className="flex items-center text-dreamLabColor3"
+              onClick={() => navigate(-1)}
             >
               <BiArrowBack />
               <span className="pl-2"> Back</span>
-            </Link>
+            </button>
           </header>
           {/* main row */}
-          <div className="flex justify-between">
+          <div className="flex justify-between flex-col xl:flex-row">
             {/* first col */}
-            <div className="basis-2/3 flex flex-col">
+            <div className="basis-2/3 flex flex-col items-center xl:items-start  mb-0 md:mb-8">
               <div className="flex gap-8">
                 <img
                   src={singleBook.mainImage}
                   alt={singleBook.title}
-                  className="w-[240px] h-[300px] object-cover"
+                  className="w-[100px] h-[150px]  md:w-[240px] md:h-[300px] object-cover"
                 />
                 {/* title , author,reading time and pages */}
                 <div>
-                  <h2 className="text-2xl text-textColor1 font-semibold mb-4">
+                  <h2 className="text-base md:text-2xl text-textColor1 font-semibold mb-4">
                     {singleBook.title}
                   </h2>
-                  <p className="text-lg text-[#595959] mb-4">
+                  <p className="text-base md:text-lg text-[#595959] mb-4">
                     by {stringConcat(singleBook.bookAuthors)}
                   </p>
                   <div className="flex justify-between max-w-[320px] mb-8">
@@ -117,11 +110,11 @@ const BookOverView = () => {
                 </div>
               </div>
               {/* category */}
-              <div className="mt-8">
-                <h3 className="font-semibold text-lg text-textColor1 mb-4">
+              <div className="my-8 xl:mt-8">
+                <h3 className="font-semibold text-lg text-textColor1 mb-4 text-center xl:text-left">
                   What is it about?
                 </h3>
-                <ul className="flex  gap-4">
+                <ul className="flex gap-4 flex-wrap">
                   {singleBook.categories.map((category) => (
                     <CategoryCard category={category} key={category.id} />
                   ))}
@@ -129,48 +122,24 @@ const BookOverView = () => {
               </div>
               {/* book overview */}
               <div className="mt-8">
-                <h3 className="font-semibold text-lg text-textColor1 mb-4">
+                <h3 className="font-semibold text-lg text-textColor1 mb-4 text-center md:text-left">
                   Book Overview
                 </h3>
-                <p>{singleBook.shortDesc}</p>
+                <p className="text-sm md:text-base leading-7">
+                  {singleBook.shortDesc}
+                </p>
               </div>
             </div>
             {/* second col */}
-            <div className="basis-1/3  grow flex flex-col items-center">
-              <h2 className="font-semibold text-lg mb-8">Popular Books</h2>
+            <div className="basis-1/3  grow flex flex-col items-center mt-8 xl:mt-0">
+              <h2 className="font-semibold text-lg mb-8">Related Books</h2>
 
-              <ul className="grid grid-cols-2 gap-2">
-                {popularBooks.map((popularbook) => (
-                  <article
-                    key={popularbook.id}
-                    className="bg-[#F8F8FC] min-h-[28rem] shadow-md  shadow-slate-400 p-4 rounded-xl flex flex-col"
-                  >
-                    <img
-                      src={popularbook.mainImage}
-                      alt={popularbook.title}
-                      className="w-full h-[15rem] object-contain"
-                    />
-                    <h3 className="mt-4 font-semibold text-lg mb-4">
-                      {popularbook.title || "Testing Book title"}
-                    </h3>
-                    <span className="text-[#595959]">
-                      {popularbook.bookAuthors.length > 0
-                        ? stringConcat(popularbook.bookAuthors)
-                        : stringConcat(dummyAuthors)}
-                    </span>
-                    <div className="mt-auto flex justify-between">
-                      <div className="flex items-center gap-2 text-[#595959]">
-                        <BsClock />
-                        <span>{popularbook.readingTime}</span>
-                      </div>
-                      <Link
-                        to={`/books/${slug}`}
-                        className="font-medium text-dreamLabColor1"
-                      >
-                        Read Now
-                      </Link>
-                    </div>
-                  </article>
+              <ul className="grid md:grid-cols-3 xl:grid-cols-2 gap-4">
+                {singleBook.related.map((relatedbook) => (
+                  <RelatedBookCard
+                    relatedbook={relatedbook}
+                    key={relatedbook.id}
+                  />
                 ))}
               </ul>
             </div>
@@ -188,6 +157,43 @@ const CategoryCard = ({ category }) => {
     <article className="flex gap-4 items-center  shadow-slate-400 shadow  rounded-xl px-4 py-2">
       <img src={icon} alt={name} className="w-8 h-8" />
       <span className="text-sm font-medium text-[#434343]">{name}</span>
+    </article>
+  );
+};
+
+const RelatedBookCard = ({ relatedbook }) => {
+  return (
+    <article
+      key={relatedbook.id}
+      className="bg-[#F8F8FC] md:min-h-[10rem] shadow-md  shadow-slate-400 p-4 rounded-xl flex md:flex-col gap-4 md:gap-0"
+    >
+      <img
+        src={relatedbook.mainImage}
+        alt={relatedbook.title}
+        className="w-[100px] h-[150px]  object-cover mx-auto"
+      />
+      <div className="flex flex-col gap-4 w-full h-full">
+        <h3 className="mt-4 font-semibold text-base md:text-lg ">
+          {relatedbook.title || "Testing Book title"}
+        </h3>
+        <span className="text-[#595959] text-sm md:text-base">
+          {relatedbook.bookAuthors.length > 0
+            ? stringConcat(relatedbook.bookAuthors)
+            : stringConcat(dummyAuthors)}
+        </span>
+        <div className="mt-auto flex justify-between">
+          <div className="flex items-center gap-2 text-[#595959] text-sm md:text-base">
+            <BsClock />
+            <span>{relatedbook.readingTime}</span>
+          </div>
+          <Link
+            to={`/books/${relatedbook.slug}`}
+            className="font-medium text-dreamLabColor1 text-sm md:text-base"
+          >
+            Read Now
+          </Link>
+        </div>
+      </div>
     </article>
   );
 };
