@@ -49,8 +49,6 @@ const BookOverView = () => {
     singleBookRefetch();
   }
 
-  console.log(popularBooks);
-
   return (
     <section>
       {!singleBookLoading && singleBook === "Unauthorized" ? (
@@ -102,7 +100,7 @@ const BookOverView = () => {
                   {singleBook.hasAccess ? (
                     <Link
                       className=" flex flex-nowrap !bg-dreamLabColor1 items-center justify-center btn_primary gap-4 !py-2 max-w-[20rem]  w-full font-semibold text-base  lg:text-lg mb-8 text-white"
-                      to={`/books/${slug}/bookdetails`}
+                      to={`/books/${slug}/${singleBook.id}/bookdetails`}
                     >
                       <BiCrown />
                       <span className="whitespace-nowrap">Read Now</span>
@@ -125,7 +123,7 @@ const BookOverView = () => {
                 </h3>
                 <ul className="flex  gap-4">
                   {singleBook.categories.map((category) => (
-                    <CategoryCard category={category} key={category.key} />
+                    <CategoryCard category={category} key={category.id} />
                   ))}
                 </ul>
               </div>
@@ -166,10 +164,10 @@ const BookOverView = () => {
                         <span>{popularbook.readingTime}</span>
                       </div>
                       <Link
-                        to="/pricing"
+                        to={`/books/${slug}`}
                         className="font-medium text-dreamLabColor1"
                       >
-                        Subscribe now
+                        Read Now
                       </Link>
                     </div>
                   </article>

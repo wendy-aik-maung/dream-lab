@@ -8,6 +8,7 @@ import {
   editChapter,
   getBooksByAdmin,
   getBooksByUsers,
+  getChapters,
   getPopularBooks,
   getRecommendedBooks,
   getSingleBook,
@@ -52,6 +53,10 @@ export const useEditBook = () => {
       navigate(`/admin/books`);
     },
   });
+};
+
+export const useGetChapters = (id) => {
+  return useQuery(["bookchapters", id], () => getChapters(id));
 };
 
 export const useAddChapter = () => {
