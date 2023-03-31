@@ -289,7 +289,9 @@ export const getBooksByUsers = async (
   const isPage = page ? `page=${page}` : "";
   const isLimited = limit ? `limit=${limit}` : "";
   const isSearched = search ? `search=${search}` : "";
-  const isCategoryIds = categoryIds ? `categoryIds=${categoryIds}` : "";
+  const isCategoryIds = categoryIds
+    ? "categoryIds=" + encodeURIComponent(JSON.stringify(categoryIds))
+    : "";
   const isAuthorId = authorId ? `authorId=${authorId}` : "";
   const isFreeOrPremium = isFree ? `isFree=${isFree}` : "";
   const isSorting = sorting ? `sorting=${sorting}` : "";
