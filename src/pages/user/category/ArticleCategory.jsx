@@ -42,7 +42,7 @@ const ArticleCategory = () => {
 					))}
 				</div>
 			)}
-			{pageCount > 0 ? (
+			{pageCount > 1 ? (
 				<Pagination handlePageChange={handlePageChange} pageCount={pageCount} />
 			) : null}
 		</div>

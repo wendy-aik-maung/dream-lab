@@ -28,7 +28,7 @@ const SingleCategory = () => {
 	return (
 		<div>
 			<section>
-				<div className="flex items-center font-poppins text-lg px-20 font-bold">
+				<div className="flex items-center font-poppins text-lg pl-1 md:pl-2 lg:px-20 mt-3 lg:mt-0 font-bold">
 					<Link to={`/category`}>
 						<h4 className=" text-dreamLabColor3">Category</h4>
 					</Link>
@@ -39,7 +39,7 @@ const SingleCategory = () => {
 						{data?.find((item) => item.id == categoryId)?.name}
 					</h4>
 				</div>
-				<h3 className="flex justify-center font-bold text-lg font-poppins pl-2 my-2 capitalize text-textColor4">
+				<h3 className="flex justify-center font-bold text-lg font-poppins pl-2 mt-3 md:my-2 capitalize text-textColor4">
 					{data?.find((item) => item.id == categoryId)?.name}
 				</h3>
 				<div className="flex justify-center items-center mt-3">

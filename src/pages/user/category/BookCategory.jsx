@@ -30,9 +30,9 @@ const BookCategory = () => {
 			setPageCount(data.meta.totalPages);
 		}
 	}, [isSuccess, data]);
-
+	console.log(pageCount);
 	return (
-		<div className="font-poppins px-2 md:px-6 lg:px-20 py-10 text-textColor1">
+		<div className="font-poppins px-2 md:px-6 lg:px-20 py-5 md:py-10 text-textColor1 h-50vh">
 			{isLoading ? (
 				<div className="flex justify-center items-center py-12">
 					<ClipLoader color="black" size={48} />
@@ -44,7 +44,7 @@ const BookCategory = () => {
 					))}
 				</div>
 			)}
-			{pageCount > 0 ? (
+			{pageCount > 1 ? (
 				<Pagination handlePageChange={handlePageChange} pageCount={pageCount} />
 			) : null}
 		</div>

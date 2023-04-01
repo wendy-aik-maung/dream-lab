@@ -3,41 +3,48 @@ import { BsClock } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { stringConcat } from "../../../utils/stringConcat";
 
+const dummyAuthors = [
+	{ name: "Leon" },
+	{ name: "Scott" },
+	{ name: "Kennedy" },
+	{ name: "Ashley" },
+];
+
 const BookItem = ({ data }) => {
 	return (
-		<section className="bg-[#F8F8FC] min-h-[20rem] shadow-md shadow-slate-400 p-4 rounded-xl flex flex-row md:flex-col">
-			<div className="md:relative h-[5rem] w-[5rem] md:h-[15rem] mb-4 mr-4">
+		<article
+			key={data.id}
+			className="bg-[#F8F8FC] md:min-h-[10rem] shadow-md  shadow-slate-400 p-4 rounded-xl flex md:flex-col gap-4 md:gap-0">
+			<div className="w-[100px] h-[130px] md:w-[100px] md:h-[150px] mx-auto">
 				<img
 					src={data.mainImage}
 					alt={data.title}
-					className="md:absolute md:w-full md:h-full object-contain"
+					className="w-[100px] h-[130px] md:w-[100px] md:h-[150px] object-cover mx-auto rounded-lg"
 				/>
 			</div>
-			<div className="">
-				<h3 className="mt-4 font-semibold text-lg mb-3">
+			<div className="flex flex-col gap-4 w-full h-full">
+				<h3 className="mt-4 font-semibold text-base md:text-lg ">
 					{data.title || "Testing Book title"}
 				</h3>
-				<span className="text-[#595959] mb-3">
+				<span className="text-[#595959] text-sm md:text-base">
 					by{" "}
-					{data.bookAuthors?.length > 0
+					{data.bookAuthors.length > 0
 						? stringConcat(data.bookAuthors)
-						: data?.bookAuthors?.length == 0
-						? "Spencer Rascoff and Stan Humphries"
-						: data?.bookAuthors}
+						: stringConcat(dummyAuthors)}
 				</span>
 				<div className="mt-auto flex justify-between">
-					<div className="flex items-center gap-2 text-[#595959]">
+					<div className="flex items-center gap-2 text-[#595959] text-sm md:text-base">
 						<BsClock />
 						<span>{data.readingTime}</span>
 					</div>
 					<Link
 						to={`/books/${data.slug}`}
-						className="font-medium text-dreamLabColor1">
+						className="font-medium text-dreamLabColor1 text-sm md:text-base">
 						View Now
 					</Link>
 				</div>
 			</div>
-		</section>
+		</article>
 	);
 };
 
