@@ -2,7 +2,9 @@ import React from "react";
 
 const CategoryItem = ({ setId, setEditStatus, setDeleteStatus, category }) => {
 	return (
-		<article className="bg-white rounded p-9 flex items-center gap-4 justify-between shadow-lg">
+		<article
+			className="bg-white 
+		rounded p-9 flex items-center gap-4 justify-between shadow-lg">
 			<img
 				src={category.icon}
 				alt="category image"
