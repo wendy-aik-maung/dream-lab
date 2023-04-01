@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { useGetArticlesByUsers } from "../../../hooks/useArticles";
-import Pagination from "../../../components/admin/Pagination";
+import Pagination from "../../../components/user/Paginations";
 import ArticleItems from "./ArticleItems";
 const ArticleLibrary = () => {
 	const [currentPage, setCurrentPage] = useState(1);

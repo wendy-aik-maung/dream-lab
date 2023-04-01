@@ -18,8 +18,10 @@ const Library = () => {
 
 	return (
 		<section>
-			<h2 className="text-center font-poppins text-xl font-bold">Library</h2>
-			<div className="flex justify-center items-center mt-1">
+			<h2 className="text-center font-poppins text-xl font-bold mb-3 py-4">
+				Library
+			</h2>
+			<div className="flex justify-center items-center mt-3">
 				<ul className="flex gap-6 mb-8">
 					{allLinks.map((link) => (
 						<CustomLink to={link.to} key={link.name}>

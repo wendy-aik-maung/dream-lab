@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { useGetBooksByUsers } from "../../../hooks/useBooks";
 import BookItem from "./BookItem";
-import Pagination from "../../../components/admin/Pagination";
+import Pagination from "../../../components/user/Paginations";
 
 const BookLibrary = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -29,7 +29,7 @@ const BookLibrary = () => {
 	}, [isSuccess, data]);
 	console.log(pageCount);
 	return (
-		<div className="font-poppins px-2 md:px-6 lg:px-20 py-20 text-textColor1">
+		<div className="font-poppins px-2 md:px-6 lg:px-20 py-10 text-textColor1">
 			{isLoading ? (
 				<div className="flex justify-center items-center py-12">
 					<ClipLoader color="black" size={48} />

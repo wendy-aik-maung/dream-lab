@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 import { useGetArticlesByUsers } from "../../../hooks/useArticles";
-import Pagination from "../../../components/admin/Pagination";
+import Pagination from "../../../components/user/Paginations";
 import ArticleItems from "../library/ArticleItems";
-const ArticleCategory = ({ id }) => {
+import { useParams } from "react-router-dom";
+const ArticleCategory = () => {
+	const { id: categoryid } = useParams();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageCount, setPageCount] = useState(0);
 
@@ -11,12 +13,12 @@ const ArticleCategory = ({ id }) => {
 		currentPage,
 		8,
 		"",
-		[id],
+		[categoryid],
 		"",
 		"",
 		""
 	);
-	console.log(data);
+	console.log("att", data);
 	const handlePageChange = (newPage) => {
 		setCurrentPage(newPage);
 	};
@@ -26,9 +28,9 @@ const ArticleCategory = ({ id }) => {
 			setPageCount(data.meta.totalPages);
 		}
 	}, [isSuccess, data]);
-	console.log(pageCount);
+	console.log("cate g", categoryid);
 	return (
-		<div className="font-poppins px-2 md:px-6 lg:px-20 py-20 text-textColor1">
+		<div className="font-poppins px-2 md:px-6 lg:px-20 py-10 text-textColor1">
 			{isLoading ? (
 				<div className="flex justify-center items-center py-12">
 					<ClipLoader color="black" size={48} />

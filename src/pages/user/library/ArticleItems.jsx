@@ -22,7 +22,9 @@ const ArticleItems = ({ data }) => {
 					<BsClock />
 					<span>{data.readingTime}</span>
 				</div>
-				<Link to="/pricing" className="font-medium text-dreamLabColor1">
+				<Link
+					to={`/articles/${data.slug}`}
+					className="font-medium text-dreamLabColor1">
 					View Now
 				</Link>
 			</div>
