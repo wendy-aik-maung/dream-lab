@@ -2,9 +2,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import {
 	addArticle,
+	getArticleContentByUser,
 	getArticlesByAdmin,
 	getArticlesByUsers,
 	getSingleArticle,
+	getSingleArticleByUser,
 	updateArticle,
 } from "../services/api/articleApi";
 
@@ -79,3 +81,17 @@ export const useGetArticlesByUsers = (
 			)
 	);
 };
+
+export const useGetSingleArticleByUser = (slug) => {
+	return useQuery(["userarticle", slug], {
+	  queryFn: () => getSingleArticleByUser(slug),
+	  retry: false,
+	});
+  };
+  
+  export const useGetArticleContentByUser = (slug) => {
+	return useQuery(["articlecontent", slug], {
+	  queryFn: () => getArticleContentByUser(slug),
+	  retry: false,
+	});
+  };

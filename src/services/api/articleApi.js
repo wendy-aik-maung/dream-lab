@@ -209,3 +209,57 @@ export const getArticlesByUsers = async (
 		throw error;
 	}
 };
+
+export const getSingleArticleByUser = async (slug) => {
+	const token = getToken();
+  
+	if (!token) {
+	  return "Unauthorized";
+	}
+  
+	const requestOptions = {
+	  headers: {
+		Authorization: `Bearer ${token}`,
+	  },
+	  mode: "cors",
+	  method: "GET",
+	  redirect: "follow",
+	};
+  
+	try {
+	  const response = await fetch(`${BASE_URL}articles/${slug}`, requestOptions);
+	  const data = await response.json();
+	  if (!response.ok) throw new Error(data.message);
+  
+	  return data;
+	} catch (error) {
+	  throw error;
+	}
+  };
+
+  export const getArticleContentByUser = async (slug) => {
+	const token = getToken();
+  
+	if (!token) {
+	  return "Unauthorized";
+	}
+  
+	const requestOptions = {
+	  headers: {
+		Authorization: `Bearer ${token}`,
+	  },
+	  mode: "cors",
+	  method: "GET",
+	  redirect: "follow",
+	};
+  
+	try {
+	  const response = await fetch(`${BASE_URL}articles/content/${slug}`, requestOptions);
+	  const data = await response.json();
+	  if (!response.ok) throw new Error(data.message);
+  
+	  return data;
+	} catch (error) {
+	  throw error;
+	}
+  };
