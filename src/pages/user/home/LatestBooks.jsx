@@ -13,7 +13,10 @@ const LatestBooks = () => {
         <h2 className="text-2xl lg:text-3xl text-center font-semibold ">
           Latest Books
         </h2>
-        <Link className="uppercase btn_primary font-semibold text-white !bg-dreamLabColor1">
+        <Link
+          className="uppercase btn_primary font-semibold text-white !bg-dreamLabColor1"
+          to="/library/books"
+        >
           view more
         </Link>
       </div>

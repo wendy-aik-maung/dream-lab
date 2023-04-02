@@ -363,7 +363,15 @@ export const getSingleBookByUser = async (slug) => {
   try {
     const response = await fetch(`${BASE_URL}books/${slug}`, requestOptions);
     const data = await response.json();
-    if (!response.ok) throw new Error(data.message);
+
+    if (!response.ok && data.statusCode === 422) {
+      throw new Error("Sorry, Book does not exist!");
+    }
+
+    if (!response.ok) {
+      console.log(data);
+      throw new Error(data.message);
+    }
 
     return data;
   } catch (error) {

@@ -74,7 +74,7 @@ const BookDetails = () => {
       <div className="sticky top-0 z-30">
         <Navbar />
       </div>
-      <section className="px-4 lg:px-12 py-12">
+      <section className="px-2 md:px-6  lg:px-12 py-12">
         <div className="flex md:gap-4 lg:gap-8">
           <aside className="fixed px-4 h-screen w-full md:max-w-[200px] lg:max-w-[240px] border-r hidden md:block overflow-y-auto">
             <header className=" flex gap-12  font-poppins font-bold text-xl mb-8 ">
@@ -106,7 +106,7 @@ const BookDetails = () => {
             </ul>
           </aside>
 
-          <div className="ml-0 md:ml-[240px] px-2 lg:px-16  max-w-[720px] max-h-[75vh] overflow-y-auto relative ">
+          <div className="ml-0 md:ml-[240px] px-2 lg:px-16 w-full  max-w-[720px] max-h-[75vh] overflow-y-auto relative ">
             <div className="flex justify-between items-center  mb-8  md:hidden">
               <header className=" flex gap-12  font-poppins font-bold text-xl  ">
                 <button

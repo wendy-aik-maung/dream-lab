@@ -54,7 +54,7 @@ const FreeBanner = () => {
         </ul>
         <Link
           className="flex flex-nowrap items-center justify-center btn_primary gap-4 !py-3 max-w-[20rem]  w-full font-semibold text-base  lg:text-lg mb-8 text-textColor1"
-          to="/"
+          to="/library/books"
         >
           <span>Discover More</span>
           <FaLongArrowAltRight />

@@ -30,25 +30,25 @@ const Footer = () => {
               </h2>
               <ul className="flex flex-col gap-6">
                 <Link
-                  href="/"
+                  to="/library/books"
                   className="lg:text-lg md:text-base text-xs font-medium text-dreamLabColor4  w-max"
                 >
                   Books
                 </Link>
                 <Link
-                  href="/"
+                  to="/library/books"
                   className="lg:text-lg md:text-base text-xs font-medium text-dreamLabColor4  w-max"
                 >
                   Articles
                 </Link>
                 <Link
-                  href="/"
+                  to="/"
                   className="lg:text-lg md:text-base text-xs font-medium text-dreamLabColor4  w-max"
                 >
                   Podcasts
                 </Link>
                 <Link
-                  href="/"
+                  to="/"
                   className="lg:text-lg md:text-base text-xs font-medium  text-dreamLabColor4 w-max"
                 >
                   Blogs
@@ -62,25 +62,25 @@ const Footer = () => {
               </h2>
               <ul className="flex flex-col gap-6">
                 <Link
-                  href="/"
+                  to="/library/books"
                   className="lg:text-lg md:text-base text-xs font-medium text-dreamLabColor4  w-max  "
                 >
                   Library
                 </Link>
                 <Link
-                  href="/"
+                  to="/"
                   className="lg:text-lg  md:text-base text-xs font-medium text-dreamLabColor4  w-max  "
                 >
                   Why Choose
                 </Link>
                 <Link
-                  href="/"
+                  to="/pricing"
                   className="lg:text-lg md:text-base text-xs font-medium text-dreamLabColor4  w-max  "
                 >
                   Pricing
                 </Link>
                 <Link
-                  href="/"
+                  to="/"
                   className="lg:text-lg md:text-base text-xs font-medium text-dreamLabColor4  w-max  "
                 >
                   About Us

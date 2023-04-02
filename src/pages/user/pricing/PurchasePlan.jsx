@@ -52,21 +52,12 @@ const bankInformations = [
 ];
 
 const PENDING = "loading";
-const SUCCESS = "success";
 const FAILED = "failed";
 
 const reducer = (state, action) => {
   switch (action.type) {
     case PENDING:
       return { ...state, isShow: false };
-
-    case SUCCESS:
-      return {
-        ...state,
-        msg: "Success! Thank you for your subscription!",
-        cls: "bg-green-400",
-        isShow: true,
-      };
 
     case FAILED:
       return {
@@ -132,27 +123,26 @@ const PurchasePlan = () => {
   const bankSlip = watch("bankslip");
 
   useEffect(() => {
-    let timer;
-
     if (userSubscribeMutation.isSuccess) {
-      dispatch({ type: SUCCESS });
-      timer = setTimeout(() => {
-        refreshUserData();
-        dispatch({ type: PENDING });
-        navigate("/pricing");
-      }, 1500);
+      refreshUserData();
+      dispatch({ type: PENDING });
+      navigate("/pricing/purchaseplan/success");
     }
-
-    return () => clearTimeout(timer);
   }, [userSubscribeMutation.isSuccess]);
 
   useEffect(() => {
+    let timer;
     if (userSubscribeMutation.isError) {
       dispatch({
         type: FAILED,
         payload: { message: userSubscribeMutation.error.message },
       });
+      timer = setTimeout(() => {
+        dispatch({ type: PENDING });
+      }, 1500);
     }
+
+    return () => clearTimeout(timer);
   }, [userSubscribeMutation.isError]);
 
   return (

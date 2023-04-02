@@ -1,4 +1,5 @@
 import UserLayout from "../layouts/user/UserLayout";
+import NotFound from "../pages/404/404";
 import Articles from "../pages/user/articles";
 import ArticleDetails from "../pages/user/articles/ArticleDetails";
 import ArticleOverView from "../pages/user/articles/ArticleOverView";
@@ -16,18 +17,8 @@ import BookLibrary from "../pages/user/library/BookLibrary";
 import MyAccount from "../pages/user/myaccount";
 import Pricing from "../pages/user/pricing";
 import PurchasePlan from "../pages/user/pricing/PurchasePlan";
+import Success from "../pages/user/pricing/Success";
 import SubscriptionPlans from "../pages/user/subscriptionplans";
-
-// {
-//   path: "subscribers",
-//   element: <SubscriberIndex />,
-//   children: [
-//     { index: true, element: <AllSubscriber /> },
-//     { path: "request", element: <RequestSubscriber /> },
-//     { path: "active", element: <ActiveSubscriber /> },
-//     { path: "expired", element: <ExpiredSubscriber /> },
-//   ],
-// },
 
 export const routes = [
   {
@@ -90,5 +81,13 @@ export const routes = [
   {
     path: "/pricing/purchaseplan/:subscriptionId",
     element: <PurchasePlan />,
+  },
+  {
+    path: "/pricing/purchaseplan/success",
+    element: <Success />,
+  },
+  {
+    path: "*",
+    element: <NotFound to="/" />,
   },
 ];
