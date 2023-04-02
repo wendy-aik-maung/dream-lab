@@ -17,7 +17,7 @@ const sortingOptions = [
 const statusOptions = [
   {
     value: "",
-    label: "All",
+    label: "All Status",
   },
   {
     value: "a",
@@ -31,7 +31,7 @@ const statusOptions = [
 const pricingOptions = [
   {
     value: "",
-    label: "All",
+    label: "All Pricing",
   },
   {
     value: "0",
@@ -52,7 +52,7 @@ const BookIndex = () => {
   const [status, setStatus] = useState({ value: "", label: "All Status" });
   const [author, setAuthor] = useState({ value: "", label: "All Authors" });
   const [authorOptions, setAuthorOptions] = useState([
-    { value: "", label: "All" },
+    { value: "", label: "All Authors" },
   ]);
   const [isFree, setIsFree] = useState({ value: "", label: "All Pricing" });
 
@@ -80,7 +80,17 @@ const BookIndex = () => {
     if (isSuccess) {
       setPageCount(books.meta.totalPages);
     }
-  }, [isSuccess]);
+  }, [
+    isSuccess,
+    pageCount,
+    currentPage,
+    search,
+    inputValue,
+    sorting,
+    status,
+    author,
+    isFree,
+  ]);
 
   // sorting
 
@@ -120,7 +130,7 @@ const BookIndex = () => {
       return { value: author.id, label: author.name };
     });
 
-    const finalArr = [{ value: "", label: "All" }, ...tempArr];
+    const finalArr = [{ value: "", label: "All Authors" }, ...tempArr];
 
     setAuthorOptions(finalArr);
   };

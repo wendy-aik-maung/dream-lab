@@ -3,8 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { BsClock } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { stringConcat } from "../../../utils/stringConcat";
+import { useUserDataContext } from "../../../contexts/UserDataContext";
+import { useLoginModalContext } from "../../../contexts/LoginModalContext";
 
 const dummyAuthors = [
   { name: "Leon " },
@@ -14,6 +16,17 @@ const dummyAuthors = [
 ];
 
 const BookSwiper = ({ data }) => {
+  const { userData } = useUserDataContext();
+  const { setIsUserLoginModalOpen } = useLoginModalContext();
+  const navigate = useNavigate();
+  const handleSubscribe = (slug) => {
+    if (userData) {
+      navigate(`/books/${slug}`);
+    } else {
+      setIsUserLoginModalOpen(true);
+    }
+  };
+
   return (
     <Swiper
       spaceBetween={50}
@@ -63,9 +76,13 @@ const BookSwiper = ({ data }) => {
               <BsClock />
               <span>{item.readingTime}</span>
             </div>
-            <Link to="/pricing" className="font-medium text-dreamLabColor1">
-              Subscribe now
-            </Link>
+
+            <button
+              className="font-medium text-dreamLabColor1"
+              onClick={() => handleSubscribe(item.slug)}
+            >
+              View Now
+            </button>
           </div>
         </SwiperSlide>
       ))}

@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetSingleArticleByUser } from "../../../hooks/useArticles";
 import { ClipLoader } from "react-spinners";
-
+import { RxPerson } from "react-icons/rx";
+import { TbFileOff } from "react-icons/tb";
 import { BiArrowBack, BiCrown } from "react-icons/bi";
 import { stringConcat } from "../../../utils/stringConcat";
-import {  BsClock } from "react-icons/bs";
+import { BsClock } from "react-icons/bs";
 import { useUserDataContext } from "../../../contexts/UserDataContext";
+import { useLoginModalContext } from "../../../contexts/LoginModalContext";
 
 const dummyAuthors = [
   { name: "Leon" },
@@ -27,6 +29,7 @@ const ArticleOverView = () => {
     error: singleArticleError,
     refetch: singleArticleRefetch,
   } = useGetSingleArticleByUser(slug);
+  const { setIsUserLoginModalOpen } = useLoginModalContext();
 
   useEffect(() => {
     if (token) {
@@ -41,10 +44,15 @@ const ArticleOverView = () => {
       </div>
     );
   }
-  if(isError){
-    return(
-      <div className="text-red-400">{singleArticleError.message}</div>
-    )
+  if (isError) {
+    return (
+      <div className="flex h-[50vh] flex-col justify-center items-center">
+        <TbFileOff className="text-red-400 mb-3  text-[48px]" />
+        <h2 className="text-lg md:text-xl lg:text-2xl text-red-500">
+          {singleArticleError.message}
+        </h2>
+      </div>
+    );
   }
 
   return (
@@ -54,6 +62,13 @@ const ArticleOverView = () => {
           <h2 className="text-2xl font-semibold text-dreamLabColor1 mb-12">
             Please Login To Continue
           </h2>
+          <button
+            className="btn_primary flex items-center justify-center font-semibold rounded-xl text-sm lg:text-base"
+            onClick={() => setIsUserLoginModalOpen(true)}
+          >
+            <RxPerson className="mr-2" size={18} />
+            <span>Login</span>
+          </button>
         </div>
       ) : (
         <div className="px-4 lg:px-12 py-12">
@@ -85,7 +100,6 @@ const ArticleOverView = () => {
                     by {stringConcat(singleArticle.articleAuthors)}
                   </p>
                   <div className="flex justify-between max-w-[320px] mb-8">
-                    
                     <span className="text-sm text-[#595959] flex items-center gap-2">
                       <BsClock size={16} />
                       {singleArticle.readingTime}
@@ -134,7 +148,11 @@ const ArticleOverView = () => {
             {/* second col */}
             <div className="basis-1/3  grow flex flex-col items-center mt-8 xl:mt-0">
               <h2 className="font-semibold text-lg mb-8">Related Articles</h2>
-
+              {singleArticle?.related.length <= 0 ? (
+                <div>
+                  <h4>Currently empty...</h4>
+                </div>
+              ) : null}
               <ul className="grid md:grid-cols-3 xl:grid-cols-2 gap-4">
                 {singleArticle.related.map((relatedArticle) => (
                   <RelatedArticleCard
@@ -197,6 +215,5 @@ const RelatedArticleCard = ({ relatedArticle }) => {
     </article>
   );
 };
-
 
 export default ArticleOverView;

@@ -20,6 +20,7 @@ import CreateBook from "../pages/admin/book/CreateBook";
 import ArticleIndex from "../pages/admin/article";
 import CreateArticle from "../pages/admin/article/CreateArticle";
 import EditArticle from "../pages/admin/article/EditArticle";
+import NotFound from "../pages/404/404";
 export const routes = [
   {
     path: "login",
@@ -119,5 +120,9 @@ export const routes = [
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound to="/admin" />,
   },
 ];
