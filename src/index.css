@@ -10,7 +10,37 @@
   background-color: #00d7ff;
 }
 
-.swiper-pagination {
-  position: absolute;
-  bottom: 0;
+.swiper-content {
+  background-color: red;
+}
+
+.swiper-button-next {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 100%;
+  background-color: #cbd5e1;
+  right: 16px;
+}
+
+.swiper-button-next::after {
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("./assets/arrow-right.svg");
+}
+.swiper-button-prev {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 100%;
+  background-color: #cbd5e1;
+  left: 16px;
+}
+
+.swiper-button-prev::after {
+  content: "";
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("./assets/arrow-left.svg");
 }

@@ -1,9 +1,11 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { BsClock } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { stringConcat } from "../../../utils/stringConcat";
 import { useLoginModalContext } from "../../../contexts/LoginModalContext";
 import { useUserDataContext } from "../../../contexts/UserDataContext";
@@ -34,6 +36,8 @@ const ArticleSwiper = ({ data }) => {
       grabCursor={true}
       effect="fade"
       className="py-4 px-2"
+      modules={[Navigation]}
+      navigation
       breakpoints={{
         0: {
           slidesPerView: 1,
@@ -41,15 +45,15 @@ const ArticleSwiper = ({ data }) => {
         },
         640: {
           slidesPerView: 2,
-          spaceBetween: 30,
+          spaceBetween: 20,
         },
         1024: {
           slidesPerView: 3,
-          spaceBetween: 40,
+          spaceBetween: 30,
         },
         1280: {
           slidesPerView: 4,
-          spaceBetween: 40,
+          spaceBetween: 30,
         },
       }}
     >
