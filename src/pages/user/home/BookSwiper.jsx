@@ -1,13 +1,14 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 import { BsClock } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { stringConcat } from "../../../utils/stringConcat";
 import { useUserDataContext } from "../../../contexts/UserDataContext";
 import { useLoginModalContext } from "../../../contexts/LoginModalContext";
-
 const dummyAuthors = [
   { name: "Leon " },
   { name: "Scott" },
@@ -32,6 +33,8 @@ const BookSwiper = ({ data }) => {
       spaceBetween={50}
       slidesPerView={4}
       grabCursor={true}
+      modules={[Navigation]}
+      navigation
       effect="fade"
       className="py-4 px-2"
       breakpoints={{
@@ -41,22 +44,22 @@ const BookSwiper = ({ data }) => {
         },
         640: {
           slidesPerView: 2,
-          spaceBetween: 30,
+          spaceBetween: 20,
         },
         1024: {
           slidesPerView: 3,
-          spaceBetween: 40,
+          spaceBetween: 30,
         },
         1280: {
           slidesPerView: 4,
-          spaceBetween: 40,
+          spaceBetween: 30,
         },
       }}
     >
       {data.map((item) => (
         <SwiperSlide
           key={item.id}
-          className="bg-[#F8F8FC] min-h-[28rem] shadow-md  shadow-slate-400 p-4 rounded-xl flex flex-col"
+          className="bg-[#F8F8FC] min-h-[28rem] shadow-md  shadow-slate-400 p-4 rounded-xl flex flex-col "
         >
           <img
             src={item.mainImage}
