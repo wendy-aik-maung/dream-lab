@@ -57,7 +57,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="py-4 lg:py-6 px-2 md:px-6  lg:px-12 flex justify-between items-center text-textColor1">
+      <nav className="py-4 lg:py-6 px-2 md:px-6  lg:px-12 flex justify-between items-center text-textColor1 sticky top-0 bg-white z-40 shadow-md">
         <HiOutlineMenuAlt2
           className="text-3xl block xl:hidden mr-4 lg:ml-0"
           onClick={handleMobileNavbarOpen}
