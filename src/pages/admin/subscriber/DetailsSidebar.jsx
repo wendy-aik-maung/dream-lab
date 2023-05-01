@@ -32,7 +32,7 @@ const DetailsSidebar = ({ setIsSidebarOpen, userDetails }) => {
       onClick={() => setIsSidebarOpen(false)}
     >
       <div
-        className="max-w-[30rem] w-full bg-white h-full p-8"
+        className="max-w-[30rem] w-full bg-white h-full p-8 overflow-y-auto scrollbar-hide"
         onClick={(e) => e.stopPropagation()}
       >
         <section className="flex justify-between items-center mb-10">
@@ -79,7 +79,7 @@ const DetailsSidebar = ({ setIsSidebarOpen, userDetails }) => {
           <label className="text-[#595959] font-medium ">bank slip photo</label>
           {bankSlipImage ? (
             <img
-              className="mt-4 max-h-[20rem] object-cover"
+              className="mt-4  object-cover"
               src={bankSlipImage ? bankSlipImage : ""}
               alt="bank slip image"
             />
