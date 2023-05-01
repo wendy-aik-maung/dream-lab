@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsImage } from "react-icons/bs";
 import { useUpdateUserSubscription } from "../../../hooks/useSubscribers";
@@ -17,6 +17,7 @@ const RequestSidebar = ({
     amount,
     bankSlipImage,
   } = userDetails;
+  const [isAccept, setIsAccept] = useState(false);
 
   const subscriberMutation = useUpdateUserSubscription();
 
@@ -88,7 +89,39 @@ const RequestSidebar = ({
           )}
         </ul>
         <div className="flex mt-6 justify-between gap-4">
-          <CustomButton
+          <button
+            className="rounded-lg py-2 px-4 border border-[#EF0202] text-[#EF0202] w-1/2"
+            disabled={subscriberMutation.isLoading}
+            onClick={() => {
+              setIsAccept(false);
+              handleUpdate("c");
+            }}
+          >
+            {!isAccept && subscriberMutation.isLoading ? (
+              <div className="flex justify-center items-center">
+                <ClipLoader size={22} />
+              </div>
+            ) : (
+              <span>Reject</span>
+            )}
+          </button>
+          <button
+            className="rounded-lg py-2 px-4 border btn_primary !w-1/2"
+            disabled={subscriberMutation.isLoading}
+            onClick={() => {
+              setIsAccept(true);
+              handleUpdate("a");
+            }}
+          >
+            {isAccept && subscriberMutation.isLoading ? (
+              <div className="flex justify-center items-center">
+                <ClipLoader size={22} />
+              </div>
+            ) : (
+              <span>Accept</span>
+            )}
+          </button>
+          {/* <CustomButton
             clsname="rounded-lg py-2 px-4 border border-[#EF0202] text-[#EF0202] w-1/2"
             handleUpdate={() => handleUpdate("c")}
             isLoading={subscriberMutation.isLoading}
@@ -102,7 +135,7 @@ const RequestSidebar = ({
             isLoading={subscriberMutation.isLoading}
           >
             Accept
-          </CustomButton>
+          </CustomButton> */}
         </div>
       </div>
     </aside>

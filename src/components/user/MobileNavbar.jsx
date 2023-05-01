@@ -13,7 +13,7 @@ import { FaSearch } from "react-icons/fa";
 const MobileNavbar = ({ onClose }) => {
   return (
     <aside
-      className="fixed top-0 left-0 w-full h-full z-10 bg-black bg-opacity-80"
+      className="fixed top-0 left-0 w-full h-full z-50 bg-black bg-opacity-80"
       onClick={onClose}
     >
       <div

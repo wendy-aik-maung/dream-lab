@@ -81,9 +81,9 @@ const MyAccount = () => {
   }, [userInformationMuatation.isSuccess]);
 
   return (
-    <section className="px-10 lg:px-16 py-12 font-poppins">
+    <section className="px-2 md:px-6 lg:px-12 py-12 font-poppins">
       {isLoading ? (
-        <div className="flex justify-center items-center py-12">
+        <div className="flex justify-center items-center py-16">
           <ClipLoader color="black" size={48} />
         </div>
       ) : (

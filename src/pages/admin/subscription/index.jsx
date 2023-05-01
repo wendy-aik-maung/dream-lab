@@ -53,6 +53,7 @@ const SubscriptionIndex = () => {
         <>
           {data?.map((subscription) => (
             <SubscriptionItem
+              key={subscription.id}
               subscriptionInfo={subscription}
               setId={setId}
               setIsDelete={setIsDelete}

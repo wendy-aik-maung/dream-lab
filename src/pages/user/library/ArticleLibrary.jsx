@@ -16,7 +16,7 @@ const ArticleLibrary = () => {
     "",
     ""
   );
-  console.log(data);
+
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
@@ -26,7 +26,7 @@ const ArticleLibrary = () => {
       setPageCount(data.meta.totalPages);
     }
   }, [isSuccess, data]);
-  console.log(pageCount);
+
   return (
     <div className="font-poppins px-2 md:px-6 lg:px-12 py-10 text-textColor1">
       {isLoading ? (

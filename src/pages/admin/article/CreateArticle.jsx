@@ -242,14 +242,16 @@ const CreateArticle = () => {
           </div>
         </div>
         {/* textArea */}
-        <TextAreaForm
-          label="Article Description"
-          name="description"
-          placeholder="Type Article Description"
-          register={register}
-          errors={errors}
-          row="8"
-        />
+        <div className="py-8">
+          <TextAreaForm
+            label="Article Description"
+            name="description"
+            placeholder="Type Article Description"
+            register={register}
+            errors={errors}
+            row="8"
+          />
+        </div>
         <TextAreaForm
           label="Article Content"
           name="content"

@@ -4,6 +4,8 @@ import { useGetBooksByUsers } from "../../../hooks/useBooks";
 import BookItem from "../library/BookItem";
 import Pagination from "../../../components/user/Paginations";
 import { useParams } from "react-router-dom";
+import { TbBookOff } from "react-icons/tb";
+import EmptyView from "../../../assets/EmptyView";
 
 const BookCategory = () => {
   const { id: categoryid } = useParams();
@@ -30,7 +32,18 @@ const BookCategory = () => {
       setPageCount(data.meta.totalPages);
     }
   }, [isSuccess, data]);
-  console.log(pageCount);
+
+  if (!isLoading && data?.items?.length === 0) {
+    return (
+      <div className="font-poppins px-2 md:px-6 lg:px-12 pb-20 pt-12 py-5  text-textColor1 flex flex-col items-center justify-center">
+        <TbBookOff className="text-[4rem] text-slate-400 mb-2" />
+        <h2 className="text-2xl text-textColor1 font-medium text-center">
+          Currently no book added...!
+        </h2>
+      </div>
+    );
+  }
+
   return (
     <div className="font-poppins px-2 md:px-6 lg:px-12 pb-20 pt-12 py-5  text-textColor1 ">
       {isLoading ? (

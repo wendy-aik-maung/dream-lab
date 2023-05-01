@@ -27,7 +27,7 @@ const Header = ({ children }) => {
               className="w-8 h-8 md:w-10 md:h-10 rounded-full"
             />
           </figure>
-          <h4 className="font-bold">Admin</h4>
+          <h4 className="font-bold">{userData?.displayName}</h4>
         </div>
       </div>
     </nav>
