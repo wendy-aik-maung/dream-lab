@@ -102,7 +102,7 @@ const UserLogin = () => {
 
   return (
     <div
-      className="fixed top-0 w-screen h-full flex justify-center items-center z-10 bg-black bg-opacity-80 "
+      className="fixed top-0 w-screen h-full flex justify-center items-center z-50 bg-black bg-opacity-80 "
       onClick={handleLoginModalClose}
     >
       <div
